@@ -40,9 +40,9 @@
  * _vimrc文件中有所需依赖组件的说明，也提供了安装方法，请读一下_vimrc文件。
  
 ## 效果
-* gvim for windows
+* gvim for windows [solarized light]
 ![image](https://github.com/fedkey/vim/blob/master/images/vim-scr.png)
 
-* gvim for ubuntu
+* gvim for ubuntu  [solarized dark]
 ![image](https://github.com/fedkey/vim/blob/master/images/linux_gvim.png)
  
