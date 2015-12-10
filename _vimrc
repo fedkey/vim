@@ -94,9 +94,22 @@ endfunctio
 set completeopt=menuone            "关闭顶部函数参数提示窗口
 set completeopt=longest,menu 
 
+
+"=========================语言与编码===================================
+set helplang=cn		            	"中文帮助
+if Mysys() == 'windows'
+	set encoding=utf-8 fileencodings=ucs-bom,utf-8,cp936	"自动识别文件编码
+elseif Mysys() == 'linux'
+	set encoding=utf-8 fileencodings=ucs-bom,utf-8,cp936	"自动识别文件编码
+endif
 if Mysys() == 'windows'             "winodws系统下执行的配置
+    "解决菜单乱码
+    set encoding=utf-8  
+    set fileencoding=chinese  
 	source $VIMRUNTIME/vimrc_example.vim
 	source $VIMRUNTIME/mswin.vim
+    "解决consle输出乱码  
+    language messages zh_CN.utf-8  
 	behave mswin
 	set diffexpr=MyDiff()
 	function MyDiff()
@@ -122,6 +135,7 @@ if Mysys() == 'windows'             "winodws系统下执行的配置
 	endif
 	silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
 	endfunction
+
 endif
 
 "=================《公共配置》==================================
@@ -167,35 +181,35 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set autoindent
-set expandtab                 	"将Tab自动转化成空格 [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
-set foldmethod=indent		    "折叠方式是使用语法折叠
-"set foldlevel=100 			    "折叠的层次是100,也就是打开所有的折叠
+set expandtab                 	    "将Tab自动转化成空格 [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
+set foldmethod=indent		        "折叠方式是使用语法折叠
+"set foldlevel=100 			        "折叠的层次是100,也就是打开所有的折叠
 "=================《外观设置》===================================
 if Mysys() == 'windows'
-	au GUIEnter * simalt ~x 	"窗口全屏
+	au GUIEnter * simalt ~x 	    "窗口全屏
 	set columns=80
 elseif Mysys() == 'linux'
     autocmd GUIEnter * winsize 167 41
 endif
-set gcr=a:block-blinkon0		"禁止光标闪烁
-set laststatus=2				"总是显示状态栏
-set ruler						" 显示光标当前位置
-set cursorline 					"高亮所在行
-"set cursorcolumn 				"高亮当前列
-set guioptions-=T				"隐藏工具栏
-"set guioptions-=m				"隐藏菜单
-set cmdheight=1					" 命令行（在状态行下）的高度，默认为1
+set gcr=a:block-blinkon0		    "禁止光标闪烁
+set laststatus=2				    "总是显示状态栏
+set ruler						    " 显示光标当前位置
+set cursorline 					    "高亮所在行
+"set cursorcolumn 				    "高亮当前列
+set guioptions-=T				    "隐藏工具栏
+"set guioptions-=m				    "隐藏菜单
+set cmdheight=1					    " 命令行（在状态行下）的高度，默认为1
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929  "一行多于80个字符,红色警告
 match OverLength /\%81v.\+/
-set showmatch                   "高亮显示[] {} ()配对
+set showmatch                       "高亮显示[] {} ()配对
 
 "--------------------高级技巧-------------------------------------
-"autocmd BufWritePre * :%s/\s\+$//e      "保存文件时自动去除行末空格
+"autocmd BufWritePre * :%s/\s\+$//e "保存文件时自动去除行末空格
 "指定文件类型去除行末空格
 "autocmd FileType c,cpp,java,php autocmd BufWritePre <buffer> :%s/\s\+$//e
 "================《搜索设置》========================================
-set incsearch "当输入的时候,跳到你搜索的关键字那去
-set hlsearch  "高亮被搜索的关键字
+set incsearch                       "当输入的时候,跳到你搜索的关键字那去
+set hlsearch                        "高亮被搜索的关键字
 
 "=================《字体》=======================================
 if Mysys() == 'windows'
@@ -230,10 +244,10 @@ au BufRead,BufNewFile *.ini         	setlocal ft=dosini
 " Solarized主题设置
 "        " git clone git://github.com/altercation/vim-colors-solarized.git
 " ------------------------------------------------------------------
-let g:solarized_underline=0    "default value is 1
-let g:solarized_contrast="high"    "default value is normal
-let g:solarized_visibility="high"    "default value is normal
-let g:solarized_diffmode="high"    "default value is normal
+let g:solarized_underline=0                 "default value is 1
+let g:solarized_contrast="high"             "default value is normal
+let g:solarized_visibility="high"           "default value is normal
+let g:solarized_diffmode="high"             "default value is normal
 syntax enable
 set background=light
 colorscheme solarized
@@ -250,51 +264,15 @@ colorscheme solarized
  let g:solarized_hitrail=0
  let g:solarized_menu=1
 
-"if Mysys() == 'windows'
-"	if has("gui_win32")
-"        " solarized 主题
-"        " git clone git://github.com/altercation/vim-colors-solarized.git
-"
-"        set background=light
-"        colorscheme solarized
-"	   " colorscheme molokai
-"       " let g:molokai_original = 1
-"       " let g:rehash256 = 1
-"	else
-"		colorscheme wombat256
-"		set t_Co=256		"支持256色
-"	endif
-"endif
-"if Mysys() == 'linux'
-"	if has("gui_gtk2")
-"		"colorscheme molokai
-"        "let g:molokai_original = 1
-"        "let g:rehash256 = 1
-"        " 两种选项 light  dark
-"        set background=light
-"        colorscheme solarized
-"	else
-"		set t_Co=256
-"
-"	endif
-"endif
-"
-"=========================语言与编码===================================
-set helplang=cn		            	"中文帮助
-if Mysys() == 'windows'
-	set encoding=cp936 fileencodings=ucs-bom,utf-8,cp936	"自动识别文件编码
-elseif Mysys() == 'linux'
-	set encoding=utf-8 fileencodings=ucs-bom,utf-8,cp936	"自动识别文件编码
-endif
 "------------声音---------------
-set vb t_vb=		                "去除报警音
+set vb t_vb=		                        "去除报警音
 "====文件============
-set clipboard+=unnamed              " 共享剪贴板
-set showtabline=2					"以标签形式打开文件
-autocmd BufNewFile * normal G		"新建文件后 自动定位到文件末尾
-set nobackup						"禁止生成临时文件
-setlocal noswapfile					"不要生成swap文件
-set wrap							"自动换行
+set clipboard+=unnamed                      " 共享剪贴板
+set showtabline=2					        "以标签形式打开文件
+autocmd BufNewFile * normal G		        "新建文件后 自动定位到文件末尾
+set nobackup						        "禁止生成临时文件
+setlocal noswapfile					        "不要生成swap文件
+set wrap							        "自动换行
 "=========按键======="
 set backspace=indent,eol,start
 
@@ -307,7 +285,7 @@ elseif Mysys() == 'linux'  					 "安装: git clone https://github.com/Shougo/neob
     call neobundle#begin(expand('~/.vim/bundle/'))   "插件安装位置
 endif
 
-NeoBundleFetch 'Shougo/neobundle.vim' 				 "必须启用
+NeoBundleFetch 'Shougo/neobundle.vim' 		"必须启用
 "==========《Vundle.vim命令说明》"
 ":NeoBundleList - 插件列表
 ":NeoBundleInstall - 安装 (更新) bundles
@@ -316,7 +294,7 @@ NeoBundleFetch 'Shougo/neobundle.vim' 				 "必须启用
 NeoBundle 'vim-scripts/winmanager--Fox'     "winmanager窗口管理
 "设置winmanager的宽度，默认为25
 "let g:winManagerWidth = 15
-let g:AutoOpenWinManager = 1        "自动打开winmanager
+let g:AutoOpenWinManager = 1                "自动打开winmanager
 let Tlist_Exit_OnlyWindow=1  
 
 "界面分隔
@@ -330,32 +308,32 @@ function! NERDTree_IsValid()
     return 1  
 endfunction  
 
-NeoBundle  'vim-scripts/bufexplorer.zip'   "显示buf列表
-"let g:bufExplorerSortBy = 'name'		" 按文件名排序
+NeoBundle  'vim-scripts/bufexplorer.zip'    "显示buf列表
+"let g:bufExplorerSortBy = 'name'		    " 按文件名排序
 NeoBundle  'tisyang/taglist'				"Tlist 函数列表
-let Tlist_Use_SingleClick=1             "单击tag就跳到tag定义的位置
-let Tlist_Show_Menu=1                   "显示taglist菜单
-let Tlist_Auto_Open=0					"默认打开Taglist
-"let Tlist_Show_One_File = 	 1          "不同时显示多个文件的tag，只显示当前文件的
-let Tlist_Exit_OnlyWindow =  1          "如果taglist窗口是最后一个窗口，则退出vim
-let Tlist_Use_Right_Window = 1          "在右侧窗口中显示taglist窗口
-let Tlist_Compart_Format = 1    		" 压缩方式
+let Tlist_Use_SingleClick=1                 "单击tag就跳到tag定义的位置
+let Tlist_Show_Menu=1                       "显示taglist菜单
+let Tlist_Auto_Open=0					    "默认打开Taglist
+"let Tlist_Show_One_File = 	 1              "不同时显示多个文件的tag，只显示当前文件的
+let Tlist_Exit_OnlyWindow =  1              "如果taglist窗口是最后一个窗口，则退出vim
+let Tlist_Use_Right_Window = 1              "在右侧窗口中显示taglist窗口
+let Tlist_Compart_Format = 1    		    " 压缩方式
 let Tlist_WinWidth = 30
 set autochdir
 if Mysys() == 'windows'
-    set tags=tags;                      " ';' 不能没有
+    set tags=tags;                          " ';' 不能没有
     let Tlist_Ctags_Cmd = 'ctags'
 endif
-NeoBundle 'kien/ctrlp.vim'                 "快速搜索/文件
+NeoBundle 'kien/ctrlp.vim'                  "快速搜索/文件
 NeoBundle 'scrooloose/nerdtree'			         "树形目录
-"map <F9> :NERDTreeToggle<CR>            "F9调出
+"map <F9> :NERDTreeToggle<CR>               "F9调出
 let g:NERDTreeWinSize = 30
 let g:NERDTreeHight= 30
 let g:NERDTreeMouseMode = 1
 let g:NERDTreeMapToggleZoom = '<Space>'
 
-autocmd VimEnter * WMToggle             "自动开启WMToggle
-autocmd VimEnter * wincmd w		        "光标停留右侧文件
+autocmd VimEnter * WMToggle                 "自动开启WMToggle
+autocmd VimEnter * wincmd w		            "光标停留右侧文件
 command  WM :WMToggle
 
 " 只剩 NERDTree时自动关闭
@@ -367,21 +345,16 @@ NeoBundle 'scrooloose/syntastic'			"语法检查
 NeoBundle 'Raimondi/delimitMate'			"补全括号和引号
 NeoBundle  'airblade/vim-gitgutter'         "显示git 更改
 NeoBundle 'majutsushi/tagbar'				"tagbar
-let g:tagbar_sort = 0					"关闭排序[也就是按标签本身在文件中的位置排序]
-let g:tagbar_show_linenumbers = -1		"显示行号
-NeoBundle 'mhinz/vim-startify'             "更改启动界面信息,提供列表选择
-":SLoad    载入 session
-":SSave    保存 session
-":SDelete  删除 session
-
-NeoBundle 'vim-scripts/YankRing.vim'       "剪贴板增强
-NeoBundle 'sjl/gundo.vim'                  "查看撤销树,类似版本控制系统,可恢复到某一阶段
+let g:tagbar_sort = 0					    "关闭排序[也就是按标签本身在文件中的位置排序]
+let g:tagbar_show_linenumbers = -1		    "显示行号
+NeoBundle 'vim-scripts/YankRing.vim'        "剪贴板增强
+NeoBundle 'sjl/gundo.vim'                   "查看撤销树,类似版本控制系统,可恢复到某一阶段
 nnoremap <F2> :GundoToggle<CR>
 " 开启自动预览 [随着光标在标签上的移动，顶部会出现一个实时的预览窗口]
 let g:tagbar_autopreview = 1
 NeoBundle 'tomasr/molokai'					"molokai配色
 NeoBundle 'bling/vim-airline'				"状态栏美化
-NeoBundle  'Lokaltog/vim-powerline'		"状态栏增强
+NeoBundle  'Lokaltog/vim-powerline'		    "状态栏增强
 NeoBundle 'terryma/vim-multiple-cursors'	"多光标多行编辑
     " 默认设置
     let g:multi_cursor_next_key='<C-n>'
@@ -402,19 +375,19 @@ NeoBundle 'terryma/vim-multiple-cursors'	"多光标多行编辑
     "按下I在每行的头部插入
     "键入”, 按下 <C-e> 到达行末, 键入另一个”和逗号
     "然后将每个光标都下移一行，按下delete
-NeoBundle 'yegappan/mru'		            "使用:MRU命令调出最近打开的文档
+NeoBundle 'yegappan/mru'		                "使用:MRU命令调出最近打开的文档
 highlight link MRUFileName LineNr
 let MRU_Max_Entries = 100
 
-NeoBundle 'tomtom/tcomment_vim'            "快速注释
+NeoBundle 'tomtom/tcomment_vim'                 "快速注释
 
 NeoBundle 'Yggdroot/indentLine'
 let g:indentLine_color_term = 239
-let g:indentLine_color_gui = '#09AA08'
+let g:indentLine_color_gui = '#3366ff'
 let g:indentLine_char = '|'
-NeoBundle 'danro/rename.vim'                        "重命名插件
-NeoBundle 'jiangmiao/auto-pairs'					 "自动插入和格式化方括号和圆括号
-NeoBundle 'vim-scripts/matchit.zip'                 "\ %匹配成对的标签，跳转
+NeoBundle 'danro/rename.vim'                    "重命名插件
+NeoBundle 'jiangmiao/auto-pairs'				"自动插入和格式化方括号和圆括号
+NeoBundle 'vim-scripts/matchit.zip'             "\ %匹配成对的标签，跳转
 
 "添加环绕
 NeoBundle 'tpope/vim-surround'                      "快速给词加环绕符号,例如引号
@@ -449,15 +422,15 @@ NeoBundle 'ianva/vim-youdao-translater'        "有道翻译
 vnoremap <silent> <C-T> <Esc>:Ydv<CR>
 nnoremap <silent> <C-T> <Esc>:Ydc<CR>
 noremap <leader>yd :Yde<CR>
-NeoBundle 'godlygeek/tabular'                  " Tabular: 自动对齐。
+NeoBundle 'godlygeek/tabular'                   " Tabular: 自动对齐。
 " ---------------------------------------------------
-NeoBundle 'shemerey/vim-project'       "项目管理
-NeoBundle 'atom/vim-mode'              "vim-mode
+NeoBundle 'shemerey/vim-project'                "项目管理
+NeoBundle 'atom/vim-mode'                       "vim-mode
 "==================python IDE======start======
-let python_highlight_all = 1                "python高亮
-NeoBundle 'vim-scripts/indentpython.vim'       "python自动缩进
+let python_highlight_all = 1                    "python高亮
+NeoBundle 'vim-scripts/indentpython.vim'        "python自动缩进
 "{{
-NeoBundle 'nvie/vim-flake8'                    "python代码检查
+NeoBundle 'nvie/vim-flake8'                     "python代码检查
 	"pip install flake8
 	"<F7> to run flake8
 	let g:flake8_quickfix_location="top"
@@ -466,21 +439,21 @@ NeoBundle 'nvie/vim-flake8'                    "python代码检查
 	let g:flake8_show_in_gutter=1
 	let g:flake8_show_in_file=1
 	let g:flake8_max_markers=500
-	let flake8_error_marker='Δ'             "错误提示符号
-	let flake8_warning_marker='×'           "警告提示符号
-	let flake8_pyflake_marker=''            " 是否屏蔽警告
-	let flake8_complexity_marker=''         "屏蔽 McCabe complexity 警告
-	let flake8_naming_marker=''             "屏蔽 naming 警告
+	let flake8_error_marker='Δ'                "错误提示符号
+	let flake8_warning_marker='×'              "警告提示符号
+	let flake8_pyflake_marker=''                " 是否屏蔽警告
+	let flake8_complexity_marker=''             "屏蔽 McCabe complexity 警告
+	let flake8_naming_marker=''                 "屏蔽 naming 警告
 "}}
 
-NeoBundle 'davidhalter/jedi-vim'		     "python补全,需要安装:pip install jedi
+NeoBundle 'davidhalter/jedi-vim'		        "python补全,需要安装:pip install jedi
 "pip install jedi
 "pip install tox pytest
 let g:jedi#use_tabs_not_buffers = 1
 
-NeoBundle 'msanders/snipmate.vim'                "spipmate代码片段
+NeoBundle 'msanders/snipmate.vim'               "spipmate代码片段
 
-NeoBundle 'tyru/open-browser.vim'                "打开浏览器
+NeoBundle 'tyru/open-browser.vim'               "打开浏览器
 "--------------------《web 插件》--------------------------------------
 "web缩进
 au BufNewFile,BufRead *.js, *.html, *.css
@@ -496,15 +469,15 @@ NeoBundle 'othree/html5.vim', {'autoload':{'filetypes':['html']}}
 NeoBundle 'gregsexton/MatchTag', {'autoload':{'filetypes':['html','xml']}}
 NeoBundle 'mattn/emmet-vim'                        "emmet 速写
 let g:user_emmet_install_global = 0                                
-autocmd FileType html,css EmmetInstall          "只在html和css中启用
-let g:user_emmet_expandabbr_key='<c-j>'  	    "更改默认按键
+autocmd FileType html,css EmmetInstall              "只在html和css中启用
+let g:user_emmet_expandabbr_key='<c-j>'  	        "更改默认按键
 let g:user_emmet_complete_tag=1
 let g:user_emmet_next_key='<c-n>'
 let g:user_emmet_prev_key='<c-p>'
-NeoBundle 'docunext/closetag.vim'                  "关闭标签
+NeoBundle 'docunext/closetag.vim'                   "关闭标签
 NeoBundle 'othree/xml.vim'							"xml插件
-NeoBundle 'ternjs/tern_for_vim'                    "tern js补全
-NeoBundle 'cakebaker/scss-syntax.vim'              "scss css检查
+NeoBundle 'ternjs/tern_for_vim'                     "tern js补全
+NeoBundle 'cakebaker/scss-syntax.vim'               "scss css检查
 au BufRead,BufNewFile *.scss set filetype=scss.css
 NeoBundle 'ap/vim-css-color', {'autoload':{'filetypes':['css','scss','sass','less','styl']}}
 "----------javascript-----------------------
@@ -537,7 +510,6 @@ NeoBundle 'ervandew/supertab'                      "超级tab
 "        setlocal dict+=~/.vim/dict/c.txt
 "	endfunction
 "endif
-
 NeoBundleCheck
 call neobundle#end()                        "用于所有插件最后
 "=========================================《实用设置》=================================="
@@ -610,4 +582,3 @@ map <F5> :call RunScript()<CR>
 "技巧
 "文本单词中添加符号,如：wwflwlf/fwfwekfek kfwkeowofeowoee 想在wwflwlf/fwfwekfek前后加一个双引号
 "操作,光标定位到wwf处：vt空格 S"   以此类推,可以快速添加其他的符号 
-
