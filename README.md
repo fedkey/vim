@@ -6,16 +6,20 @@
 
 ## 支持语言
 * web
- * web编程,提供html,css,js语法速写，格式化等插件。
- * 提供python django编写支持
+ * 支持html,css,js语法速写，格式化。
+ * js美化
+ * 代码块速写
+ 
  <br>
 * python编程
  * python，我本身也常写python，所以python的支持是比较好的，代码补全，折叠，错误检查，应有都有
+ *  提供python django编写支持
  * 提供python一键运行
+ * ……
 
 ## 其他
 * 按照emacs快捷键的双键模式定义的一整套快捷键，用过emacs的人可以快速上手。当然，没有使用过emacs的人不用管，放着无害，永远不会触发。
-
+### ……
 ## 安装说明
 
 * windows用户
