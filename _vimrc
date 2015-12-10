@@ -1,88 +1,88 @@
-" -----------------     ×÷Õß: ÑîÊ¥ÁÁ
-" -----------------     ÓÊÏä: fedkey@sina.com
-" -----------------     ²©¿Í: http://yangshengliang.com
-" -----------------     ´´½¨: 2015Äê10ÔÂ22ÈÕ
-"ÏµÍ³ÒÀÀµ
+" -----------------     ä½œè€…: æ¨åœ£äº®
+" -----------------     é‚®ç®±: fedkey@sina.com
+" -----------------     åšå®¢: http://yangshengliang.com
+" -----------------     åˆ›å»º: 2015å¹´10æœˆ22æ—¥
+"ç³»ç»Ÿä¾èµ–
 "linux-fedora
 "sudo yum install ctags
-"sudo yum install build-essential cmake python-dev  #±àÒëYCM×Ô¶¯²¹È«²å¼şÒÀÀµ
+"sudo yum install build-essential cmake python-dev  #ç¼–è¯‘YCMè‡ªåŠ¨è¡¥å…¨æ’ä»¶ä¾èµ–
 "sudo yum install silversearcher-ag
-"Èí¼ş°²×°
-"python2.7  Ğí¶à²å¼şÒÀÀµpython2.7,±Ø×°
+"è½¯ä»¶å®‰è£…
+"python2.7  è®¸å¤šæ’ä»¶ä¾èµ–python2.7,å¿…è£…
 "java       sudo yum install openjdk-8-jdk
 "npm        sudo yum install npm
 "clang      sudo yum install clang
 "cmake      sudo yum install cmake
 "python-dev sudo yum install pythoon-dev
 "gvim       sudo yum install vim-gtk
-" Ctrl + K                   --¹â±êÒÆÉÏÒ»ĞĞÄ©Î²
-" Ctrl + H                   --¹â±êÒÆĞĞÊ×
-" Ctrl + L                   --¹â±êÒÆĞĞÎ²
-" Ctrl + Z                   --È¡´úESCÄ£Ê½¼ü [ºÍLingos¿ì½İ¼üÓĞ³åÍ»]
-" Ctrl + S                   --±£´æÎÄ¼ş
-" Ctrl + C                   --±àÒë [Ö§³ÖC/C++¡¢Java]
-" Ctrl + R                   --ÔËĞĞ [Ö§³ÖC/C++¡¢Java¡¢Lua¡¢Perl¡¢Python¡¢Ruby]
-" Ctrl + ]                   --×ªµ½º¯Êı¶¨Òå
-" Ctrl + T                   --·µ»Øµ÷ÓÃº¯Êı
-" Ctrl + E                   --Ìí¼Ó×¢ÊÍ [²åÈëÄ£Ê½] [Ìí¼ÓµÄÊÇCÓïÑÔµÄ¶àĞĞ×¢ÊÍ£¬ËùÒÔÊÊÓÃÓÚC/C++/JavaµÈ]
-" Ctrl + E                   --Ò»²½¼ÓÔØÓï·¨Ä£°åºÍ×÷Õß¡¢Ê±¼äĞÅÏ¢ [·Ç²åÈëÄ£Ê½]
-" <C-P>                      --µ¥´Ê²¹È«
-" <C-X><C-L>                 --ÕûĞĞ²¹È«
-" Tab¼ü                      --²åÈëÄ£Ê½ÏÂµÄÈ«¹¦ÄÜÓï·¨½á¹¹²¹È« [snipMate²å¼ş]
-" wm                         --¿ªÆôÎÄµµä¯ÀÀ´°¿Ú
-" \ww                        --½øÈëvimWikiÄ£Ê½
-" za                         --´ò¿ª»ò¹Ø±Õµ±Ç°ÕÛµş
-" zM                         --¹Ø±ÕËùÓĞÕÛµş
-" zR                         --´ò¿ªËùÓĞÕÛµş
-" :set syntax=cpp            --ÊÖ¶¯Ñ¡ÔñÓï·¨¸ßÁÁ [»ò :set filetype=cpp]
-" :%!xxd                     --×ª´¢¶ş½øÖÆÎÄ¼ş£¬ÒÔÊ®Áù½øÖÆĞÎÊ½ÏÔÊ¾
-" :%!xxd -r                  --»¹Ô­¶ş½øÖÆÎÄ¼ş
-"Ê¹ÓÃPython
+" Ctrl + K                   --å…‰æ ‡ç§»ä¸Šä¸€è¡Œæœ«å°¾
+" Ctrl + H                   --å…‰æ ‡ç§»è¡Œé¦–
+" Ctrl + L                   --å…‰æ ‡ç§»è¡Œå°¾
+" Ctrl + Z                   --å–ä»£ESCæ¨¡å¼é”® [å’ŒLingoså¿«æ·é”®æœ‰å†²çª]
+" Ctrl + S                   --ä¿å­˜æ–‡ä»¶
+" Ctrl + C                   --ç¼–è¯‘ [æ”¯æŒC/C++ã€Java]
+" Ctrl + R                   --è¿è¡Œ [æ”¯æŒC/C++ã€Javaã€Luaã€Perlã€Pythonã€Ruby]
+" Ctrl + ]                   --è½¬åˆ°å‡½æ•°å®šä¹‰
+" Ctrl + T                   --è¿”å›è°ƒç”¨å‡½æ•°
+" Ctrl + E                   --æ·»åŠ æ³¨é‡Š [æ’å…¥æ¨¡å¼] [æ·»åŠ çš„æ˜¯Cè¯­è¨€çš„å¤šè¡Œæ³¨é‡Šï¼Œæ‰€ä»¥é€‚ç”¨äºC/C++/Javaç­‰]
+" Ctrl + E                   --ä¸€æ­¥åŠ è½½è¯­æ³•æ¨¡æ¿å’Œä½œè€…ã€æ—¶é—´ä¿¡æ¯ [éæ’å…¥æ¨¡å¼]
+" <C-P>                      --å•è¯è¡¥å…¨
+" <C-X><C-L>                 --æ•´è¡Œè¡¥å…¨
+" Tabé”®                      --æ’å…¥æ¨¡å¼ä¸‹çš„å…¨åŠŸèƒ½è¯­æ³•ç»“æ„è¡¥å…¨ [snipMateæ’ä»¶]
+" wm                         --å¼€å¯æ–‡æ¡£æµè§ˆçª—å£
+" \ww                        --è¿›å…¥vimWikiæ¨¡å¼
+" za                         --æ‰“å¼€æˆ–å…³é—­å½“å‰æŠ˜å 
+" zM                         --å…³é—­æ‰€æœ‰æŠ˜å 
+" zR                         --æ‰“å¼€æ‰€æœ‰æŠ˜å 
+" :set syntax=cpp            --æ‰‹åŠ¨é€‰æ‹©è¯­æ³•é«˜äº® [æˆ– :set filetype=cpp]
+" :%!xxd                     --è½¬å‚¨äºŒè¿›åˆ¶æ–‡ä»¶ï¼Œä»¥åå…­è¿›åˆ¶å½¢å¼æ˜¾ç¤º
+" :%!xxd -r                  --è¿˜åŸäºŒè¿›åˆ¶æ–‡ä»¶
+"ä½¿ç”¨Python
 "sudo pip install pyflakes
 "sudo pip install pylint
 "sudo pip install pep8
 
-"¿ì½İ¼ü¶¨ÖÆ,Ë«¼üÈ¡×Ôemacs°´¼ü·½Ê½
-"Ë«°´¼üÊ¾Àı nmapÄ£Ê½
+"å¿«æ·é”®å®šåˆ¶,åŒé”®å–è‡ªemacsæŒ‰é”®æ–¹å¼
+"åŒæŒ‰é”®ç¤ºä¾‹ nmapæ¨¡å¼
 " nmap <C-x><C-s> :w!<CR>
-" ²åÈëÄ£Ê½
+" æ’å…¥æ¨¡å¼
 " imap <C-x><C-s> <ESC> :w!<cr>
-" ÆÕÍ¨,²»µİ¹éÓ³ÉäÄ£Ê½ ,
+" æ™®é€š,ä¸é€’å½’æ˜ å°„æ¨¡å¼ ,
 " nnoremap ,w :w!<cr>
-"±£´æ
+"ä¿å­˜
 nmap <C-x><C-s> :w!<CR>
 imap <C-x><C-s> <ESC>:w!<CR>
 
-" ÎÄ¼şÁí´æÎª
+" æ–‡ä»¶å¦å­˜ä¸º
 nmap <C-x><C-w> :browse confirm saveas<CR>
 imap <C-x><C-w> <ESC>:browse confirm saveas<CR>
 
-" ±£´æ²¢ÍË³öÎÄ¼ş
+" ä¿å­˜å¹¶é€€å‡ºæ–‡ä»¶
 nmap <C-x><C-c> :wqa!<CR>
 imap <C-x><C-c> <ESC>:wqa!<CR>
 
-" ²»±£´æÍË³öÎÄ¼ş
+" ä¸ä¿å­˜é€€å‡ºæ–‡ä»¶
 nmap <C-x><C-q> :qa!<CR>
 imap <C-x><C-q> <ESC>:qa!<CR>
 
-" ´ò¿ªÎÄ¼ş
+" æ‰“å¼€æ–‡ä»¶
 nmap <C-x><C-f> :browse confirm e<CR>
 imap <C-x><C-f> <ESC>:browse confirm e<CR>
 
-" ´ò¿ªÎÄ¼ş
+" æ‰“å¼€æ–‡ä»¶
 nmap <C-x><C-f> :browse confirm e<CR>
 imap <C-x><C-f> <ESC>:browse confirm e<CR>
 
-" ½¨Á¢tagÎÄ¼ş
+" å»ºç«‹tagæ–‡ä»¶
 nmap <C-x><C-n>  :!ctags -R .<CR>
 imap <C-x><C-n> <ESC>:!ctags -R .<CR>
 
-" ×ª»»³É16½øÖÆ
+" è½¬æ¢æˆ16è¿›åˆ¶
 nmap ,ox :%!xxd<CR>
-" »Ö¸´Ô­Ê¼ÖÆÊ½
+" æ¢å¤åŸå§‹åˆ¶å¼
 nmap ,-ox :%!xxd -r<CR>
 
-"===========¡¶ÅĞ¶ÏÊÇÊ²Ã´ÑùµÄÏµÍ³¡·============================"
+"===========ã€Šåˆ¤æ–­æ˜¯ä»€ä¹ˆæ ·çš„ç³»ç»Ÿã€‹============================"
 function! Mysys()
   if has("win32")
     return "windows"
@@ -91,24 +91,24 @@ function! Mysys()
   endif
 endfunctio
 
-set completeopt=menuone            "¹Ø±Õ¶¥²¿º¯Êı²ÎÊıÌáÊ¾´°¿Ú
+set completeopt=menuone            "å…³é—­é¡¶éƒ¨å‡½æ•°å‚æ•°æç¤ºçª—å£
 set completeopt=longest,menu 
 
 
-"=========================ÓïÑÔÓë±àÂë===================================
-set helplang=cn		            	"ÖĞÎÄ°ïÖú
+"=========================è¯­è¨€ä¸ç¼–ç ===================================
+set helplang=cn		            	"ä¸­æ–‡å¸®åŠ©
 if Mysys() == 'windows'
-	set encoding=utf-8 fileencodings=ucs-bom,utf-8,cp936	"×Ô¶¯Ê¶±ğÎÄ¼ş±àÂë
+	set encoding=utf-8 fileencodings=ucs-bom,utf-8,cp936	"è‡ªåŠ¨è¯†åˆ«æ–‡ä»¶ç¼–ç 
 elseif Mysys() == 'linux'
-	set encoding=utf-8 fileencodings=ucs-bom,utf-8,cp936	"×Ô¶¯Ê¶±ğÎÄ¼ş±àÂë
+	set encoding=utf-8 fileencodings=ucs-bom,utf-8,cp936	"è‡ªåŠ¨è¯†åˆ«æ–‡ä»¶ç¼–ç 
 endif
-if Mysys() == 'windows'             "winodwsÏµÍ³ÏÂÖ´ĞĞµÄÅäÖÃ
-    "½â¾ö²Ëµ¥ÂÒÂë
+if Mysys() == 'windows'             "winodwsç³»ç»Ÿä¸‹æ‰§è¡Œçš„é…ç½®
+    "è§£å†³èœå•ä¹±ç 
     set encoding=utf-8  
     set fileencoding=chinese  
 	source $VIMRUNTIME/vimrc_example.vim
 	source $VIMRUNTIME/mswin.vim
-    "½â¾öconsleÊä³öÂÒÂë  
+    "è§£å†³consleè¾“å‡ºä¹±ç   
     language messages zh_CN.utf-8  
 	behave mswin
 	set diffexpr=MyDiff()
@@ -138,28 +138,28 @@ if Mysys() == 'windows'             "winodwsÏµÍ³ÏÂÖ´ĞĞµÄÅäÖÃ
 
 endif
 
-"=================¡¶¹«¹²ÅäÖÃ¡·==================================
-set nocompatible  	            "²»Ê¹ÓÃviÄ£Ê½"
-set linespace=0 	            "×Ö·û¼ä²åÈëµÄÏñËØĞĞÊıÄ¿
+"=================ã€Šå…¬å…±é…ç½®ã€‹==================================
+set nocompatible  	            "ä¸ä½¿ç”¨viæ¨¡å¼"
+set linespace=0 	            "å­—ç¬¦é—´æ’å…¥çš„åƒç´ è¡Œæ•°ç›®
 set nu
 set guicursor=n-v-c:hor20
 set gcr=n-v-c:ver25-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor
-set mouse=a            		    "Æô¶¯¶ÔÊó±êµÄÖ§³Ö
+set mouse=a            		    "å¯åŠ¨å¯¹é¼ æ ‡çš„æ”¯æŒ
 if Mysys() == 'linux'
-	set clipboard=unnamedplus   "¸´ÖÆÎÄ¼ş
+	set clipboard=unnamedplus   "å¤åˆ¶æ–‡ä»¶
 elseif Mysys() == 'windows'
-	set clipboard+=unnamed 	    "¹²ÏíÕ³Ìù°å
+	set clipboard+=unnamed 	    "å…±äº«ç²˜è´´æ¿
 endif
-set showcmd                     " ÊäÈëµÄÃüÁîÏÔÊ¾³öÀ´
-nnoremap <C-F2> :vert diffsplit "±È½ÏÎÄ¼ş
-set autoread                    " ÉèÖÃµ±ÎÄ¼ş±»¸Ä¶¯Ê±×Ô¶¯ÔØÈë
-set magic                       " ÉèÖÃÄ§Êõ
-"Óï·¨¸ßÁÁ"
-syntax on                       "ÔÊĞíÓÃÖ¸¶¨Óï·¨¸ßÁÁ
-syntax enable                   " ´ò¿ªÓï·¨¸ßÁÁ
-filetype plugin indent on       " ¿ªÆô×Ô¶¯¼ì²âÎÄ¼şÀàĞÍ
-"=======================×Ô¶¯±£´æsession=========================== 
-"×Ô¶¯±£´æsession
+set showcmd                     " è¾“å…¥çš„å‘½ä»¤æ˜¾ç¤ºå‡ºæ¥
+nnoremap <C-F2> :vert diffsplit "æ¯”è¾ƒæ–‡ä»¶
+set autoread                    " è®¾ç½®å½“æ–‡ä»¶è¢«æ”¹åŠ¨æ—¶è‡ªåŠ¨è½½å…¥
+set magic                       " è®¾ç½®é­”æœ¯
+"è¯­æ³•é«˜äº®"
+syntax on                       "å…è®¸ç”¨æŒ‡å®šè¯­æ³•é«˜äº®
+syntax enable                   " æ‰“å¼€è¯­æ³•é«˜äº®
+filetype plugin indent on       " å¼€å¯è‡ªåŠ¨æ£€æµ‹æ–‡ä»¶ç±»å‹
+"=======================è‡ªåŠ¨ä¿å­˜session=========================== 
+"è‡ªåŠ¨ä¿å­˜session
 if Mysys() == 'linux'
     autocmd VimLeave * mks!  ~/_session.vim
     if exists("session.vim")
@@ -172,55 +172,55 @@ if Mysys() == 'windows'
         autocmd set  VimEnter * source! $VIM/_session.vim 
     endif
 endif
-" ´ò¿ªÉÏ´Î¹Ø±ÕµÄÎÄ¼ş
+" æ‰“å¼€ä¸Šæ¬¡å…³é—­çš„æ–‡ä»¶
 " <C-o><C-o><cr>
-" ´ò¿ªÎÄ¼şÊ±£¬°´ÕÕ viminfo ±£´æµÄÉÏ´Î¹Ø±ÕÊ±µÄ¹â±êÎ»ÖÃÖØĞÂÉèÖÃ¹â±ê
+" æ‰“å¼€æ–‡ä»¶æ—¶ï¼ŒæŒ‰ç…§ viminfo ä¿å­˜çš„ä¸Šæ¬¡å…³é—­æ—¶çš„å…‰æ ‡ä½ç½®é‡æ–°è®¾ç½®å…‰æ ‡
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
-"================¡¶Ëõ½øÉèÖÃ¡·===================================
+"================ã€Šç¼©è¿›è®¾ç½®ã€‹===================================
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set autoindent
-set expandtab                 	    "½«Tab×Ô¶¯×ª»¯³É¿Õ¸ñ [ĞèÒªÊäÈëÕæÕıµÄTab¼üÊ±£¬Ê¹ÓÃ Ctrl+V + Tab]
-set foldmethod=indent		        "ÕÛµş·½Ê½ÊÇÊ¹ÓÃÓï·¨ÕÛµş
-"set foldlevel=100 			        "ÕÛµşµÄ²ã´ÎÊÇ100,Ò²¾ÍÊÇ´ò¿ªËùÓĞµÄÕÛµş
-"=================¡¶Íâ¹ÛÉèÖÃ¡·===================================
+set expandtab                 	    "å°†Tabè‡ªåŠ¨è½¬åŒ–æˆç©ºæ ¼ [éœ€è¦è¾“å…¥çœŸæ­£çš„Tabé”®æ—¶ï¼Œä½¿ç”¨ Ctrl+V + Tab]
+set foldmethod=indent		        "æŠ˜å æ–¹å¼æ˜¯ä½¿ç”¨è¯­æ³•æŠ˜å 
+"set foldlevel=100 			        "æŠ˜å çš„å±‚æ¬¡æ˜¯100,ä¹Ÿå°±æ˜¯æ‰“å¼€æ‰€æœ‰çš„æŠ˜å 
+"=================ã€Šå¤–è§‚è®¾ç½®ã€‹===================================
 if Mysys() == 'windows'
-	au GUIEnter * simalt ~x 	    "´°¿ÚÈ«ÆÁ
+	au GUIEnter * simalt ~x 	    "çª—å£å…¨å±
 	set columns=80
 elseif Mysys() == 'linux'
     autocmd GUIEnter * winsize 167 41
 endif
-set gcr=a:block-blinkon0		    "½ûÖ¹¹â±êÉÁË¸
-set laststatus=2				    "×ÜÊÇÏÔÊ¾×´Ì¬À¸
-set ruler						    " ÏÔÊ¾¹â±êµ±Ç°Î»ÖÃ
-set cursorline 					    "¸ßÁÁËùÔÚĞĞ
-"set cursorcolumn 				    "¸ßÁÁµ±Ç°ÁĞ
-set guioptions-=T				    "Òş²Ø¹¤¾ßÀ¸
-"set guioptions-=m				    "Òş²Ø²Ëµ¥
-set cmdheight=1					    " ÃüÁîĞĞ£¨ÔÚ×´Ì¬ĞĞÏÂ£©µÄ¸ß¶È£¬Ä¬ÈÏÎª1
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929  "Ò»ĞĞ¶àÓÚ80¸ö×Ö·û,ºìÉ«¾¯¸æ
+set gcr=a:block-blinkon0		    "ç¦æ­¢å…‰æ ‡é—ªçƒ
+set laststatus=2				    "æ€»æ˜¯æ˜¾ç¤ºçŠ¶æ€æ 
+set ruler						    " æ˜¾ç¤ºå…‰æ ‡å½“å‰ä½ç½®
+set cursorline 					    "é«˜äº®æ‰€åœ¨è¡Œ
+"set cursorcolumn 				    "é«˜äº®å½“å‰åˆ—
+set guioptions-=T				    "éšè—å·¥å…·æ 
+"set guioptions-=m				    "éšè—èœå•
+set cmdheight=1					    " å‘½ä»¤è¡Œï¼ˆåœ¨çŠ¶æ€è¡Œä¸‹ï¼‰çš„é«˜åº¦ï¼Œé»˜è®¤ä¸º1
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929  "ä¸€è¡Œå¤šäº80ä¸ªå­—ç¬¦,çº¢è‰²è­¦å‘Š
 match OverLength /\%81v.\+/
-set showmatch                       "¸ßÁÁÏÔÊ¾[] {} ()Åä¶Ô
+set showmatch                       "é«˜äº®æ˜¾ç¤º[] {} ()é…å¯¹
 
-"--------------------¸ß¼¶¼¼ÇÉ-------------------------------------
-"autocmd BufWritePre * :%s/\s\+$//e "±£´æÎÄ¼şÊ±×Ô¶¯È¥³ıĞĞÄ©¿Õ¸ñ
-"Ö¸¶¨ÎÄ¼şÀàĞÍÈ¥³ıĞĞÄ©¿Õ¸ñ
+"--------------------é«˜çº§æŠ€å·§-------------------------------------
+"autocmd BufWritePre * :%s/\s\+$//e "ä¿å­˜æ–‡ä»¶æ—¶è‡ªåŠ¨å»é™¤è¡Œæœ«ç©ºæ ¼
+"æŒ‡å®šæ–‡ä»¶ç±»å‹å»é™¤è¡Œæœ«ç©ºæ ¼
 "autocmd FileType c,cpp,java,php autocmd BufWritePre <buffer> :%s/\s\+$//e
-"================¡¶ËÑË÷ÉèÖÃ¡·========================================
-set incsearch                       "µ±ÊäÈëµÄÊ±ºò,Ìøµ½ÄãËÑË÷µÄ¹Ø¼ü×ÖÄÇÈ¥
-set hlsearch                        "¸ßÁÁ±»ËÑË÷µÄ¹Ø¼ü×Ö
+"================ã€Šæœç´¢è®¾ç½®ã€‹========================================
+set incsearch                       "å½“è¾“å…¥çš„æ—¶å€™,è·³åˆ°ä½ æœç´¢çš„å…³é”®å­—é‚£å»
+set hlsearch                        "é«˜äº®è¢«æœç´¢çš„å…³é”®å­—
 
-"=================¡¶×ÖÌå¡·=======================================
+"=================ã€Šå­—ä½“ã€‹=======================================
 if Mysys() == 'windows'
     set guifont=courier_new:h11
 elseif Mysys() == 'linux'
     " set guifont=DejaVu\Sans\Mono\ 11
-    " Droid sans monoĞèÒªÏÂÔØ
+    " Droid sans monoéœ€è¦ä¸‹è½½
     set guifont=DroidSansMono\ 11
 endif
 
-" ==============¡¶¸ù¾İºó×ºÃûÖ¸¶¨ÎÄ¼şÀàĞÍ¡·============================
+" ==============ã€Šæ ¹æ®åç¼€åæŒ‡å®šæ–‡ä»¶ç±»å‹ã€‹============================
 au BufRead,BufNewFile *.h           	setlocal ft=c
 au BufRead,BufNewFile *.i           	setlocal ft=c
 au BufRead,BufNewFile *.m           	setlocal ft=objc
@@ -239,9 +239,9 @@ au BufRead,BufNewFile http*.conf    	setlocal ft=apache
 au BufRead,BufNewFile php-fpm*.conf 	setlocal ft=dosini
 au BufRead,BufNewFile *.ini         	setlocal ft=dosini
 
-"==============¡¶ÅäÉ«Ö÷Ìâ¡·============================================
+"==============ã€Šé…è‰²ä¸»é¢˜ã€‹============================================
 
-" SolarizedÖ÷ÌâÉèÖÃ
+" Solarizedä¸»é¢˜è®¾ç½®
 "        " git clone git://github.com/altercation/vim-colors-solarized.git
 " ------------------------------------------------------------------
 let g:solarized_underline=0                 "default value is 1
@@ -264,40 +264,40 @@ colorscheme solarized
  let g:solarized_hitrail=0
  let g:solarized_menu=1
 
-"------------ÉùÒô---------------
-set vb t_vb=		                        "È¥³ı±¨¾¯Òô
-"====ÎÄ¼ş============
-set clipboard+=unnamed                      " ¹²Ïí¼ôÌù°å
-set showtabline=2					        "ÒÔ±êÇ©ĞÎÊ½´ò¿ªÎÄ¼ş
-autocmd BufNewFile * normal G		        "ĞÂ½¨ÎÄ¼şºó ×Ô¶¯¶¨Î»µ½ÎÄ¼şÄ©Î²
-set nobackup						        "½ûÖ¹Éú³ÉÁÙÊ±ÎÄ¼ş
-setlocal noswapfile					        "²»ÒªÉú³ÉswapÎÄ¼ş
-set wrap							        "×Ô¶¯»»ĞĞ
-"=========°´¼ü======="
+"------------å£°éŸ³---------------
+set vb t_vb=		                        "å»é™¤æŠ¥è­¦éŸ³
+"====æ–‡ä»¶============
+set clipboard+=unnamed                      " å…±äº«å‰ªè´´æ¿
+set showtabline=2					        "ä»¥æ ‡ç­¾å½¢å¼æ‰“å¼€æ–‡ä»¶
+autocmd BufNewFile * normal G		        "æ–°å»ºæ–‡ä»¶å è‡ªåŠ¨å®šä½åˆ°æ–‡ä»¶æœ«å°¾
+set nobackup						        "ç¦æ­¢ç”Ÿæˆä¸´æ—¶æ–‡ä»¶
+setlocal noswapfile					        "ä¸è¦ç”Ÿæˆswapæ–‡ä»¶
+set wrap							        "è‡ªåŠ¨æ¢è¡Œ
+"=========æŒ‰é”®======="
 set backspace=indent,eol,start
 
-"===================================¡¶²å¼ş¼°ÅäÖÃ¡·===============================""°²×°vundle¹ÜÀí²å¼ş£¬ÏÈ°²×°gitÔÙ°²×°vundle
-if Mysys() == 'windows'  					 "°²×°:git clone https://github.com/Shougo/neobundle.vim.git
-	set runtimepath+=$VIM/vimfiles/bundle/neobundle.vim 	 " ´Ë´¦¹æ¶¨neobundleµÄÂ·¾¶
-    call neobundle#begin(expand('$VIM/vimfiles/bundle/')) "²å¼ş°²×°Î»ÖÃ
-elseif Mysys() == 'linux'  					 "°²×°: git clone https://github.com/Shougo/neobundle.vim.git
-	set runtimepath+=~/.vim/bundle/neobundle.vim/ 	 		 " ´Ë´¦¹æ¶¨neobundleµÄÂ·¾¶
-    call neobundle#begin(expand('~/.vim/bundle/'))   "²å¼ş°²×°Î»ÖÃ
+"===================================ã€Šæ’ä»¶åŠé…ç½®ã€‹===============================""å®‰è£…vundleç®¡ç†æ’ä»¶ï¼Œå…ˆå®‰è£…gitå†å®‰è£…vundle
+if Mysys() == 'windows'  					 "å®‰è£…:git clone https://github.com/Shougo/neobundle.vim.git
+	set runtimepath+=$VIM/vimfiles/bundle/neobundle.vim 	 " æ­¤å¤„è§„å®šneobundleçš„è·¯å¾„
+    call neobundle#begin(expand('$VIM/vimfiles/bundle/')) "æ’ä»¶å®‰è£…ä½ç½®
+elseif Mysys() == 'linux'  					 "å®‰è£…: git clone https://github.com/Shougo/neobundle.vim.git
+	set runtimepath+=~/.vim/bundle/neobundle.vim/ 	 		 " æ­¤å¤„è§„å®šneobundleçš„è·¯å¾„
+    call neobundle#begin(expand('~/.vim/bundle/'))   "æ’ä»¶å®‰è£…ä½ç½®
 endif
 
-NeoBundleFetch 'Shougo/neobundle.vim' 		"±ØĞëÆôÓÃ
-"==========¡¶Vundle.vimÃüÁîËµÃ÷¡·"
-":NeoBundleList - ²å¼şÁĞ±í
-":NeoBundleInstall - °²×° (¸üĞÂ) bundles
-":NeoBundleClean - confirm (or auto-approve) ÒÆ³ı²»Ê¹ÓÃµÄ²å¼ş
+NeoBundleFetch 'Shougo/neobundle.vim' 		"å¿…é¡»å¯ç”¨
+"==========ã€ŠVundle.vimå‘½ä»¤è¯´æ˜ã€‹"
+":NeoBundleList - æ’ä»¶åˆ—è¡¨
+":NeoBundleInstall - å®‰è£… (æ›´æ–°) bundles
+":NeoBundleClean - confirm (or auto-approve) ç§»é™¤ä¸ä½¿ç”¨çš„æ’ä»¶
 
-NeoBundle 'vim-scripts/winmanager--Fox'     "winmanager´°¿Ú¹ÜÀí
-"ÉèÖÃwinmanagerµÄ¿í¶È£¬Ä¬ÈÏÎª25
+NeoBundle 'vim-scripts/winmanager--Fox'     "winmanagerçª—å£ç®¡ç†
+"è®¾ç½®winmanagerçš„å®½åº¦ï¼Œé»˜è®¤ä¸º25
 "let g:winManagerWidth = 15
-let g:AutoOpenWinManager = 1                "×Ô¶¯´ò¿ªwinmanager
+let g:AutoOpenWinManager = 1                "è‡ªåŠ¨æ‰“å¼€winmanager
 let Tlist_Exit_OnlyWindow=1  
 
-"½çÃæ·Ö¸ô
+"ç•Œé¢åˆ†éš”
 "let g:winManagerWindowLayout='FileExplorer|TagList'
 let g:NERDTree_title="[NERDTree]"  
 let g:winManagerWindowLayout="NERDTree|TagList" 
@@ -308,129 +308,156 @@ function! NERDTree_IsValid()
     return 1  
 endfunction  
 
-NeoBundle  'vim-scripts/bufexplorer.zip'    "ÏÔÊ¾bufÁĞ±í
-"let g:bufExplorerSortBy = 'name'		    " °´ÎÄ¼şÃûÅÅĞò
-NeoBundle  'tisyang/taglist'				"Tlist º¯ÊıÁĞ±í
-let Tlist_Use_SingleClick=1                 "µ¥»÷tag¾ÍÌøµ½tag¶¨ÒåµÄÎ»ÖÃ
-let Tlist_Show_Menu=1                       "ÏÔÊ¾taglist²Ëµ¥
-let Tlist_Auto_Open=0					    "Ä¬ÈÏ´ò¿ªTaglist
-"let Tlist_Show_One_File = 	 1              "²»Í¬Ê±ÏÔÊ¾¶à¸öÎÄ¼şµÄtag£¬Ö»ÏÔÊ¾µ±Ç°ÎÄ¼şµÄ
-let Tlist_Exit_OnlyWindow =  1              "Èç¹ûtaglist´°¿ÚÊÇ×îºóÒ»¸ö´°¿Ú£¬ÔòÍË³övim
-let Tlist_Use_Right_Window = 1              "ÔÚÓÒ²à´°¿ÚÖĞÏÔÊ¾taglist´°¿Ú
-let Tlist_Compart_Format = 1    		    " Ñ¹Ëõ·½Ê½
+NeoBundle  'vim-scripts/bufexplorer.zip'    "æ˜¾ç¤ºbufåˆ—è¡¨
+"let g:bufExplorerSortBy = 'name'		    " æŒ‰æ–‡ä»¶åæ’åº
+NeoBundle  'tisyang/taglist'				"Tlist å‡½æ•°åˆ—è¡¨
+let Tlist_Use_SingleClick=1                 "å•å‡»tagå°±è·³åˆ°tagå®šä¹‰çš„ä½ç½®
+let Tlist_Show_Menu=1                       "æ˜¾ç¤ºtaglistèœå•
+let Tlist_Auto_Open=0					    "é»˜è®¤æ‰“å¼€Taglist
+"let Tlist_Show_One_File = 	 1              "ä¸åŒæ—¶æ˜¾ç¤ºå¤šä¸ªæ–‡ä»¶çš„tagï¼Œåªæ˜¾ç¤ºå½“å‰æ–‡ä»¶çš„
+let Tlist_Exit_OnlyWindow =  1              "å¦‚æœtaglistçª—å£æ˜¯æœ€åä¸€ä¸ªçª—å£ï¼Œåˆ™é€€å‡ºvim
+let Tlist_Use_Right_Window = 1              "åœ¨å³ä¾§çª—å£ä¸­æ˜¾ç¤ºtaglistçª—å£
+let Tlist_Compart_Format = 1    		    " å‹ç¼©æ–¹å¼
 let Tlist_WinWidth = 30
 set autochdir
 if Mysys() == 'windows'
-    set tags=tags;                          " ';' ²»ÄÜÃ»ÓĞ
+    set tags=tags;                          " ';' ä¸èƒ½æ²¡æœ‰
     let Tlist_Ctags_Cmd = 'ctags'
 endif
-NeoBundle 'kien/ctrlp.vim'                  "¿ìËÙËÑË÷/ÎÄ¼ş
-NeoBundle 'scrooloose/nerdtree'			         "Ê÷ĞÎÄ¿Â¼
-"map <F9> :NERDTreeToggle<CR>               "F9µ÷³ö
+NeoBundle 'kien/ctrlp.vim'                  "å¿«é€Ÿæœç´¢/æ–‡ä»¶
+NeoBundle 'scrooloose/nerdtree'			         "æ ‘å½¢ç›®å½•
+"map <F9> :NERDTreeToggle<CR>               "F9è°ƒå‡º
 let g:NERDTreeWinSize = 30
 let g:NERDTreeHight= 30
 let g:NERDTreeMouseMode = 1
 let g:NERDTreeMapToggleZoom = '<Space>'
 
-autocmd VimEnter * WMToggle                 "×Ô¶¯¿ªÆôWMToggle
-autocmd VimEnter * wincmd w		            "¹â±êÍ£ÁôÓÒ²àÎÄ¼ş
+autocmd VimEnter * WMToggle                 "è‡ªåŠ¨å¼€å¯WMToggle
+autocmd VimEnter * wincmd w		            "å…‰æ ‡åœç•™å³ä¾§æ–‡ä»¶
 command  WM :WMToggle
 
-" Ö»Ê£ NERDTreeÊ±×Ô¶¯¹Ø±Õ
+" åªå‰© NERDTreeæ—¶è‡ªåŠ¨å…³é—­
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 "========================================<IDE>========================================
-NeoBundle 'tpope/vim-fugitive'				"git¼¯³É
-NeoBundle 'scrooloose/syntastic'			"Óï·¨¼ì²é
-NeoBundle 'Raimondi/delimitMate'			"²¹È«À¨ºÅºÍÒıºÅ
-NeoBundle  'airblade/vim-gitgutter'         "ÏÔÊ¾git ¸ü¸Ä
+NeoBundle 'tpope/vim-fugitive'				"gité›†æˆ
+NeoBundle 'scrooloose/syntastic'			"è¯­æ³•æ£€æŸ¥
+NeoBundle 'Raimondi/delimitMate'			"è¡¥å…¨æ‹¬å·å’Œå¼•å·
+NeoBundle  'airblade/vim-gitgutter'         "æ˜¾ç¤ºgit æ›´æ”¹
 NeoBundle 'majutsushi/tagbar'				"tagbar
-let g:tagbar_sort = 0					    "¹Ø±ÕÅÅĞò[Ò²¾ÍÊÇ°´±êÇ©±¾ÉíÔÚÎÄ¼şÖĞµÄÎ»ÖÃÅÅĞò]
-let g:tagbar_show_linenumbers = -1		    "ÏÔÊ¾ĞĞºÅ
-NeoBundle 'vim-scripts/YankRing.vim'        "¼ôÌù°åÔöÇ¿
-NeoBundle 'sjl/gundo.vim'                   "²é¿´³·ÏúÊ÷,ÀàËÆ°æ±¾¿ØÖÆÏµÍ³,¿É»Ö¸´µ½Ä³Ò»½×¶Î
+let g:tagbar_sort = 0					    "å…³é—­æ’åº[ä¹Ÿå°±æ˜¯æŒ‰æ ‡ç­¾æœ¬èº«åœ¨æ–‡ä»¶ä¸­çš„ä½ç½®æ’åº]
+let g:tagbar_show_linenumbers = -1		    "æ˜¾ç¤ºè¡Œå·
+NeoBundle 'vim-scripts/YankRing.vim'        "å‰ªè´´æ¿å¢å¼º
+NeoBundle 'sjl/gundo.vim'                   "æŸ¥çœ‹æ’¤é”€æ ‘,ç±»ä¼¼ç‰ˆæœ¬æ§åˆ¶ç³»ç»Ÿ,å¯æ¢å¤åˆ°æŸä¸€é˜¶æ®µ
 nnoremap <F2> :GundoToggle<CR>
-" ¿ªÆô×Ô¶¯Ô¤ÀÀ [Ëæ×Å¹â±êÔÚ±êÇ©ÉÏµÄÒÆ¶¯£¬¶¥²¿»á³öÏÖÒ»¸öÊµÊ±µÄÔ¤ÀÀ´°¿Ú]
+" å¼€å¯è‡ªåŠ¨é¢„è§ˆ [éšç€å…‰æ ‡åœ¨æ ‡ç­¾ä¸Šçš„ç§»åŠ¨ï¼Œé¡¶éƒ¨ä¼šå‡ºç°ä¸€ä¸ªå®æ—¶çš„é¢„è§ˆçª—å£]
 let g:tagbar_autopreview = 1
-NeoBundle 'tomasr/molokai'					"molokaiÅäÉ«
-NeoBundle 'bling/vim-airline'				"×´Ì¬À¸ÃÀ»¯
-NeoBundle  'Lokaltog/vim-powerline'		    "×´Ì¬À¸ÔöÇ¿
-NeoBundle 'terryma/vim-multiple-cursors'	"¶à¹â±ê¶àĞĞ±à¼­
-    " Ä¬ÈÏÉèÖÃ
+NeoBundle 'tomasr/molokai'					"molokaié…è‰²
+NeoBundle 'bling/vim-airline'				"çŠ¶æ€æ ç¾åŒ–
+NeoBundle  'Lokaltog/vim-powerline'		    "çŠ¶æ€æ å¢å¼º
+NeoBundle 'terryma/vim-multiple-cursors'	"å¤šå…‰æ ‡å¤šè¡Œç¼–è¾‘
+    " é»˜è®¤è®¾ç½®
     let g:multi_cursor_next_key='<C-n>'
     let g:multi_cursor_prev_key='<C-p>'
     let g:multi_cursor_skip_key='<C-x>'
     let g:multi_cursor_quit_key='<Esc>'
-    "Ê¹ÓÃ·½·¨
-    "fpÌøµ½p´¦
-    "°´ÏÂ <C-n> Ñ¡ÖĞ¹â±êÏÂµÄµ¥´Ê
-    "¼ÌĞø°´ÏÂ <C-n> Á½´ÎÑ¡ÖĞÁíÍâÁ½¸öÏàÍ¬µÄµ¥´Ê
-    "°´ÏÂc½øĞĞĞŞ¸Ä
-    "¼üÈëĞŞ¸Ä
-    "°´ÏÂ <Esc> ÍË³ö
-    "ÔÚÆÕÍ¨Ä£Ê½ÏÂ£¬°´ÏÂ Ctrl-n ¿ªÊ¼½øÈë¿ÉÊÓÄ£Ê½²¢Ñ¡ÖĞ¹â±êÏÂµÄµ¥´Ê£¬¼ÌĞø°´ Ctrl-n Ñ¡ÔñÏÂÒ»¸öÏàÍ¬µÄµ¥´Ê£¬°´ÏÂ Ctrl-p Íù»ØÑ¡Ò»¸ö£¬ Ctrl-x ÔòÌø¹ıÏÂÒ»¸öÏàÍ¬µ¥´Ê¡£
-    "    °´ÏÂVÑ¡ÖĞÕûĞĞ
-    "°´ÏÂGµ½´ïÄ©ĞĞ
-    "°´ÏÂ <C-n> ÔÚÃ¿ĞĞµÄ¿ªÍ·¼ÓÉÏÒ»¸ö¹â±ê²¢·µ»ØÆÕÍ¨Ä£Ê½
-    "°´ÏÂIÔÚÃ¿ĞĞµÄÍ·²¿²åÈë
-    "¼üÈë¡±, °´ÏÂ <C-e> µ½´ïĞĞÄ©, ¼üÈëÁíÒ»¸ö¡±ºÍ¶ººÅ
-    "È»ºó½«Ã¿¸ö¹â±ê¶¼ÏÂÒÆÒ»ĞĞ£¬°´ÏÂdelete
-NeoBundle 'yegappan/mru'		                "Ê¹ÓÃ:MRUÃüÁîµ÷³ö×î½ü´ò¿ªµÄÎÄµµ
+    "ä½¿ç”¨æ–¹æ³•
+    "fpè·³åˆ°på¤„
+    "æŒ‰ä¸‹ <C-n> é€‰ä¸­å…‰æ ‡ä¸‹çš„å•è¯
+    "ç»§ç»­æŒ‰ä¸‹ <C-n> ä¸¤æ¬¡é€‰ä¸­å¦å¤–ä¸¤ä¸ªç›¸åŒçš„å•è¯
+    "æŒ‰ä¸‹cè¿›è¡Œä¿®æ”¹
+    "é”®å…¥ä¿®æ”¹
+    "æŒ‰ä¸‹ <Esc> é€€å‡º
+    "åœ¨æ™®é€šæ¨¡å¼ä¸‹ï¼ŒæŒ‰ä¸‹ Ctrl-n å¼€å§‹è¿›å…¥å¯è§†æ¨¡å¼å¹¶é€‰ä¸­å…‰æ ‡ä¸‹çš„å•è¯ï¼Œç»§ç»­æŒ‰ Ctrl-n é€‰æ‹©ä¸‹ä¸€ä¸ªç›¸åŒçš„å•è¯ï¼ŒæŒ‰ä¸‹ Ctrl-p å¾€å›é€‰ä¸€ä¸ªï¼Œ Ctrl-x åˆ™è·³è¿‡ä¸‹ä¸€ä¸ªç›¸åŒå•è¯ã€‚
+    "    æŒ‰ä¸‹Vé€‰ä¸­æ•´è¡Œ
+    "æŒ‰ä¸‹Gåˆ°è¾¾æœ«è¡Œ
+    "æŒ‰ä¸‹ <C-n> åœ¨æ¯è¡Œçš„å¼€å¤´åŠ ä¸Šä¸€ä¸ªå…‰æ ‡å¹¶è¿”å›æ™®é€šæ¨¡å¼
+    "æŒ‰ä¸‹Iåœ¨æ¯è¡Œçš„å¤´éƒ¨æ’å…¥
+    "é”®å…¥â€, æŒ‰ä¸‹ <C-e> åˆ°è¾¾è¡Œæœ«, é”®å…¥å¦ä¸€ä¸ªâ€å’Œé€—å·
+    "ç„¶åå°†æ¯ä¸ªå…‰æ ‡éƒ½ä¸‹ç§»ä¸€è¡Œï¼ŒæŒ‰ä¸‹delete
+NeoBundle 'yegappan/mru'		                "ä½¿ç”¨:MRUå‘½ä»¤è°ƒå‡ºæœ€è¿‘æ‰“å¼€çš„æ–‡æ¡£
 highlight link MRUFileName LineNr
 let MRU_Max_Entries = 100
 
-NeoBundle 'tomtom/tcomment_vim'                 "¿ìËÙ×¢ÊÍ
+NeoBundle 'tomtom/tcomment_vim'                 "å¿«é€Ÿæ³¨é‡Š
 
 NeoBundle 'Yggdroot/indentLine'
 let g:indentLine_color_term = 239
 let g:indentLine_color_gui = '#3366ff'
 let g:indentLine_char = '|'
-NeoBundle 'danro/rename.vim'                    "ÖØÃüÃû²å¼ş
-NeoBundle 'jiangmiao/auto-pairs'				"×Ô¶¯²åÈëºÍ¸ñÊ½»¯·½À¨ºÅºÍÔ²À¨ºÅ
-NeoBundle 'vim-scripts/matchit.zip'             "\ %Æ¥Åä³É¶ÔµÄ±êÇ©£¬Ìø×ª
+NeoBundle 'danro/rename.vim'                    "é‡å‘½åæ’ä»¶
+NeoBundle 'jiangmiao/auto-pairs'				"è‡ªåŠ¨æ’å…¥å’Œæ ¼å¼åŒ–æ–¹æ‹¬å·å’Œåœ†æ‹¬å·
+NeoBundle 'vim-scripts/matchit.zip'             "\ %åŒ¹é…æˆå¯¹çš„æ ‡ç­¾ï¼Œè·³è½¬
 
-"Ìí¼Ó»·ÈÆ
-NeoBundle 'tpope/vim-surround'                      "¿ìËÙ¸ø´Ê¼Ó»·ÈÆ·ûºÅ,ÀıÈçÒıºÅ
+"æ·»åŠ ç¯ç»•
+NeoBundle 'tpope/vim-surround'                      "å¿«é€Ÿç»™è¯åŠ ç¯ç»•ç¬¦å·,ä¾‹å¦‚å¼•å·
 "{{
-"Ê¹ÓÃ·½·¨£º ysiw"   "¿ÉÓÃÈÎÒâ·ûºÅ´úÌæ
-"yssb  ¿ÉÒÔ¿ìËÙÎªÒ»ĞĞ°üÎ§Ô²À¨ºÅ ±ÈÈç yss" ÎªÒ»ĞĞ°üÎ§Ë«ÒıºÅ
-"cs Ö¸Áî¿ÉÒÔ¸ü¸Ä°üÎ§, ±ÈÈç cs'" ÊÇ½«µ¥ÒıºÅ±ä³ÉË«ÒıºÅ, cs"( ÊÇ½«Ë«ÒıºÅ±ä³ÉÔ²À¨ºÅ
-"ds Ö¸Áî¿ÉÒÔÈ¡³ö°üÎ§, ºóÃæĞè¸ú°üÎ§µÄÄÚÈİ, ds" ÊÇÈ¥³ıË«ÒıºÅ°üÎ§, ``
-"ÆÕÍ¨Ä£Ê½
+"ä½¿ç”¨æ–¹æ³•ï¼š ysiw"   "å¯ç”¨ä»»æ„ç¬¦å·ä»£æ›¿
+"yssb  å¯ä»¥å¿«é€Ÿä¸ºä¸€è¡ŒåŒ…å›´åœ†æ‹¬å· æ¯”å¦‚ yss" ä¸ºä¸€è¡ŒåŒ…å›´åŒå¼•å·
+"cs æŒ‡ä»¤å¯ä»¥æ›´æ”¹åŒ…å›´, æ¯”å¦‚ cs'" æ˜¯å°†å•å¼•å·å˜æˆåŒå¼•å·, cs"( æ˜¯å°†åŒå¼•å·å˜æˆåœ†æ‹¬å·
+"ds æŒ‡ä»¤å¯ä»¥å–å‡ºåŒ…å›´, åé¢éœ€è·ŸåŒ…å›´çš„å†…å®¹, ds" æ˜¯å»é™¤åŒå¼•å·åŒ…å›´, ``
+"æ™®é€šæ¨¡å¼
 "-----------
-"ds  - É¾³ıÒ»¸ö»·ÈÆ
-"cs  - ¸Ä±äÒ»¸ö»·ÈÆ
-"ys  - Ìí¼ÓÒ»¸ö»·ÈÆ
-"yS  - Ìí¼ÓÒ»¸ö»·ÈÆºÍµØ·½±»°üÎ§µÄÎÄ±¾´ÓĞÂµÄÒ»ĞĞ+Ëõ½ø
-"yss - Ìí¼ÓÒ»¸ö»·ÈÆ
-"ySs - ¼ÓÉÏÖÜÎ§µÄ»·ÈÆ£¬·ÅÖÃµ½Ò»¸öĞÂµÄĞĞ+Ëõ½ø
-"ySS - Í¬ ySs
+"ds  - åˆ é™¤ä¸€ä¸ªç¯ç»•
+"cs  - æ”¹å˜ä¸€ä¸ªç¯ç»•
+"ys  - æ·»åŠ ä¸€ä¸ªç¯ç»•
+"yS  - æ·»åŠ ä¸€ä¸ªç¯ç»•å’Œåœ°æ–¹è¢«åŒ…å›´çš„æ–‡æœ¬ä»æ–°çš„ä¸€è¡Œ+ç¼©è¿›
+"yss - æ·»åŠ ä¸€ä¸ªç¯ç»•
+"ySs - åŠ ä¸Šå‘¨å›´çš„ç¯ç»•ï¼Œæ”¾ç½®åˆ°ä¸€ä¸ªæ–°çš„è¡Œ+ç¼©è¿›
+"ySS - åŒ ySs
 
-"¿ÉÊÓÄ£Ê½
+"å¯è§†æ¨¡å¼
 "-----------
-"s   - Ìí¼ÓÒ»¸ö»·ÈÆ
-"S   - Ìí¼ÓÒ»¸öĞÂµÄ»·ÈÆÎÄ±¾+Ëõ½ø
-"²åÈëÄ£Ê½
+"s   - æ·»åŠ ä¸€ä¸ªç¯ç»•
+"S   - æ·»åŠ ä¸€ä¸ªæ–°çš„ç¯ç»•æ–‡æœ¬+ç¼©è¿›
+"æ’å…¥æ¨¡å¼
 "-----------
-"<CTRL-s> - Ìí¼ÓÒ»¸ö»·ÈÆ
-"<CTRL-s><CTRL-s> - Ìí¼ÓÒ»¸öĞÂµÄ»·ÈÆÎÄ±¾+Ëõ½ø
+"<CTRL-s> - æ·»åŠ ä¸€ä¸ªç¯ç»•
+"<CTRL-s><CTRL-s> - æ·»åŠ ä¸€ä¸ªæ–°çš„ç¯ç»•æ–‡æœ¬+ç¼©è¿›
 "<CTRL-g>s - same as <CTRL-s>
 "<CTRL-g>S - same as <CTRL-s><CTRL-s>
 "}}
 
-NeoBundle 'ianva/vim-youdao-translater'        "ÓĞµÀ·­Òë
+NeoBundle 'ianva/vim-youdao-translater'        "æœ‰é“ç¿»è¯‘
 vnoremap <silent> <C-T> <Esc>:Ydv<CR>
 nnoremap <silent> <C-T> <Esc>:Ydc<CR>
 noremap <leader>yd :Yde<CR>
-NeoBundle 'godlygeek/tabular'                   " Tabular: ×Ô¶¯¶ÔÆë¡£
-" ---------------------------------------------------
-NeoBundle 'shemerey/vim-project'                "ÏîÄ¿¹ÜÀí
+NeoBundle 'godlygeek/tabular'                   " Tabular: è‡ªåŠ¨å¯¹é½ã€‚
+
+NeoBundle 'shemerey/vim-project'                "é¡¹ç›®ç®¡ç†
 NeoBundle 'atom/vim-mode'                       "vim-mode
+NeoBundle 'Shougo/neocomplcache.vim'            "ç»ˆæä»£ç è¡¥å…¨
+let g:acp_enableAtStartup = 1                   "å¯ç”¨
+" Use neocomplcache.
+let g:neocomplcache_enable_at_startup = 1
+" Use smartcase.
+let g:neocomplcache_enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+ "Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplcache_force_omni_patterns')
+  let g:neocomplcache_force_omni_patterns = {}
+endif
+let g:neocomplcache_force_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+let g:neocomplcache_force_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+let g:neocomplcache_force_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-o>"
+" For perlomni.vim setting.
+" https://github.com/c9s/perlomni.vim
+let g:neocomplcache_force_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 "==================python IDE======start======
-let python_highlight_all = 1                    "python¸ßÁÁ
-NeoBundle 'vim-scripts/indentpython.vim'        "python×Ô¶¯Ëõ½ø
+let python_highlight_all = 1                    "pythoné«˜äº®
+NeoBundle 'vim-scripts/indentpython.vim'        "pythonè‡ªåŠ¨ç¼©è¿›
 "{{
-NeoBundle 'nvie/vim-flake8'                     "python´úÂë¼ì²é
+NeoBundle 'nvie/vim-flake8'                     "pythonä»£ç æ£€æŸ¥
 	"pip install flake8
 	"<F7> to run flake8
 	let g:flake8_quickfix_location="top"
@@ -439,23 +466,23 @@ NeoBundle 'nvie/vim-flake8'                     "python´úÂë¼ì²é
 	let g:flake8_show_in_gutter=1
 	let g:flake8_show_in_file=1
 	let g:flake8_max_markers=500
-	let flake8_error_marker='¦¤'                "´íÎóÌáÊ¾·ûºÅ
-	let flake8_warning_marker='¡Á'              "¾¯¸æÌáÊ¾·ûºÅ
-	let flake8_pyflake_marker=''                " ÊÇ·ñÆÁ±Î¾¯¸æ
-	let flake8_complexity_marker=''             "ÆÁ±Î McCabe complexity ¾¯¸æ
-	let flake8_naming_marker=''                 "ÆÁ±Î naming ¾¯¸æ
+	let flake8_error_marker='Î”'                "é”™è¯¯æç¤ºç¬¦å·
+	let flake8_warning_marker='Ã—'              "è­¦å‘Šæç¤ºç¬¦å·
+	let flake8_pyflake_marker=''                " æ˜¯å¦å±è”½è­¦å‘Š
+	let flake8_complexity_marker=''             "å±è”½ McCabe complexity è­¦å‘Š
+	let flake8_naming_marker=''                 "å±è”½ naming è­¦å‘Š
 "}}
 
-NeoBundle 'davidhalter/jedi-vim'		        "python²¹È«,ĞèÒª°²×°:pip install jedi
+NeoBundle 'davidhalter/jedi-vim'		        "pythonè¡¥å…¨,éœ€è¦å®‰è£…:pip install jedi
 "pip install jedi
 "pip install tox pytest
 let g:jedi#use_tabs_not_buffers = 1
 
-NeoBundle 'msanders/snipmate.vim'               "spipmate´úÂëÆ¬¶Î
+NeoBundle 'msanders/snipmate.vim'               "spipmateä»£ç ç‰‡æ®µ
 
-NeoBundle 'tyru/open-browser.vim'               "´ò¿ªä¯ÀÀÆ÷
-"--------------------¡¶web ²å¼ş¡·--------------------------------------
-"webËõ½ø
+NeoBundle 'tyru/open-browser.vim'               "æ‰“å¼€æµè§ˆå™¨
+"--------------------ã€Šweb æ’ä»¶ã€‹--------------------------------------
+"webç¼©è¿›
 au BufNewFile,BufRead *.js, *.html, *.css
     \ set tabstop=2
     \ set softtabstop=2
@@ -467,32 +494,33 @@ augroup VimCSS3Syntax
 augroup END
 NeoBundle 'othree/html5.vim', {'autoload':{'filetypes':['html']}}
 NeoBundle 'gregsexton/MatchTag', {'autoload':{'filetypes':['html','xml']}}
-NeoBundle 'mattn/emmet-vim'                        "emmet ËÙĞ´
+NeoBundle 'mattn/emmet-vim'                        "emmet é€Ÿå†™
 let g:user_emmet_install_global = 0                                
-autocmd FileType html,css EmmetInstall              "Ö»ÔÚhtmlºÍcssÖĞÆôÓÃ
-let g:user_emmet_expandabbr_key='<c-j>'  	        "¸ü¸ÄÄ¬ÈÏ°´¼ü
+autocmd FileType html,css EmmetInstall              "åªåœ¨htmlå’Œcssä¸­å¯ç”¨
+let g:user_emmet_expandabbr_key='<c-j>'  	        "æ›´æ”¹é»˜è®¤æŒ‰é”®
 let g:user_emmet_complete_tag=1
 let g:user_emmet_next_key='<c-n>'
 let g:user_emmet_prev_key='<c-p>'
-NeoBundle 'docunext/closetag.vim'                   "¹Ø±Õ±êÇ©
-NeoBundle 'othree/xml.vim'							"xml²å¼ş
-NeoBundle 'ternjs/tern_for_vim'                     "tern js²¹È«
-NeoBundle 'cakebaker/scss-syntax.vim'               "scss css¼ì²é
+NeoBundle 'docunext/closetag.vim'                   "å…³é—­æ ‡ç­¾
+NeoBundle 'othree/xml.vim'							"xmlæ’ä»¶
+NeoBundle 'ternjs/tern_for_vim'                     "tern jsè¡¥å…¨
+NeoBundle 'cakebaker/scss-syntax.vim'               "scss cssæ£€æŸ¥
 au BufRead,BufNewFile *.scss set filetype=scss.css
 NeoBundle 'ap/vim-css-color', {'autoload':{'filetypes':['css','scss','sass','less','styl']}}
 "----------javascript-----------------------
 NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'nono/jquery.vim'                         "jquery¸ßÁÁ
-NeoBundle 'elzr/vim-json'                           "json¸ßÁÁ
-NeoBundle 'guileen/vim-node-dict'					"Node.js ×Öµä
-NeoBundle 'maksimr/vim-jsbeautify'                  "JS´úÂë¸ñÊ½»¯
+NeoBundle 'nono/jquery.vim'                         "jqueryé«˜äº®
+NeoBundle 'elzr/vim-json'                           "jsoné«˜äº®
+NeoBundle 'guileen/vim-node-dict'					"Node.js å­—å…¸
+NeoBundle 'maksimr/vim-jsbeautify'                  "JSä»£ç æ ¼å¼åŒ–
 "django
 NeoBundle 'django_templates.vim'
 NeoBundle 'Django-Projects'
 
 "--------------------PHP IDE-----------------------------------------------
-NeoBundle 'ervandew/supertab'                      "³¬¼¶tab
-" ======================¡¶Õë¶Ô²¿·ÖÓïÑÔÌí¼Ó×Öµä²¹È«¡·=======================
+set omnifunc=phpcomplete#CompletePHP            "phpè¡¥å…¨
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+" ======================ã€Šé’ˆå¯¹éƒ¨åˆ†è¯­è¨€æ·»åŠ å­—å…¸è¡¥å…¨ã€‹=======================
 "autocmd FileType c          call AddCDict()
 "if Mysys() == 'windows'
 "	function AddCDict()
@@ -511,35 +539,35 @@ NeoBundle 'ervandew/supertab'                      "³¬¼¶tab
 "	endfunction
 "endif
 NeoBundleCheck
-call neobundle#end()                        "ÓÃÓÚËùÓĞ²å¼ş×îºó
-"=========================================¡¶ÊµÓÃÉèÖÃ¡·=================================="
-"µ¥´Ê¾ÀÕı
+call neobundle#end()                        "ç”¨äºæ‰€æœ‰æ’ä»¶æœ€å
+"=========================================ã€Šå®ç”¨è®¾ç½®ã€‹=================================="
+"å•è¯çº æ­£
 ":abbr Lunix Linux
 ":abbr accross across
-"=========================================<×Ô¶¨ÒåÃüÁî>==================================="
-command T :tabnew | WMToggle	"´ò¿ªĞÂ±êÇ©Ò³,²¢¼ÓÔØWMToggle
+"=========================================<è‡ªå®šä¹‰å‘½ä»¤>==================================="
+command T :tabnew | WMToggle	"æ‰“å¼€æ–°æ ‡ç­¾é¡µ,å¹¶åŠ è½½WMToggle
 
-"ĞÂ½¨.c,.h,.sh,.javaÎÄ¼ş£¬×Ô¶¯²åÈëÎÄ¼şÍ·
+"æ–°å»º.c,.h,.sh,.javaæ–‡ä»¶ï¼Œè‡ªåŠ¨æ’å…¥æ–‡ä»¶å¤´
 autocmd BufNewFile *.c,*.cpp,*.[ch],*.sh,*.py,*.php  exec ":call SetTitle()"
-""¶¨Òåº¯ÊıSetTitle£¬×Ô¶¯²åÈëÎÄ¼şÍ·
+""å®šä¹‰å‡½æ•°SetTitleï¼Œè‡ªåŠ¨æ’å…¥æ–‡ä»¶å¤´
 func SetTitle()
-	"Èç¹ûÎÄ¼şÀàĞÍÎª.shÎÄ¼ş
+	"å¦‚æœæ–‡ä»¶ç±»å‹ä¸º.shæ–‡ä»¶
 	if &filetype == 'sh'
 		call setline(1,"\#!/bin/bash")
-        call append(1,"# ×÷Õß:" .    "  ÑîÊ¥ÁÁ")
-        call append(2,"# ÓÊÏä:" .    "  fedkey@sina.com")
-        call append(3,"# ²©¿Í:" .    "  yangshengliang.com")
-        call append(4,"# ´´½¨ÈÕÆÚ:" .strftime("%Y-%m-%d"))
+        call append(1,"# ä½œè€…:" .    "  æ¨åœ£äº®")
+        call append(2,"# é‚®ç®±:" .    "  fedkey@sina.com")
+        call append(3,"# åšå®¢:" .    "  yangshengliang.com")
+        call append(4,"# åˆ›å»ºæ—¥æœŸ:" .strftime("%Y-%m-%d"))
 
     elseif &filetype == 'python'
         call setline(1,"#!/usr/bin/env python")
         call append(1,"# coding=utf-8")
         call append(2, "\"\"\"")
-		call append(3,"ÎÄ¼şÃû:      ".expand("%"))
-        call append(4,"´´½¨ÈÕÆÚ:    " . strftime("%Y-%m-%d"))
-	    call append(5,"×÷Õß:        ÑîÊ¥ÁÁ")
-	    call append(6,"ÓÊÏä:        fedkey@sina.com")
-        call append(7,"²©¿Í£º       yangshengliang.com")
+		call append(3,"æ–‡ä»¶å:      ".expand("%"))
+        call append(4,"åˆ›å»ºæ—¥æœŸ:    " . strftime("%Y-%m-%d"))
+	    call append(5,"ä½œè€…:        æ¨åœ£äº®")
+	    call append(6,"é‚®ç®±:        fedkey@sina.com")
+        call append(7,"åšå®¢ï¼š       yangshengliang.com")
         call append(8, "\"\"\"")
 
     elseif &filetype == 'ruby'
@@ -549,11 +577,11 @@ func SetTitle()
      elseif &filetype == 'php'
 		call setline(1, "<?php")
 		call append(line("."),"/*")
-		call append(line(".")+1,"ÎÄ¼şÃû:  ".expand("%"))
-		call append(line(".")+2,"×÷Õß:    ÑîÊ¥ÁÁ")
-		call append(line(".")+3,"ÓÊÏä:    fedkey@sina.com ")
-		call append(line(".")+4,"²©¿Í:    yangshengliang.com ")
-		call append(line(".")+5,"´´½¨ÈÕÆÚ:" . strftime("%Y-%m-%d"))
+		call append(line(".")+1,"æ–‡ä»¶å:  ".expand("%"))
+		call append(line(".")+2,"ä½œè€…:    æ¨åœ£äº®")
+		call append(line(".")+3,"é‚®ç®±:    fedkey@sina.com ")
+		call append(line(".")+4,"åšå®¢:    yangshengliang.com ")
+		call append(line(".")+5,"åˆ›å»ºæ—¥æœŸ:" . strftime("%Y-%m-%d"))
 		call append(line(".")+6, "*/")
 	endif
 	if expand("%:e") == 'cpp'
@@ -571,7 +599,7 @@ func SetTitle()
 	endif
 endfun
 autocmd BufNewFile * normal G
-"==========================================F5 Ò»¼üÔËĞĞ=====================================================
+"==========================================F5 ä¸€é”®è¿è¡Œ=====================================================
 func! RunScript()
 if &filetype == 'python'
     exec "!python %"
@@ -579,6 +607,6 @@ endif
 endfunc
 map <F5> :call RunScript()<CR>
 
-"¼¼ÇÉ
-"ÎÄ±¾µ¥´ÊÖĞÌí¼Ó·ûºÅ,Èç£ºwwflwlf/fwfwekfek kfwkeowofeowoee ÏëÔÚwwflwlf/fwfwekfekÇ°ºó¼ÓÒ»¸öË«ÒıºÅ
-"²Ù×÷,¹â±ê¶¨Î»µ½wwf´¦£ºvt¿Õ¸ñ S"   ÒÔ´ËÀàÍÆ,¿ÉÒÔ¿ìËÙÌí¼ÓÆäËûµÄ·ûºÅ 
+"æŠ€å·§
+"æ–‡æœ¬å•è¯ä¸­æ·»åŠ ç¬¦å·,å¦‚ï¼šwwflwlf/fwfwekfek kfwkeowofeowoee æƒ³åœ¨wwflwlf/fwfwekfekå‰ååŠ ä¸€ä¸ªåŒå¼•å·
+"æ“ä½œ,å…‰æ ‡å®šä½åˆ°wwfå¤„ï¼švtç©ºæ ¼ S"   ä»¥æ­¤ç±»æ¨,å¯ä»¥å¿«é€Ÿæ·»åŠ å…¶ä»–çš„ç¬¦å· 
