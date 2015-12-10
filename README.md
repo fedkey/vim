@@ -6,7 +6,7 @@
 ## 安装
 
 * windows用户
-创建bundle目录，位置为： $VIM/vimfiles/bundle         $VIM代表你的vim安装目录<br>
+创建bundle目录，位置为： $VIM/vimfiles/bundle    （$VIM代表你的vim安装目录）<br>
 下载：_vimrc到  $VIM 下。替换之前最好备份一下<br>
 
 * linux用户 
