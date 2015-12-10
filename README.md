@@ -1,9 +1,9 @@
 ## fedkey vim 说明
 
-* 该项目是我自己的vim配置,可以在linux和windows上通用。<br>
+* 该项目是我自己的vim配置,可以在linux和windows上通用。<br><br>
 * 配置使用Neobundle管理器，使用方法见：https://github.com/Shougo/neobundle.vim<br>
 
-## 安装
+## 安装说明
 
 * windows用户
 创建bundle目录，位置为： $VIM/vimfiles/bundle    （$VIM代表你的vim安装目录）<br>
