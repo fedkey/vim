@@ -94,7 +94,6 @@ endfunctio
 set completeopt=menuone            "关闭顶部函数参数提示窗口
 set completeopt=longest,menu 
 
-
 "=========================语言与编码===================================
 set helplang=cn		            	"中文帮助
 if Mysys() == 'windows'
@@ -223,6 +222,8 @@ endif
 " ==============《根据后缀名指定文件类型》============================
 au BufRead,BufNewFile *.h           	setlocal ft=c
 au BufRead,BufNewFile *.i           	setlocal ft=c
+au BufRead,BufNewFile *.c           	setlocal ft=c
+au BufRead,BufNewFile *.cpp           	setlocal ft=cpp
 au BufRead,BufNewFile *.m           	setlocal ft=objc
 au BufRead,BufNewFile *.di          	setlocal ft=d
 au BufRead,BufNewFile *.ss          	setlocal ft=scheme
@@ -242,7 +243,7 @@ au BufRead,BufNewFile *.ini         	setlocal ft=dosini
 "==============《配色主题》============================================
 
 " Solarized主题设置
-"        " git clone git://github.com/altercation/vim-colors-solarized.git
+    " git clone git://github.com/altercation/vim-colors-solarized.git
 " ------------------------------------------------------------------
 let g:solarized_underline=0                 "default value is 1
 let g:solarized_contrast="high"             "default value is normal
@@ -274,9 +275,10 @@ set nobackup						        "禁止生成临时文件
 setlocal noswapfile					        "不要生成swap文件
 set wrap							        "自动换行
 "=========按键======="
-set backspace=indent,eol,start
+set backspace=indent,eol,start              "使用退格键
 
-"===================================《插件及配置》===============================""安装vundle管理插件，先安装git再安装vundle
+"===========《插件及配置》==========================="
+"安装neobundle管理插件，先安装git再安装neobundle
 if Mysys() == 'windows'  					 "安装:git clone https://github.com/Shougo/neobundle.vim.git
 	set runtimepath+=$VIM/vimfiles/bundle/neobundle.vim 	 " 此处规定neobundle的路径
     call neobundle#begin(expand('$VIM/vimfiles/bundle/')) "插件安装位置
@@ -560,6 +562,7 @@ call neobundle#end()                        "用于所有插件最后
 "=========================================<自定义命令>==================================="
 command T :tabnew | WMToggle	"打开新标签页,并加载WMToggle
 
+filetype plugin indent on       " 开启自动检测文件类型
 "新建.c,.h,.sh,.java文件，自动插入文件头
 autocmd BufNewFile *.c,*.cpp,*.[ch],*.sh,*.py,*.php  exec ":call SetTitle()"
 ""定义函数SetTitle，自动插入文件头
@@ -623,3 +626,4 @@ map <F5> :call RunScript()<CR>
 "技巧
 "文本单词中添加符号,如：wwflwlf/fwfwekfek kfwkeowofeowoee 想在wwflwlf/fwfwekfek前后加一个双引号
 "操作,光标定位到wwf处：vt空格 S"   以此类推,可以快速添加其他的符号 
+
