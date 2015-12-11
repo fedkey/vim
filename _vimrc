@@ -427,10 +427,8 @@ NeoBundle 'godlygeek/tabular'                   " Tabular: 自动对齐。
 NeoBundle 'shemerey/vim-project'                "项目管理
 NeoBundle 'atom/vim-mode'                       "vim-mode
 NeoBundle 'ervandew/supertab'                   "按<tab>可实现代码提示
-let g:SuperTabDefaultCompletionType = "<tab>"
-let g:SuperTabContextDefaultCompletionType = "<tab>"
 NeoBundle 'Shougo/neocomplcache.vim'            "终极代码补全
-let g:acp_enableAtStartup = 1                   "启用
+let g:acp_enableAtStartup = 0                   "禁用自启
 " Use neocomplcache.
 let g:neocomplcache_enable_at_startup = 1
 " Use smartcase.
@@ -440,9 +438,10 @@ let g:neocomplcache_min_syntax_length = 3
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
  "Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP              "php补全
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType python setlocal omnifunc=jedi#Complete                     "python 用jedi补全
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " Enable heavy omni completion.
@@ -452,10 +451,22 @@ endif
 let g:neocomplcache_force_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 let g:neocomplcache_force_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
 let g:neocomplcache_force_omni_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-o>"
 " For perlomni.vim setting.
 " https://github.com/c9s/perlomni.vim
 let g:neocomplcache_force_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+
 "==================python IDE======start======
 let python_highlight_all = 1                    "python高亮
 NeoBundle 'vim-scripts/indentpython.vim'        "python自动缩进
@@ -506,7 +517,7 @@ let g:user_emmet_next_key='<c-n>'
 let g:user_emmet_prev_key='<c-p>'
 NeoBundle 'docunext/closetag.vim'                   "关闭标签
 NeoBundle 'othree/xml.vim'							"xml插件
-NeoBundle 'ternjs/tern_for_vim'                     "tern js补全
+"NeoBundle 'ternjs/tern_for_vim'                     "tern js补全
 NeoBundle 'cakebaker/scss-syntax.vim'               "scss css检查
 au BufRead,BufNewFile *.scss set filetype=scss.css
 NeoBundle 'ap/vim-css-color', {'autoload':{'filetypes':['css','scss','sass','less','styl']}}
@@ -521,8 +532,7 @@ NeoBundle 'django_templates.vim'
 NeoBundle 'Django-Projects'
 
 "--------------------PHP IDE-----------------------------------------------
-set omnifunc=phpcomplete#CompletePHP            "php补全
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+
 " ======================《针对部分语言添加字典补全》=======================
 "autocmd FileType c          call AddCDict()
 "if Mysys() == 'windows'
