@@ -426,6 +426,9 @@ NeoBundle 'godlygeek/tabular'                   " Tabular: 自动对齐。
 
 NeoBundle 'shemerey/vim-project'                "项目管理
 NeoBundle 'atom/vim-mode'                       "vim-mode
+NeoBundle 'ervandew/supertab'                   "按<tab>可实现代码提示
+let g:SuperTabDefaultCompletionType = "<tab>"
+let g:SuperTabContextDefaultCompletionType = "<tab>"
 NeoBundle 'Shougo/neocomplcache.vim'            "终极代码补全
 let g:acp_enableAtStartup = 1                   "启用
 " Use neocomplcache.
