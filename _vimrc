@@ -77,6 +77,12 @@ imap <C-x><C-f> <ESC>:browse confirm e<CR>
 nmap <C-x><C-n>  :!ctags -R .<CR>
 imap <C-x><C-n> <ESC>:!ctags -R .<CR>
 
+" 快速定位到行末
+imap <C-e> <ESC> A
+
+" 快速定位到行首
+imap <C-a> <ESC> I
+
 " 转换成16进制
 nmap ,ox :%!xxd<CR>
 " 恢复原始制式
@@ -106,7 +112,7 @@ if Mysys() == 'windows'             "winodws系统下执行的配置
     set encoding=utf-8  
     set fileencoding=chinese  
 	source $VIMRUNTIME/vimrc_example.vim
-	source $VIMRUNTIME/mswin.vim
+	" source $VIMRUNTIME/mswin.vim  不使用win的快捷键
     "解决consle输出乱码  
     language messages zh_CN.utf-8  
 	behave mswin
@@ -624,4 +630,3 @@ map <F5> :call RunScript()<CR>
 "技巧
 "文本单词中添加符号,如：wwflwlf/fwfwekfek kfwkeowofeowoee 想在wwflwlf/fwfwekfek前后加一个双引号
 "操作,光标定位到wwf处：vt空格 S"   以此类推,可以快速添加其他的符号 
-
