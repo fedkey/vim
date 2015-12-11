@@ -50,3 +50,29 @@
 * gvim for ubuntu  [solarized dark]
 ![image](https://github.com/fedkey/vim/blob/master/images/linux_gvim.png)
  
+## 插件bug报备
+不管是winmanager 还是winmanager--fox ，启动gvim后，会自己生成一个空白文档。不得不手动关闭。解决方法如下：
+进入 winmanager--fox/plugin/ 打开：winmanager.vim   文件。查找：ToggleWindowsManager()函数。原本的ToggleWindowsManager函数为：
+<pre>function! <SID>ToggleWindowsManager()
+	if IsWinManagerVisible()
+		call s:CloseWindowsManager()
+	else
+		call s:StartWindowsManager()
+	end
+endfunction
+</pre>
+修改后的为：
+<pre>
+function! <SID>ToggleWindowsManager()
+	if IsWinManagerVisible()
+		call s:CloseWindowsManager()
+	else
+		call s:StartWindowsManager()
+  exe 'q'
+	end
+endfunction
+</pre>
+
+注：call s:StartWindowsManager() 处，加一行：exe 'q'
+
+
