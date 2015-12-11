@@ -73,6 +73,6 @@ function! <SID>ToggleWindowsManager()
 endfunction
 </pre>
 
-注：call s:StartWindowsManager() 处，加一行：exe 'q'
+注：call s:StartWindowsManager() 处，加一行：exe 'q'       方法来源：http://blog.csdn.net/bokee/article/details/6633193
 
 
