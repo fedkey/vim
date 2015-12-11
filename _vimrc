@@ -147,8 +147,6 @@ endif
 set nocompatible  	            "不使用vi模式"
 set linespace=0 	            "字符间插入的像素行数目
 set nu
-set guicursor=n-v-c:hor20
-set gcr=n-v-c:ver25-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor
 set mouse=a            		    "启动对鼠标的支持
 if Mysys() == 'linux'
 	set clipboard=unnamedplus   "复制文件
@@ -196,7 +194,8 @@ if Mysys() == 'windows'
 elseif Mysys() == 'linux'
     autocmd GUIEnter * winsize 167 41
 endif
-set gcr=a:block-blinkon0		    "禁止光标闪烁
+set gcr=n-v-c:ver25-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver15-Cursor/lCursor
+au InsertEnter * hi Cursor guibg=#e953eb "光标颜色
 set laststatus=2				    "总是显示状态栏
 set ruler						    " 显示光标当前位置
 set cursorline 					    "高亮所在行
@@ -204,8 +203,8 @@ set cursorline 					    "高亮所在行
 set guioptions-=T				    "隐藏工具栏
 "set guioptions-=m				    "隐藏菜单
 set cmdheight=1					    " 命令行（在状态行下）的高度，默认为1
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929  "一行多于80个字符,红色警告
-match OverLength /\%81v.\+/
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929  "一行多于79个字符,红色警告
+match OverLength /\%79v.\+/
 set showmatch                       "高亮显示[] {} ()配对
 
 "--------------------高级技巧-------------------------------------
@@ -245,7 +244,6 @@ au BufRead,BufNewFile php-fpm*.conf 	setlocal ft=dosini
 au BufRead,BufNewFile *.ini         	setlocal ft=dosini
 
 "==============《配色主题》============================================
-
 " Solarized主题设置
     " git clone git://github.com/altercation/vim-colors-solarized.git
 " ------------------------------------------------------------------
@@ -256,10 +254,7 @@ let g:solarized_diffmode="high"             "default value is normal
 syntax enable
 set background=light
 colorscheme solarized
-" ------------------------------------------------------------------
-
-" The following items are available options, but do not need to be
-" included in your .vimrc as they are currently set to their defaults.
+" solarized 设置
  let g:solarized_termcolors= 256
  let g:solarized_termtrans=0
  let g:solarized_degrade=0
@@ -290,7 +285,6 @@ elseif Mysys() == 'linux'  					 "安装: git clone https://github.com/Shougo/ne
 	set runtimepath+=~/.vim/bundle/neobundle.vim/ 	 		 " 此处规定neobundle的路径
     call neobundle#begin(expand('~/.vim/bundle/'))   "插件安装位置
 endif
-
 NeoBundleFetch 'Shougo/neobundle.vim' 		"必须启用
 "==========《Vundle.vim命令说明》"
 ":NeoBundleList - 插件列表
