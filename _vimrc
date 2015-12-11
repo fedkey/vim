@@ -222,8 +222,6 @@ endif
 " ==============《根据后缀名指定文件类型》============================
 au BufRead,BufNewFile *.h           	setlocal ft=c
 au BufRead,BufNewFile *.i           	setlocal ft=c
-au BufRead,BufNewFile *.c           	setlocal ft=c
-au BufRead,BufNewFile *.cpp           	setlocal ft=cpp
 au BufRead,BufNewFile *.m           	setlocal ft=objc
 au BufRead,BufNewFile *.di          	setlocal ft=d
 au BufRead,BufNewFile *.ss          	setlocal ft=scheme
