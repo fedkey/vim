@@ -194,8 +194,14 @@ if Mysys() == 'windows'
 elseif Mysys() == 'linux'
     autocmd GUIEnter * winsize 167 41
 endif
-set gcr=n-v-c:ver25-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver15-Cursor/lCursor
-au InsertEnter * hi Cursor guibg=#e953eb "光标颜色
+
+set gcr=n-v-c:ver2-Cursor/lCursor,ve:ver1-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor
+
+"插入模式时是黑色
+au InsertLeave * hi Cursor guibg=black
+
+"离开插入模式时是蓝色
+au InsertEnter * hi Cursor guibg=blue
 set laststatus=2				    "总是显示状态栏
 set ruler						    " 显示光标当前位置
 set cursorline 					    "高亮所在行
