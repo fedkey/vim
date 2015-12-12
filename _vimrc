@@ -293,7 +293,7 @@ elseif Mysys() == 'linux'  					 "安装: git clone https://github.com/Shougo/ne
     call neobundle#begin(expand('~/.vim/bundle/'))   "插件安装位置
 endif
 NeoBundleFetch 'Shougo/neobundle.vim' 		"必须启用
-"==========《Vundle.vim命令说明》"
+"==========《Neobundle命令说明》"
 ":NeoBundleList - 插件列表
 ":NeoBundleInstall - 安装 (更新) bundles
 ":NeoBundleClean - confirm (or auto-approve) 移除不使用的插件
