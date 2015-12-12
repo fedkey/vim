@@ -88,54 +88,70 @@ nmap ,ox :%!xxd<CR>
 " 恢复原始制式
 nmap ,-ox :%!xxd -r<CR>
 
+
+"vim 设置{{{
+"initialize default settings
+let s:settings = {}
+let s:settings.default_indent = 2
+let s:settings.max_column = 120
+let s:settings.autocomplete_method = 'neocomplcache'
+let s:settings.enable_cursorcolumn = 0
+let s:settings.colorscheme = 'jellybeans'
+
+
+
 "===========《判断是什么样的系统》============================"
-function! Mysys()
-  if has("win32")
-    return "windows"
-  else
-    return "linux"
-  endif
-endfunctio
+"选择操作系统(os){{{
+function! OSX()
+    return has('macunix')
+endfunction
+function! LINUX()
+    return has('unix') && !has('macunix') && !has('win32unix')
+endfunction
+function! WINDOWS()
+    return (has('win16') || has('win32') || has('win64'))
+endfunction
+"}}}
 
 set completeopt=menuone            "关闭顶部函数参数提示窗口
 set completeopt=longest,menu 
 
 "=========================语言与编码===================================
 set helplang=cn		            	"中文帮助
-if Mysys() == 'windows'
+if WINDOWS()
 	set encoding=utf-8 fileencodings=ucs-bom,utf-8,cp936	"自动识别文件编码
-elseif Mysys() == 'linux'
+elseif LINUX()
 	set encoding=utf-8 fileencodings=ucs-bom,utf-8,cp936	"自动识别文件编码
 endif
-if Mysys() == 'windows'             "winodws系统下执行的配置
-set nocompatible
-behave mswin
-"解决consle输出乱码  
-language messages zh_CN.utf-8  
-set diffexpr=MyDiff()
-function MyDiff()
-  let opt = '-a --binary '
-  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-  let arg1 = v:fname_in
-  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-  let arg2 = v:fname_new
-  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-  let arg3 = v:fname_out
-  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-  let eq = ''
-  if $VIMRUNTIME =~ ' '
-    if &sh =~ '\<cmd'
-      let cmd = '""' . $VIMRUNTIME . '\diff"'
-      let eq = '"'
-    else
-      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-    endif
-  else
-    let cmd = $VIMRUNTIME . '\diff'
-  endif
-  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
-endfunction
+if WINDOWS()             "winodws系统下执行的配置
+	set nocompatible
+	behave mswin
+	"解决consle输出乱码  
+	language messages zh_CN.utf-8  
+	set diffexpr=MyDiff()
+	function MyDiff()
+  		let opt = '-a --binary '
+  		if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+  		if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+  		let arg1 = v:fname_in
+  		if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+  		let arg2 = v:fname_new
+  		if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+  		let arg3 = v:fname_out
+  		if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+  		let eq = ''
+  		if $VIMRUNTIME =~ ' '
+    			if &sh =~ '\<cmd'
+      				let cmd = '""' . $VIMRUNTIME . '\diff"'
+      				let eq = '"'
+    			else
+      				let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+    			endif
+  		else
+    			let cmd = $VIMRUNTIME . '\diff'
+  		endif
+  		silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+	endfunction
 endif
 
 "=================《公共配置》==================================
@@ -143,9 +159,9 @@ set nocompatible  	            "不使用vi模式"
 set linespace=0 	            "字符间插入的像素行数目
 set nu
 set mouse=a            		    "启动对鼠标的支持
-if Mysys() == 'linux'
+if LINUX()
 	set clipboard=unnamedplus   "复制文件
-elseif Mysys() == 'windows'
+elseif WINDOWS()
 	set clipboard+=unnamed 	    "共享粘贴板
 endif
 set showcmd                     " 输入的命令显示出来
@@ -154,13 +170,13 @@ set autoread                    " 设置当文件被改动时自动载入
 set magic                       " 设置魔术
 "=======================自动保存session=========================== 
 "自动保存session
-if Mysys() == 'linux'
+if LINUX()
     autocmd VimLeave * mks!  ~/_session.vim
     if exists("session.vim")
         autocmd set  VimEnter * source! ~/_session.vim 
     endif
 endif
-if Mysys() == 'windows'
+if WINDOWS()
     autocmd VimLeave * mks!  $VIM/_session.vim
     if exists("session.vim")
         autocmd set  VimEnter * source! $VIM/_session.vim 
@@ -179,13 +195,12 @@ set expandtab                 	    "将Tab自动转化成空格 [需要输入真
 set foldmethod=indent		        "折叠方式是使用语法折叠
 "set foldlevel=100 			        "折叠的层次是100,也就是打开所有的折叠
 "=================《外观设置》===================================
-if Mysys() == 'windows'
+if WINDOWS()
 	au GUIEnter * simalt ~x 	    "窗口全屏
 	set columns=80
-elseif Mysys() == 'linux'
+elseif LINUX()
     autocmd GUIEnter * winsize 167 41
 endif
-
 
 set laststatus=2				    "总是显示状态栏
 set ruler						    " 显示光标当前位置
@@ -194,8 +209,6 @@ set cursorcolumn 				    "高亮当前列
 "set guioptions-=T				    "隐藏工具栏
 "set guioptions-=m				    "隐藏菜单
 set cmdheight=1					    " 命令行（在状态行下）的高度，默认为1
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929  "一行多于79个字符,红色警告
-match OverLength /\%79v.\+/
 set showmatch                       "高亮显示[] {} ()配对
 
 "--------------------高级技巧-------------------------------------
@@ -207,9 +220,9 @@ set incsearch                       "当输入的时候,跳到你搜索的关键
 set hlsearch                        "高亮被搜索的关键字
 
 "=================《字体》=======================================
-if Mysys() == 'windows'
+if WINDOWS()
     set guifont=courier_new:h11
-elseif Mysys() == 'linux'
+elseif LINUX()
     " set guifont=DejaVu\Sans\Mono\ 11
     " Droid sans mono需要下载
     set guifont=DroidSansMono\ 11
@@ -233,27 +246,6 @@ au BufRead,BufNewFile *.conf        	setlocal ft=nginx
 au BufRead,BufNewFile http*.conf    	setlocal ft=apache
 au BufRead,BufNewFile php-fpm*.conf 	setlocal ft=dosini
 au BufRead,BufNewFile *.ini         	setlocal ft=dosini
-
-"==============《配色主题》============================================
-" Solarized主题设置
-    " git clone git://github.com/altercation/vim-colors-solarized.git
-" ------------------------------------------------------------------
-let g:solarized_underline=0                 "default value is 1
-let g:solarized_contrast="high"             "default value is normal
-let g:solarized_visibility="high"           "default value is normal
-let g:solarized_diffmode="high"             "default value is normal
-syntax enable
-set background=dark
-colorscheme solarized
-" solarized 设置
- let g:solarized_termcolors= 256
- let g:solarized_termtrans=0
- let g:solarized_degrade=0
- let g:solarized_bold=1
- let g:solarized_italic=1
- let g:solarized_termcolors=16
- let g:solarized_hitrail=0
- let g:solarized_menu=1
  
  "------------声音---------------
 set vb t_vb=		                        "去除报警音
@@ -267,13 +259,12 @@ set wrap							        "自动换行
 "=========按键======="
 set backspace=indent,eol,start              "使用退格键
 
-
 "===========《插件及配置》==========================="
 "安装neobundle管理插件，先安装git再安装neobundle
-if Mysys() == 'windows'  					 "安装:git clone https://github.com/Shougo/neobundle.vim.git
+if WINDOWS()  					 "安装:git clone https://github.com/Shougo/neobundle.vim.git
 	set runtimepath+=$VIM/vimfiles/bundle/neobundle.vim 	 " 此处规定neobundle的路径
     call neobundle#begin(expand('$VIM/vimfiles/bundle/')) "插件安装位置
-elseif Mysys() == 'linux'  					 "安装: git clone https://github.com/Shougo/neobundle.vim.git
+elseif LINUX()  					 "安装: git clone https://github.com/Shougo/neobundle.vim.git
 	set runtimepath+=~/.vim/bundle/neobundle.vim/ 	 		 " 此处规定neobundle的路径
     call neobundle#begin(expand('~/.vim/bundle/'))   "插件安装位置
 endif
@@ -312,7 +303,7 @@ let Tlist_Use_Right_Window = 1              "在右侧窗口中显示taglist窗�
 let Tlist_Compart_Format = 1    		    " 压缩方式
 let Tlist_WinWidth = 30
 set autochdir
-if Mysys() == 'windows'
+if WINDOWS()
     set tags=tags;                          " ';' 不能没有
     let Tlist_Ctags_Cmd = 'ctags'
 endif
@@ -336,6 +327,15 @@ NeoBundle  'airblade/vim-gitgutter'         "显示git 更改
 NeoBundle 'majutsushi/tagbar'				"tagbar
 let g:tagbar_sort = 0					    "关闭排序[也就是按标签本身在文件中的位置排序]
 let g:tagbar_show_linenumbers = -1		    "显示行号
+let g:tagbar_width=30
+let g:tagbar_left = 1
+let g:NERDTreeWinPos='right'
+let g:NERDTreeWinSize=31
+let g:NERDTreeChDirMode=1
+nmap <F8> :TagbarToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+
 NeoBundle 'vim-scripts/YankRing.vim'        "剪贴板增强
 NeoBundle 'sjl/gundo.vim'                   "查看撤销树,类似版本控制系统,可恢复到某一阶段
 nnoremap <F2> :GundoToggle<CR>
@@ -364,22 +364,22 @@ NeoBundle 'terryma/vim-multiple-cursors'	"多光标多行编辑
     "按下I在每行的头部插入
     "键入”, 按下 <C-e> 到达行末, 键入另一个”和逗号
     "然后将每个光标都下移一行，按下delete
-NeoBundle 'yegappan/mru'		                "使用:MRU命令调出最近打开的文档
+NeoBundle 'yegappan/mru'		            "使用:MRU命令调出最近打开的文档
 highlight link MRUFileName LineNr
 let MRU_Max_Entries = 100
 
-NeoBundle 'tomtom/tcomment_vim'                 "快速注释
-
+NeoBundle 'tomtom/tcomment_vim'             "快速注释
+NeoBundle 'kien/rainbow_parentheses.vim'	"挂号匹配高亮
 NeoBundle 'Yggdroot/indentLine'
 let g:indentLine_color_term = 239
 let g:indentLine_color_gui = '#3366ff'
 let g:indentLine_char = '|'
-NeoBundle 'danro/rename.vim'                    "重命名插件
-NeoBundle 'jiangmiao/auto-pairs'				"自动插入和格式化方括号和圆括号
+NeoBundle 'danro/rename.vim'                "重命名插件
+NeoBundle 'jiangmiao/auto-pairs'		    "自动插入和格式化方括号和圆括号
 NeoBundle 'vim-scripts/matchit.zip'             "\ %匹配成对的标签，跳转
-
+NeoBundle 'tpope/vim-projectionist'		    "项目创建
 "添加环绕
-NeoBundle 'tpope/vim-surround'                      "快速给词加环绕符号,例如引号
+NeoBundle 'tpope/vim-surround'              "快速给词加环绕符号,例如引号
 "{{
 "使用方法： ysiw"   "可用任意符号代替
 "yssb  可以快速为一行包围圆括号 比如 yss" 为一行包围双引号
@@ -407,7 +407,7 @@ NeoBundle 'tpope/vim-surround'                      "快速给词加环绕符号
 "<CTRL-g>S - same as <CTRL-s><CTRL-s>
 "}}
 
-NeoBundle 'ianva/vim-youdao-translater'        "有道翻译
+NeoBundle 'ianva/vim-youdao-translater'         "有道翻译
 vnoremap <silent> <C-T> <Esc>:Ydv<CR>
 nnoremap <silent> <C-T> <Esc>:Ydc<CR>
 noremap <leader>yd :Yde<CR>
@@ -456,7 +456,6 @@ if !exists('g:neocomplete#sources#omni#input_patterns')
 endif
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
-
 NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'kien/rainbow_parentheses.vim'
 let g:rbpt_colorpairs = [
@@ -484,7 +483,12 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
-"==================python IDE======start======
+"项目查找,搜索
+"{{
+NeoBundle 'Shougo/unite.vim'
+"}}
+
+"==================python IDE============
 let python_highlight_all = 1                    "python高亮
 NeoBundle 'vim-scripts/indentpython.vim'        "python自动缩进
 "{{
@@ -497,8 +501,8 @@ NeoBundle 'nvie/vim-flake8'                     "python代码检查
 	let g:flake8_show_in_gutter=1
 	let g:flake8_show_in_file=1
 	let g:flake8_max_markers=500
-	let flake8_error_marker='Δ'                "错误提示符号
-	let flake8_warning_marker='×'              "警告提示符号
+	let flake8_error_marker='Δ'                 "错误提示符号
+	let flake8_warning_marker='×'               "警告提示符号
 	let flake8_pyflake_marker=''                " 是否屏蔽警告
 	let flake8_complexity_marker=''             "屏蔽 McCabe complexity 警告
 	let flake8_naming_marker=''                 "屏蔽 naming 警告
@@ -510,6 +514,16 @@ NeoBundle 'davidhalter/jedi-vim'		        "python补全,需要安装:pip install
 let g:jedi#use_tabs_not_buffers = 1
 
 NeoBundle 'msanders/snipmate.vim'               "spipmate代码片段
+
+NeoBundle 'klen/python-mode'                    "python ide
+"运行python  r
+"python 文档中搜索    k
+" Override go-to.definition key shortcut to Ctrl-]
+let g:pymode_rope_goto_definition_bind = "<C-]>"
+" Override run current python file key shortcut to Ctrl-Shift-e
+let g:pymode_run_bind = "<C-S-e>"
+" Override view python doc key shortcut to Ctrl-Shift-d
+let g:pymode_doc_bind = "<C-S-d>"
 
 NeoBundle 'tyru/open-browser.vim'               "打开浏览器
 "--------------------《web 插件》--------------------------------------
@@ -523,9 +537,8 @@ augroup VimCSS3Syntax
   autocmd!
   autocmd FileType css setlocal iskeyword+=-
 augroup END
-NeoBundle 'othree/html5.vim', {'autoload':{'filetypes':['html']}}
 NeoBundle 'gregsexton/MatchTag', {'autoload':{'filetypes':['html','xml']}}
-NeoBundle 'mattn/emmet-vim'                        "emmet 速写
+NeoBundle 'mattn/emmet-vim'                         "emmet 速写
 let g:user_emmet_install_global = 0                                
 autocmd FileType html,css EmmetInstall              "只在html和css中启用
 let g:user_emmet_expandabbr_key='<c-j>'  	        "更改默认按键
@@ -538,21 +551,49 @@ NeoBundle 'othree/xml.vim'							"xml插件
 NeoBundle 'cakebaker/scss-syntax.vim'               "scss css检查
 au BufRead,BufNewFile *.scss set filetype=scss.css
 NeoBundle 'ap/vim-css-color', {'autoload':{'filetypes':['css','scss','sass','less','styl']}}
+
+NeoBundleLazy 'groenewege/vim-less', {'autoload':{'filetypes':['less']}}
+NeoBundleLazy 'cakebaker/scss-syntax.vim', {'autoload':{'filetypes':['scss','sass']}}
+NeoBundleLazy 'ap/vim-css-color', {'autoload':{'filetypes':['css','scss','sass','less','styl']}}
+NeoBundleLazy 'othree/html5.vim', {'autoload':{'filetypes':['html']}}
+NeoBundleLazy 'wavded/vim-stylus', {'autoload':{'filetypes':['styl']}}
+NeoBundleLazy 'digitaltoad/vim-jade', {'autoload':{'filetypes':['jade']}}
+NeoBundleLazy 'juvenn/mustache.vim', {'autoload':{'filetypes':['mustache']}}
+NeoBundleLazy 'gregsexton/MatchTag', {'autoload':{'filetypes':['html','xml']}}
+
 "----------javascript-----------------------
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'nono/jquery.vim'                         "jquery高亮
 NeoBundle 'elzr/vim-json'                           "json高亮
-NeoBundle 'guileen/vim-node-dict'					"Node.js 字典
-NeoBundle 'maksimr/vim-jsbeautify'                  "JS代码格式化
+NeoBundle 'guileen/vim-node-dict'		            "Node.js 字典
 "django
 NeoBundle 'django_templates.vim'
 NeoBundle 'Django-Projects'
+
+NeoBundleLazy 'marijnh/tern_for_vim', {
+\ 'autoload': { 'filetypes': ['javascript'] },
+\ 'build': {
+\ 'mac': 'npm install',
+\ 'unix': 'npm install',
+\ 'cygwin': 'npm install',
+\ 'windows': 'npm install',
+\ },
+\ }
+NeoBundleLazy 'pangloss/vim-javascript', {'autoload':{'filetypes':['javascript']}}
+NeoBundleLazy 'maksimr/vim-jsbeautify', {'autoload':{'filetypes':['javascript']}} "{{{
+nnoremap <leader>fjs :call JsBeautify()<cr>
+"}}}
+NeoBundleLazy 'leafgarland/typescript-vim', {'autoload':{'filetypes':['typescript']}}
+NeoBundleLazy 'kchmck/vim-coffee-script', {'autoload':{'filetypes':['coffee']}}
+NeoBundleLazy 'mmalecki/vim-node.js', {'autoload':{'filetypes':['javascript']}}
+NeoBundleLazy 'leshill/vim-json', {'autoload':{'filetypes':['javascript','json']}}
+NeoBundleLazy 'othree/javascript-libraries-syntax.vim', {'autoload':{'filetypes':['javascript','coffee','ls','typescript']}}
 
 "--------------------PHP IDE-----------------------------------------------
 
 " ======================《针对部分语言添加字典补全》=======================
 "autocmd FileType c          call AddCDict()
-"if Mysys() == 'windows'
+"if WINDOWS()
 "	function AddCDict()
 "        setlocal dict+=$VIM/vimfiles/dict/c.txt
 "	endfunction
@@ -563,12 +604,16 @@ NeoBundle 'Django-Projects'
 "        setlocal dict+=$VIM/vimfiles/dict/cpp-boost.txt
 "	endfunction
 "
-"elseif Mysys() == 'linux'
+"elseif LINUX()
 "	function AddCDict()
 "        setlocal dict+=~/.vim/dict/c.txt
 "	endfunction
 "endif
 
+"==============《配色主题》============================================
+colorscheme desert
+"colorscheme
+NeoBundle 'morhetz/gruvbox'
 call neobundle#end()
 NeoBundleCheck
 filetype plugin indent on
