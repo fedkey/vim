@@ -255,7 +255,7 @@ set showtabline=2					        "以标签形式打开文件
 autocmd BufNewFile * normal G		        "新建文件后 自动定位到文件末尾
 set nobackup						        "禁止生成临时文件
 setlocal noswapfile					        "不要生成swap文件
-set wrap							        "自动换行
+set wrap							        "自动折行
 "=========按键======="
 set backspace=indent,eol,start              "使用退格键
 
@@ -489,7 +489,6 @@ NeoBundle 'Shougo/unite.vim'
 "}}
 
 "==================python IDE============
-let python_highlight_all = 1                    "python高亮
 NeoBundle 'vim-scripts/indentpython.vim'        "python自动缩进
 "{{
 NeoBundle 'nvie/vim-flake8'                     "python代码检查
@@ -514,16 +513,6 @@ NeoBundle 'davidhalter/jedi-vim'		        "python补全,需要安装:pip install
 let g:jedi#use_tabs_not_buffers = 1
 
 NeoBundle 'msanders/snipmate.vim'               "spipmate代码片段
-
-NeoBundle 'klen/python-mode'                    "python ide
-"运行python  r
-"python 文档中搜索    k
-" Override go-to.definition key shortcut to Ctrl-]
-let g:pymode_rope_goto_definition_bind = "<C-]>"
-" Override run current python file key shortcut to Ctrl-Shift-e
-let g:pymode_run_bind = "<C-S-e>"
-" Override view python doc key shortcut to Ctrl-Shift-d
-let g:pymode_doc_bind = "<C-S-d>"
 
 NeoBundle 'tyru/open-browser.vim'               "打开浏览器
 "--------------------《web 插件》--------------------------------------
@@ -569,16 +558,6 @@ NeoBundle 'guileen/vim-node-dict'		            "Node.js 字典
 "django
 NeoBundle 'django_templates.vim'
 NeoBundle 'Django-Projects'
-
-NeoBundleLazy 'marijnh/tern_for_vim', {
-\ 'autoload': { 'filetypes': ['javascript'] },
-\ 'build': {
-\ 'mac': 'npm install',
-\ 'unix': 'npm install',
-\ 'cygwin': 'npm install',
-\ 'windows': 'npm install',
-\ },
-\ }
 NeoBundleLazy 'pangloss/vim-javascript', {'autoload':{'filetypes':['javascript']}}
 NeoBundleLazy 'maksimr/vim-jsbeautify', {'autoload':{'filetypes':['javascript']}} "{{{
 nnoremap <leader>fjs :call JsBeautify()<cr>
