@@ -108,39 +108,34 @@ elseif Mysys() == 'linux'
 	set encoding=utf-8 fileencodings=ucs-bom,utf-8,cp936	"自动识别文件编码
 endif
 if Mysys() == 'windows'             "winodws系统下执行的配置
-    "解决菜单乱码
-    set encoding=utf-8  
-    set fileencoding=chinese  
-	source $VIMRUNTIME/vimrc_example.vim
-	" source $VIMRUNTIME/mswin.vim  不使用win的快捷键
-    "解决consle输出乱码  
-    language messages zh_CN.utf-8  
-	behave mswin
-	set diffexpr=MyDiff()
-	function MyDiff()
-	let opt = '-a --binary '
-	if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-	if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-	let arg1 = v:fname_in
-	if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-	let arg2 = v:fname_new
-	if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-	let arg3 = v:fname_out
-	if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-	let eq = ''
-	if $VIMRUNTIME =~ ' '
-		if &sh =~ '\<cmd'
-		let cmd = '""' . $VIMRUNTIME . '\diff"'
-		let eq = '"'
-		else
-		let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-		endif
-	else
-		let cmd = $VIMRUNTIME . '\diff'
-	endif
-	silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
-	endfunction
-
+set nocompatible
+behave mswin
+"解决consle输出乱码  
+language messages zh_CN.utf-8  
+set diffexpr=MyDiff()
+function MyDiff()
+  let opt = '-a --binary '
+  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+  let arg1 = v:fname_in
+  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+  let arg2 = v:fname_new
+  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+  let arg3 = v:fname_out
+  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+  let eq = ''
+  if $VIMRUNTIME =~ ' '
+    if &sh =~ '\<cmd'
+      let cmd = '""' . $VIMRUNTIME . '\diff"'
+      let eq = '"'
+    else
+      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+    endif
+  else
+    let cmd = $VIMRUNTIME . '\diff'
+  endif
+  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+endfunction
 endif
 
 "=================《公共配置》==================================
@@ -157,10 +152,6 @@ set showcmd                     " 输入的命令显示出来
 nnoremap <C-F2> :vert diffsplit "比较文件
 set autoread                    " 设置当文件被改动时自动载入
 set magic                       " 设置魔术
-"语法高亮"
-syntax on                       "允许用指定语法高亮
-syntax enable                   " 打开语法高亮
-filetype plugin indent on       " 开启自动检测文件类型
 "=======================自动保存session=========================== 
 "自动保存session
 if Mysys() == 'linux'
@@ -195,19 +186,12 @@ elseif Mysys() == 'linux'
     autocmd GUIEnter * winsize 167 41
 endif
 
-"设置光标
-"set gcr=n-v-c:ver2-Cursor/lCursor,ve:ver1-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor
 
-"插入模式时是黑色
-"au InsertLeave * hi Cursor guibg=black
-
-"离开插入模式时是蓝色
-"au InsertEnter * hi Cursor guibg=blue
 set laststatus=2				    "总是显示状态栏
 set ruler						    " 显示光标当前位置
 set cursorline 					    "高亮所在行
-"set cursorcolumn 				    "高亮当前列
-set guioptions-=T				    "隐藏工具栏
+set cursorcolumn 				    "高亮当前列
+"set guioptions-=T				    "隐藏工具栏
 "set guioptions-=m				    "隐藏菜单
 set cmdheight=1					    " 命令行（在状态行下）的高度，默认为1
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929  "一行多于79个字符,红色警告
@@ -259,7 +243,7 @@ let g:solarized_contrast="high"             "default value is normal
 let g:solarized_visibility="high"           "default value is normal
 let g:solarized_diffmode="high"             "default value is normal
 syntax enable
-set background=light
+set background=dark
 colorscheme solarized
 " solarized 设置
  let g:solarized_termcolors= 256
@@ -270,8 +254,8 @@ colorscheme solarized
  let g:solarized_termcolors=16
  let g:solarized_hitrail=0
  let g:solarized_menu=1
-
-"------------声音---------------
+ 
+ "------------声音---------------
 set vb t_vb=		                        "去除报警音
 "====文件============
 set clipboard+=unnamed                      " 共享剪贴板
@@ -283,6 +267,7 @@ set wrap							        "自动换行
 "=========按键======="
 set backspace=indent,eol,start              "使用退格键
 
+
 "===========《插件及配置》==========================="
 "安装neobundle管理插件，先安装git再安装neobundle
 if Mysys() == 'windows'  					 "安装:git clone https://github.com/Shougo/neobundle.vim.git
@@ -293,7 +278,7 @@ elseif Mysys() == 'linux'  					 "安装: git clone https://github.com/Shougo/ne
     call neobundle#begin(expand('~/.vim/bundle/'))   "插件安装位置
 endif
 NeoBundleFetch 'Shougo/neobundle.vim' 		"必须启用
-"==========《Neobundle命令说明》"
+"==========《neobundle命令说明》"
 ":NeoBundleList - 插件列表
 ":NeoBundleInstall - 安装 (更新) bundles
 ":NeoBundleClean - confirm (or auto-approve) 移除不使用的插件
@@ -317,7 +302,7 @@ endfunction
 
 NeoBundle  'vim-scripts/bufexplorer.zip'    "显示buf列表
 "let g:bufExplorerSortBy = 'name'		    " 按文件名排序
-NeoBundle  'tisyang/taglist'				"Tlist 函数列表
+NeoBundle 'taglist.vim'						"Tlist 函数列表
 let Tlist_Use_SingleClick=1                 "单击tag就跳到tag定义的位置
 let Tlist_Show_Menu=1                       "显示taglist菜单
 let Tlist_Auto_Open=0					    "默认打开Taglist
@@ -342,9 +327,6 @@ let g:NERDTreeMapToggleZoom = '<Space>'
 autocmd VimEnter * WMToggle                 "自动开启WMToggle
 autocmd VimEnter * wincmd w		            "光标停留右侧文件
 command  WM :WMToggle
-
-" 只剩 NERDTree时自动关闭
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 "========================================<IDE>========================================
 NeoBundle 'tpope/vim-fugitive'				"git集成
@@ -474,6 +456,34 @@ if !exists('g:neocomplete#sources#omni#input_patterns')
 endif
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
+
+NeoBundle 'bronson/vim-trailing-whitespace'
+NeoBundle 'kien/rainbow_parentheses.vim'
+let g:rbpt_colorpairs = [
+            \ ['brown',       'RoyalBlue3'],
+            \ ['Darkblue',    'SeaGreen3'],
+            \ ['darkgray',    'DarkOrchid3'],
+            \ ['darkgreen',   'firebrick3'],
+            \ ['darkcyan',    'RoyalBlue3'],
+            \ ['darkred',     'SeaGreen3'],
+            \ ['darkmagenta', 'DarkOrchid3'],
+            \ ['brown',       'firebrick3'],
+            \ ['gray',        'RoyalBlue3'],
+            \ ['black',       'SeaGreen3'],
+            \ ['darkmagenta', 'DarkOrchid3'],
+            \ ['Darkblue',    'firebrick3'],
+            \ ['darkgreen',   'RoyalBlue3'],
+            \ ['darkcyan',    'SeaGreen3'],
+            \ ['darkred',     'DarkOrchid3'],
+            \ ['red',         'firebrick3'],
+            \ ]
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
 "==================python IDE======start======
 let python_highlight_all = 1                    "python高亮
 NeoBundle 'vim-scripts/indentpython.vim'        "python自动缩进
@@ -558,8 +568,11 @@ NeoBundle 'Django-Projects'
 "        setlocal dict+=~/.vim/dict/c.txt
 "	endfunction
 "endif
+
+call neobundle#end()
 NeoBundleCheck
-call neobundle#end()                        "用于所有插件最后
+filetype plugin indent on
+syntax on
 "=========================================《实用设置》=================================="
 "单词纠正
 ":abbr Lunix Linux
