@@ -182,7 +182,7 @@ if WINDOWS()
         autocmd set  VimEnter * source! $VIM/_session.vim 
     endif
 endif
-" 打开上次关闭的文件
+"" 打开上次关闭的文件
 " <C-o><C-o><cr>
 " 打开文件时，按照 viminfo 保存的上次关闭时的光标位置重新设置光标
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
@@ -302,39 +302,40 @@ let Tlist_Exit_OnlyWindow =  1              "如果taglist窗口是最后一个�
 let Tlist_Use_Right_Window = 1              "在右侧窗口中显示taglist窗口
 let Tlist_Compart_Format = 1    		    " 压缩方式
 let Tlist_WinWidth = 30
-set autochdir
 if WINDOWS()
     set tags=tags;                          " ';' 不能没有
     let Tlist_Ctags_Cmd = 'ctags'
 endif
 NeoBundle 'kien/ctrlp.vim'                  "快速搜索/文件
 NeoBundle 'scrooloose/nerdtree'			         "树形目录
-"map <F9> :NERDTreeToggle<CR>               "F9调出
+nmap <F9> :NERDTreeToggle<CR>               "F9调出
 let g:NERDTreeWinSize = 30
 let g:NERDTreeHight= 30
 let g:NERDTreeMouseMode = 1
 let g:NERDTreeMapToggleZoom = '<Space>'
 
-autocmd VimEnter * WMToggle                 "自动开启WMToggle
-autocmd VimEnter * wincmd w		            "光标停留右侧文件
+"autocmd VimEnter * WMToggle                 "自动开启WMToggle
+" autocmd VimEnter * wincmd w		            "光标停留右侧文件
 command  WM :WMToggle
-
+nmap <F3> :WMToggle<cr>
+set autochdir
 "========================================<IDE>========================================
 NeoBundle 'tpope/vim-fugitive'				"git集成
 NeoBundle 'scrooloose/syntastic'			"语法检查
 NeoBundle 'Raimondi/delimitMate'			"补全括号和引号
 NeoBundle  'airblade/vim-gitgutter'         "显示git 更改
+NeoBundle 'mhinz/vim-startify'              "显示上次编辑的文件列表
+":SLoad    load a session
+":SSave    save a session
+":SDelete  delete a session
 NeoBundle 'majutsushi/tagbar'				"tagbar
 let g:tagbar_sort = 0					    "关闭排序[也就是按标签本身在文件中的位置排序]
 let g:tagbar_show_linenumbers = -1		    "显示行号
 let g:tagbar_width=30
 let g:tagbar_left = 1
-let g:NERDTreeWinPos='right'
-let g:NERDTreeWinSize=31
 let g:NERDTreeChDirMode=1
 nmap <F8> :TagbarToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
 
 NeoBundle 'vim-scripts/YankRing.vim'        "剪贴板增强
 NeoBundle 'sjl/gundo.vim'                   "查看撤销树,类似版本控制系统,可恢复到某一阶段
@@ -344,7 +345,7 @@ let g:tagbar_autopreview = 1
 NeoBundle 'tomasr/molokai'					"molokai配色
 NeoBundle 'bling/vim-airline'				"状态栏美化
 NeoBundle  'Lokaltog/vim-powerline'		    "状态栏增强
-NeoBundle 'terryma/vim-multiple-cursors'	"多光标多行编辑
+NeoBundle 'terryma/vim-multiple-cursors'	"多光标编辑
     " 默认设置
     let g:multi_cursor_next_key='<C-n>'
     let g:multi_cursor_prev_key='<C-p>'
@@ -478,7 +479,7 @@ let g:rbpt_colorpairs = [
             \ ]
 let g:rbpt_max = 16
 let g:rbpt_loadcmd_toggle = 0
-au VimEnter * RainbowParenthesesToggle
+"au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
