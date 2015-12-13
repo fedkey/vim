@@ -75,4 +75,5 @@ endfunction
 
 注：call s:StartWindowsManager() 处，加一行：exe 'q'       方法来源：http://blog.csdn.net/bokee/article/details/6633193
 
-
+=== 特别声明 ===
+此配置是我自己使用的环境，会不断变化，不敢保证你所拿到的和图上的一致。但可保证的是，配置会越来越好。
