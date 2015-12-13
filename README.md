@@ -4,22 +4,18 @@
 * 使用Neobundle来管理所有的插件包,利于后期更改，使用方法见：https://github.com/Shougo/neobundle.vim<br>
 
 
-## 支持语言
-* web
- * 支持html,css,js语法速写，格式化。
- * js美化
- * 代码块速写
- 
- <br>
-* python编程
- * python，我本身也常写python，所以python的支持是比较好的，代码补全，折叠，错误检查，应有都有
- *  提供python django编写支持
- * 提供python一键运行
- * ……
+## 支持的语言类型
+* javascript
+* html
+* css 
+* python
+* php
+* shell
 
-## 其他
+## 快捷键
 * 按照emacs快捷键的双键模式定义的一整套快捷键，用过emacs的人可以快速上手。当然，没有使用过emacs的人也不用担心，放着无害，永远不会触发。
-### ……
+
+
 ## 安装说明
 
 * windows用户
@@ -75,5 +71,5 @@ endfunction
 
 注：call s:StartWindowsManager() 处，加一行：exe 'q'       方法来源：http://blog.csdn.net/bokee/article/details/6633193
 
-=== 特别声明 ===
-此配置是我自己使用的环境，会不断变化，不敢保证你所拿到的和图上的一致。但可保证的是，配置会越来越好。
+## 特别声明
+此配置是我自己使用的环境，会不断变化，不敢保证你所拿到的和图上的一致。但可保证的是，配置会越来越强大。
