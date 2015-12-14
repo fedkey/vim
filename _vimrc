@@ -3,7 +3,7 @@
 " -----------------     博客: http://yangshengliang.com
 " -----------------     创建: 2015年10月22日
 "系统依赖
-"linux-fedora
+"linux-fedora+ubuntu
 "sudo yum install ctags
 "sudo yum install build-essential cmake python-dev  #编译YCM自动补全插件依赖
 "sudo yum install silversearcher-ag
