@@ -300,6 +300,7 @@ let Tlist_Exit_OnlyWindow =  1              "如果taglist窗口是最后一个�
 let Tlist_Use_Right_Window = 1              "在右侧窗口中显示taglist窗口
 let Tlist_Compart_Format = 1    		    " 压缩方式
 let Tlist_WinWidth = 30
+nmap <F6> :Tlist <cr>
 if WINDOWS()
     set tags=tags;                          " ';' 不能没有
     let Tlist_Ctags_Cmd = 'ctags'
@@ -597,7 +598,7 @@ NeoBundleLazy 'othree/javascript-libraries-syntax.vim', {'autoload':{'filetypes'
 "endif
 
 "==============《配色主题》============================================
-colorscheme desert
+colorscheme molokai
 "colorscheme
 NeoBundle 'morhetz/gruvbox'
 call neobundle#end()
