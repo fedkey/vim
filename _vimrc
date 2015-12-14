@@ -3,7 +3,7 @@
 " -----------------     博客: http://yangshengliang.com
 " -----------------     创建: 2015年10月22日
 "系统依赖
-"linux-fedora+ubuntu
+"linux-fedora
 "sudo yum install ctags
 "sudo yum install build-essential cmake python-dev  #编译YCM自动补全插件依赖
 "sudo yum install silversearcher-ag
@@ -97,8 +97,6 @@ let s:settings.max_column = 120
 let s:settings.autocomplete_method = 'neocomplcache'
 let s:settings.enable_cursorcolumn = 0
 let s:settings.colorscheme = 'jellybeans'
-
-
 
 "===========《判断是什么样的系统》============================"
 "选择操作系统(os){{{
@@ -320,10 +318,18 @@ command  WM :WMToggle
 nmap <F3> :WMToggle<cr>
 set autochdir
 "========================================<IDE>========================================
-NeoBundle 'tpope/vim-fugitive'				"git集成
+NeoBundle 'tpope/vim-fugitive'				"git信息
+NeoBundle 'airblade/vim-gitgutter'          "git 插件
+let g:gitgutter_sign_column_always = 1
+let g:gitgutter_max_signs = 500
+nmap ]h <Plug>GitGutterNextHunk
+nmap [h <Plug>GitGutterPrevHunk
+nmap <Leader>ha <Plug>GitGutterStageHunk
+nmap <Leader>hu <Plug>GitGutterRevertHunk
+nmap <Leader>hv <Plug>GitGutterPreviewHunk
+
 NeoBundle 'scrooloose/syntastic'			"语法检查
 NeoBundle 'Raimondi/delimitMate'			"补全括号和引号
-NeoBundle  'airblade/vim-gitgutter'         "显示git 更改
 NeoBundle 'mhinz/vim-startify'              "显示上次编辑的文件列表
 ":SLoad    load a session
 ":SSave    save a session
