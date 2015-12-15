@@ -192,7 +192,7 @@ set autoindent
 set expandtab                 	    "将Tab自动转化成空格 [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
 set foldmethod=indent		        "折叠方式是使用语法折叠
 "set foldlevel=100 			        "折叠的层次是100,也就是打开所有的折叠
-"=================《外观设置》===================================
+"=================《外观设置》===============================
 if WINDOWS()
 	au GUIEnter * simalt ~x 	    "窗口全屏
 	set columns=80
@@ -209,7 +209,7 @@ set cursorcolumn 				    "高亮当前列
 set cmdheight=1					    " 命令行（在状态行下）的高度，默认为1
 set showmatch                       "高亮显示[] {} ()配对
 
-"--------------------高级技巧-------------------------------------
+"--------------------高级技巧---------------------------------
 "autocmd BufWritePre * :%s/\s\+$//e "保存文件时自动去除行末空格
 "指定文件类型去除行末空格
 "autocmd FileType c,cpp,java,php autocmd BufWritePre <buffer> :%s/\s\+$//e
@@ -217,7 +217,7 @@ set showmatch                       "高亮显示[] {} ()配对
 set incsearch                       "当输入的时候,跳到你搜索的关键字那去
 set hlsearch                        "高亮被搜索的关键字
 
-"=================《字体》=======================================
+"=================《字体》================================
 if WINDOWS()
     set guifont=courier_new:h11
 elseif LINUX()
@@ -226,7 +226,7 @@ elseif LINUX()
     set guifont=DroidSansMono\ 11
 endif
 
-" ==============《根据后缀名指定文件类型》============================
+" ==============《根据后缀名指定文件类型》=================
 au BufRead,BufNewFile *.h           	setlocal ft=c
 au BufRead,BufNewFile *.i           	setlocal ft=c
 au BufRead,BufNewFile *.m           	setlocal ft=objc
@@ -272,6 +272,7 @@ NeoBundleFetch 'Shougo/neobundle.vim' 		"必须启用
 ":NeoBundleInstall - 安装 (更新) bundles
 ":NeoBundleClean - confirm (or auto-approve) 移除不使用的插件
 
+NeoBundle 'weynhamz/vim-plugin-minibufexpl'
 NeoBundle 'vim-scripts/winmanager--Fox'     "winmanager窗口管理
 "设置winmanager的宽度，默认为25
 "let g:winManagerWidth = 15
@@ -305,7 +306,12 @@ if WINDOWS()
     set tags=tags;                          " ';' 不能没有
     let Tlist_Ctags_Cmd = 'ctags'
 endif
+
+"文件,项目查找,搜索
+NeoBundle 'Shougo/unite.vim'
 NeoBundle 'kien/ctrlp.vim'                  "快速搜索/文件
+
+
 NeoBundle 'scrooloose/nerdtree'			         "树形目录
 nmap <F9> :NERDTreeToggle<CR>               "F9调出
 let g:NERDTreeWinSize = 30
@@ -319,6 +325,7 @@ command  WM :WMToggle
 nmap <F3> :WMToggle<cr>
 set autochdir
 "========================================<IDE>========================================
+"git 
 NeoBundle 'tpope/vim-fugitive'				"git信息
 NeoBundle 'airblade/vim-gitgutter'          "git 插件
 let g:gitgutter_sign_column_always = 1
@@ -328,6 +335,8 @@ nmap [h <Plug>GitGutterPrevHunk
 nmap <Leader>ha <Plug>GitGutterStageHunk
 nmap <Leader>hu <Plug>GitGutterRevertHunk
 nmap <Leader>hv <Plug>GitGutterPreviewHunk
+NeoBundle 'mattn/gist-vim'
+let g:gist_detect_filetype = 1
 
 NeoBundle 'scrooloose/syntastic'			"语法检查
 NeoBundle 'Raimondi/delimitMate'			"补全括号和引号
@@ -343,8 +352,10 @@ let g:tagbar_left = 1
 let g:NERDTreeChDirMode=1
 nmap <F8> :TagbarToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
 NeoBundle 'vim-scripts/YankRing.vim'        "剪贴板增强
+
+" 撤销
+NeoBundle 'mbbill/undotree'                 "撤销树
 NeoBundle 'sjl/gundo.vim'                   "查看撤销树,类似版本控制系统,可恢复到某一阶段
 nnoremap <F2> :GundoToggle<CR>
 " 开启自动预览 [随着光标在标签上的移动，顶部会出现一个实时的预览窗口]
@@ -385,6 +396,8 @@ let g:indentLine_char = '|'
 NeoBundle 'danro/rename.vim'                "重命名插件
 NeoBundle 'jiangmiao/auto-pairs'		    "自动插入和格式化方括号和圆括号
 NeoBundle 'vim-scripts/matchit.zip'             "\ %匹配成对的标签，跳转
+
+"项目管理
 NeoBundle 'tpope/vim-projectionist'		    "项目创建
 "添加环绕
 NeoBundle 'tpope/vim-surround'              "快速给词加环绕符号,例如引号
@@ -491,11 +504,6 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
-"项目查找,搜索
-"{{
-NeoBundle 'Shougo/unite.vim'
-"}}
-
 "==================python IDE============
 NeoBundle 'vim-scripts/indentpython.vim'        "python自动缩进
 "{{
@@ -515,13 +523,37 @@ NeoBundle 'nvie/vim-flake8'                     "python代码检查
 	let flake8_naming_marker=''                 "屏蔽 naming 警告
 "}}
 
+"快速跳转
+NeoBundle 'easymotion/vim-easymotion'
+" Gif config
+map <Leader>l <Plug>(easymotion-lineforward)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
+let g:EasyMotion_use_smartsign_us = 1 " US layout
+let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
+
 NeoBundle 'davidhalter/jedi-vim'		        "python补全,需要安装:pip install jedi
 "pip install jedi
 "pip install tox pytest
 let g:jedi#use_tabs_not_buffers = 1
 
+"代码块
+NeoBundle 'honza/vim-snippets'
 NeoBundle 'msanders/snipmate.vim'               "spipmate代码片段
 
+"------ snipmate dependencies -------
+NeoBundle 'MarcWeber/vim-addon-mw-utils'
+NeoBundle 'tomtom/tlib_vim'
+
+"搜索
+NeoBundle 'grep.vim'
+" Fast navigation
+"-----------------
+NeoBundle 'edsono/vim-matchit'
+NeoBundle 'Lokaltog/vim-easymotion'
+
+"打开浏览器
 NeoBundle 'tyru/open-browser.vim'               "打开浏览器
 "--------------------《web 插件》--------------------------------------
 "web缩进
@@ -576,9 +608,7 @@ NeoBundleLazy 'mmalecki/vim-node.js', {'autoload':{'filetypes':['javascript']}}
 NeoBundleLazy 'leshill/vim-json', {'autoload':{'filetypes':['javascript','json']}}
 NeoBundleLazy 'othree/javascript-libraries-syntax.vim', {'autoload':{'filetypes':['javascript','coffee','ls','typescript']}}
 
-"--------------------PHP IDE-----------------------------------------------
-
-" ======================《针对部分语言添加字典补全》=======================
+" ============《针对部分语言添加字典补全》==============
 "autocmd FileType c          call AddCDict()
 "if WINDOWS()
 "	function AddCDict()
@@ -597,7 +627,7 @@ NeoBundleLazy 'othree/javascript-libraries-syntax.vim', {'autoload':{'filetypes'
 "	endfunction
 "endif
 
-"==============《配色主题》============================================
+"==============《配色主题》==============
 colorscheme molokai
 "colorscheme
 NeoBundle 'morhetz/gruvbox'
@@ -605,11 +635,11 @@ call neobundle#end()
 NeoBundleCheck
 filetype plugin indent on
 syntax on
-"=========================================《实用设置》=================================="
+"===========《实用设置》===================
 "单词纠正
 ":abbr Lunix Linux
 ":abbr accross across
-"=========================================<自定义命令>==================================="
+"=============<自定义命令>================
 command T :tabnew | WMToggle	"打开新标签页,并加载WMToggle
 
 filetype plugin indent on       " 开启自动检测文件类型
@@ -665,7 +695,7 @@ func SetTitle()
 	endif
 endfun
 autocmd BufNewFile * normal G
-"==========================================F5 一键运行=====================================================
+" ====F5 一键运行=====
 func! RunScript()
 if &filetype == 'python'
     exec "!python %"
