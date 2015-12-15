@@ -539,7 +539,6 @@ NeoBundle 'davidhalter/jedi-vim'		        "python补全,需要安装:pip install
 let g:jedi#use_tabs_not_buffers = 1
 
 "代码块
-NeoBundle 'honza/vim-snippets'
 NeoBundle 'msanders/snipmate.vim'               "spipmate代码片段
 
 "------ snipmate dependencies -------
