@@ -433,6 +433,11 @@ vnoremap <silent> <C-T> <Esc>:Ydv<CR>
 nnoremap <silent> <C-T> <Esc>:Ydc<CR>
 noremap <leader>yd :Yde<CR>
 NeoBundle 'godlygeek/tabular'                   " Tabular: 自动对齐。
+" vim-markdown
+NeoBundle 'plasticboy/vim-markdown'
+let g:vim_markdown_folding_disabled=1
+let g:vim_markdown_math=1
+let g:vim_markdown_frontmatter=1
 
 NeoBundle 'shemerey/vim-project'                "项目管理
 NeoBundle 'atom/vim-mode'                       "vim-mode
@@ -705,3 +710,4 @@ map <F5> :call RunScript()<CR>
 "技巧
 "文本单词中添加符号,如：wwflwlf/fwfwekfek kfwkeowofeowoee 想在wwflwlf/fwfwekfek前后加一个双引号
 "操作,光标定位到wwf处：vt空格 S"   以此类推,可以快速添加其他的符号 
+
