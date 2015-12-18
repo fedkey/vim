@@ -339,6 +339,27 @@ NeoBundle 'mattn/gist-vim'
 let g:gist_detect_filetype = 1
 
 NeoBundle 'scrooloose/syntastic'			"语法检查
+"java
+let g:syntastic_java_javac_config_file_enabled = 1
+let g:syntastic_java_javac_delete_output = 0
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+
+NeoBundle 'syngan/vim-vimlint', {
+            \ 'depends' : 'ynkdir/vim-vimlparser'}
+let g:syntastic_vimlint_options = {
+            \'EVL102': 1 ,
+            \'EVL103': 1 ,
+            \'EVL205': 1 ,
+            \'EVL105': 1 ,
+            \}
+NeoBundle 'ynkdir/vim-vimlparser'
+NeoBundle 'gcmt/wildfire.vim'
+noremap <SPACE> <Plug>(wildfire-fuel)
+vnoremap <C-SPACE> <Plug>(wildfire-water)
+let g:wildfire_objects = ["i'", 'i"', "i)", "i]", "i}", "ip", "it"]
 NeoBundle 'Raimondi/delimitMate'			"补全括号和引号
 NeoBundle 'mhinz/vim-startify'              "显示上次编辑的文件列表
 ":SLoad    load a session
@@ -363,6 +384,18 @@ let g:tagbar_autopreview = 1
 NeoBundle 'tomasr/molokai'					"molokai配色
 NeoBundle 'bling/vim-airline'				"状态栏美化
 NeoBundle  'Lokaltog/vim-powerline'		    "状态栏增强
+NeoBundle 'itchyny/lightline.vim'           "状态栏横条美化
+set laststatus=2
+if !has('gui_running')
+  set t_Co=256
+endif
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'component': {
+      \   'readonly': '%{&readonly?"⭤":""}',
+      \ }
+      \ }
+
 NeoBundle 'terryma/vim-multiple-cursors'	"多光标编辑
     " 默认设置
     let g:multi_cursor_next_key='<C-n>'
@@ -433,11 +466,6 @@ vnoremap <silent> <C-T> <Esc>:Ydv<CR>
 nnoremap <silent> <C-T> <Esc>:Ydc<CR>
 noremap <leader>yd :Yde<CR>
 NeoBundle 'godlygeek/tabular'                   " Tabular: 自动对齐。
-" vim-markdown
-NeoBundle 'plasticboy/vim-markdown'
-let g:vim_markdown_folding_disabled=1
-let g:vim_markdown_math=1
-let g:vim_markdown_frontmatter=1
 
 NeoBundle 'shemerey/vim-project'                "项目管理
 NeoBundle 'atom/vim-mode'                       "vim-mode
@@ -458,7 +486,6 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=jedi#Complete                     "python 用jedi补全
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
 " Enable heavy omni completion.
 if !exists('g:neocomplcache_force_omni_patterns')
   let g:neocomplcache_force_omni_patterns = {}
@@ -528,6 +555,7 @@ NeoBundle 'nvie/vim-flake8'                     "python代码检查
 	let flake8_naming_marker=''                 "屏蔽 naming 警告
 "}}
 
+NeoBundle 'amoffat/snake'                       "使vim最大限度支持python写插件
 "快速跳转
 NeoBundle 'easymotion/vim-easymotion'
 " Gif config
@@ -593,6 +621,15 @@ NeoBundleLazy 'wavded/vim-stylus', {'autoload':{'filetypes':['styl']}}
 NeoBundleLazy 'digitaltoad/vim-jade', {'autoload':{'filetypes':['jade']}}
 NeoBundleLazy 'juvenn/mustache.vim', {'autoload':{'filetypes':['mustache']}}
 NeoBundleLazy 'gregsexton/MatchTag', {'autoload':{'filetypes':['html','xml']}}
+
+"java ide
+NeoBundle 'vim-scripts/JavaBrowser'                 "java代码浏览器
+NeoBundle 'wsdjeg/vim-javacomplete2'
+let g:JavaComplete_UseFQN = 1
+let g:JavaComplete_ServerAutoShutdownTime = 300
+let g:JavaComplete_MavenRepositoryDisable = 0
+NeoBundle 'vim-scripts/javacomplete'
+NeoBundle 'vim-scripts/Vim-JDE'
 
 "----------javascript-----------------------
 NeoBundle 'pangloss/vim-javascript'
@@ -703,6 +740,9 @@ autocmd BufNewFile * normal G
 func! RunScript()
 if &filetype == 'python'
     exec "!python %"
+elseif &filetype == 'java'
+    exec "!javac %"
+    exec "!java %<"
 endif
 endfunc
 map <F5> :call RunScript()<CR>
@@ -710,4 +750,3 @@ map <F5> :call RunScript()<CR>
 "技巧
 "文本单词中添加符号,如：wwflwlf/fwfwekfek kfwkeowofeowoee 想在wwflwlf/fwfwekfek前后加一个双引号
 "操作,光标定位到wwf处：vt空格 S"   以此类推,可以快速添加其他的符号 
-
