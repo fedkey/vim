@@ -1,7 +1,6 @@
 " -----------------     作者: 杨圣亮
 " -----------------     邮箱: fedkey@sina.com
-" -----------------     博客: http://yangshengliang.com
-" -----------------     创建: 2015年10月22日
+" -----------------     博客: http://huimingcc.com
 "系统依赖
 "linux-fedora
 "sudo yum install ctags
@@ -156,7 +155,11 @@ endif
 set nocompatible  	            "不使用vi模式"
 set linespace=0 	            "字符间插入的像素行数目
 set nu
-set mouse=a            		    "启动对鼠标的支持
+set showmode "Show current mode down the bottom
+set gcr=a:blinkon0 "Disable cursor blink
+if has('mouse')
+  set mouse=a
+endif
 if LINUX()
 	set clipboard=unnamedplus   "复制文件
 elseif WINDOWS()
@@ -166,8 +169,21 @@ set showcmd                     " 输入的命令显示出来
 nnoremap <C-F2> :vert diffsplit "比较文件
 set autoread                    " 设置当文件被改动时自动载入
 set magic                       " 设置魔术
-"=======================自动保存session=========================== 
-"自动保存session
+set hid
+set history=1000
+let mapleader = ","
+let g:mapleader = ","
+" 快速保存
+nmap <leader>w :w!<cr>
+" Turn on the WiLd menu
+set wildmenu
+
+" Ignore compiled files
+set wildignore=*.o,*~,*.pyc
+
+set cmdheight=2
+"=======================保存session=========================== 
+"保存session
 if LINUX()
     autocmd VimLeave * mks!  ~/_session.vim
     if exists("session.vim")
@@ -203,12 +219,24 @@ endif
 set laststatus=2				    "总是显示状态栏
 set ruler						    " 显示光标当前位置
 set cursorline 					    "高亮所在行
-set cursorcolumn 				    "高亮当前列
+"set cursorcolumn 				    "高亮当前列
 "set guioptions-=T				    "隐藏工具栏
 "set guioptions-=m				    "隐藏菜单
 set cmdheight=1					    " 命令行（在状态行下）的高度，默认为1
 set showmatch                       "高亮显示[] {} ()配对
+if has('statusline')
+    set laststatus=2
 
+    " Broken down into easily includeable segments
+    set statusline=%<%f\                     " Filename
+    set statusline+=%w%h%m%r                 " Options
+    if !exists('g:override_spf13_bundles')
+        set statusline+=%{fugitive#statusline()} " Git Hotness
+    endif
+    set statusline+=\ [%{&ff}/%Y]            " Filetype
+    set statusline+=\ [%{getcwd()}]          " Current dir
+    set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+endif
 "--------------------高级技巧---------------------------------
 "autocmd BufWritePre * :%s/\s\+$//e "保存文件时自动去除行末空格
 "指定文件类型去除行末空格
@@ -254,6 +282,7 @@ autocmd BufNewFile * normal G		        "新建文件后 自动定位到文件末
 set nobackup						        "禁止生成临时文件
 setlocal noswapfile					        "不要生成swap文件
 set wrap							        "自动折行
+set textwidth=79
 "=========按键======="
 set backspace=indent,eol,start              "使用退格键
 
@@ -272,7 +301,7 @@ NeoBundleFetch 'Shougo/neobundle.vim' 		"必须启用
 ":NeoBundleInstall - 安装 (更新) bundles
 ":NeoBundleClean - confirm (or auto-approve) 移除不使用的插件
 
-NeoBundle 'weynhamz/vim-plugin-minibufexpl'
+"NeoBundle 'weynhamz/vim-plugin-minibufexpl'
 NeoBundle 'vim-scripts/winmanager--Fox'     "winmanager窗口管理
 "设置winmanager的宽度，默认为25
 "let g:winManagerWidth = 15
@@ -339,9 +368,6 @@ NeoBundle 'mattn/gist-vim'
 let g:gist_detect_filetype = 1
 
 NeoBundle 'scrooloose/syntastic'			"语法检查
-"java
-let g:syntastic_java_javac_config_file_enabled = 1
-let g:syntastic_java_javac_delete_output = 0
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
@@ -396,6 +422,14 @@ let g:lightline = {
       \ }
       \ }
 
+" Vim UI {
+        let g:solarized_termcolors=256
+        let g:solarized_termtrans=1
+        let g:solarized_contrast="normal"
+        let g:solarized_visibility="normal"
+        color solarized             " Load a colorscheme
+
+
 NeoBundle 'terryma/vim-multiple-cursors'	"多光标编辑
     " 默认设置
     let g:multi_cursor_next_key='<C-n>'
@@ -420,6 +454,79 @@ NeoBundle 'yegappan/mru'		            "使用:MRU命令调出最近打开的文�
 highlight link MRUFileName LineNr
 let MRU_Max_Entries = 100
 
+"neocomplete补全
+NeoBundle 'Shougo/neocomplete.vim'
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+" AutoComplPop like behavior.
+"let g:neocomplete#enable_auto_select = 1
+
+" Shell like behavior(not recommended).
+"set completeopt+=longest
+"let g:neocomplete#enable_auto_select = 1
+"let g:neocomplete#disable_auto_complete = 1
+"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+" For perlomni.vim setting.
+" https://github.com/c9s/perlomni.vim
+let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+
 NeoBundle 'tomtom/tcomment_vim'             "快速注释
 NeoBundle 'kien/rainbow_parentheses.vim'	"挂号匹配高亮
 NeoBundle 'Yggdroot/indentLine'
@@ -429,6 +536,22 @@ let g:indentLine_char = '|'
 NeoBundle 'danro/rename.vim'                "重命名插件
 NeoBundle 'jiangmiao/auto-pairs'		    "自动插入和格式化方括号和圆括号
 NeoBundle 'vim-scripts/matchit.zip'             "\ %匹配成对的标签，跳转
+
+"代码块
+NeoBundle 'msanders/snipmate.vim'               "spipmate代码片段
+"------ snipmate dependencies -------
+NeoBundle 'MarcWeber/vim-addon-mw-utils'
+NeoBundle 'tomtom/tlib_vim'
+
+"搜索
+NeoBundle 'grep.vim'
+" Fast navigation
+"-----------------
+NeoBundle 'edsono/vim-matchit'
+NeoBundle 'Lokaltog/vim-easymotion'
+
+"打开浏览器
+NeoBundle 'tyru/open-browser.vim'               "打开浏览器
 
 "项目管理
 NeoBundle 'tpope/vim-projectionist'		    "项目创建
@@ -537,56 +660,39 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
 "==================python IDE============
-NeoBundle 'vim-scripts/indentpython.vim'        "python自动缩进
-"{{
-NeoBundle 'nvie/vim-flake8'                     "python代码检查
-	"pip install flake8
-	"<F7> to run flake8
-	let g:flake8_quickfix_location="top"
-	let g:flake8_quickfix_height=7
-	let g:flake8_show_quickfix=1
-	let g:flake8_show_in_gutter=1
-	let g:flake8_show_in_file=1
-	let g:flake8_max_markers=500
-	let flake8_error_marker='Δ'                 "错误提示符号
-	let flake8_warning_marker='×'               "警告提示符号
-	let flake8_pyflake_marker=''                " 是否屏蔽警告
-	let flake8_complexity_marker=''             "屏蔽 McCabe complexity 警告
-	let flake8_naming_marker=''                 "屏蔽 naming 警告
-"}}
+    NeoBundle 'vim-scripts/indentpython.vim'        "python自动缩进
+    NeoBundle 'klen/python-mode'
+    NeoBundle 'yssource/python.vim'
+    NeoBundle 'python_match.vim'
+    NeoBundle 'pythoncomplete'
+    NeoBundle 'amoffat/snake'                       "使vim最大限度支持python写插件
+    "快速跳转
+    NeoBundle 'easymotion/vim-easymotion'
+    " Gif config
+    map <Leader>l <Plug>(easymotion-lineforward)
+    map <Leader>j <Plug>(easymotion-j)
+    map <Leader>k <Plug>(easymotion-k)
+    map <Leader>h <Plug>(easymotion-linebackward)
+    let g:EasyMotion_use_smartsign_us = 1 " US layout
+    let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
 
-NeoBundle 'amoffat/snake'                       "使vim最大限度支持python写插件
-"快速跳转
-NeoBundle 'easymotion/vim-easymotion'
-" Gif config
-map <Leader>l <Plug>(easymotion-lineforward)
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-map <Leader>h <Plug>(easymotion-linebackward)
-let g:EasyMotion_use_smartsign_us = 1 " US layout
-let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
+    NeoBundle 'davidhalter/jedi-vim'		        "python补全,需要安装:pip install jedi
+    "pip install jedi
+    "pip install tox pytest
+    let g:jedi#use_tabs_not_buffers = 1
 
-NeoBundle 'davidhalter/jedi-vim'		        "python补全,需要安装:pip install jedi
-"pip install jedi
-"pip install tox pytest
-let g:jedi#use_tabs_not_buffers = 1
-
-"代码块
-NeoBundle 'msanders/snipmate.vim'               "spipmate代码片段
-
-"------ snipmate dependencies -------
-NeoBundle 'MarcWeber/vim-addon-mw-utils'
-NeoBundle 'tomtom/tlib_vim'
-
-"搜索
-NeoBundle 'grep.vim'
-" Fast navigation
-"-----------------
-NeoBundle 'edsono/vim-matchit'
-NeoBundle 'Lokaltog/vim-easymotion'
-
-"打开浏览器
-NeoBundle 'tyru/open-browser.vim'               "打开浏览器
+ " PyMode {
+        " Disable if python support not present
+        if !has('python') && !has('python3')
+            let g:pymode = 0
+        endif
+        if isdirectory(expand("~/.vim/bundle/python-mode"))
+            let g:pymode_lint_checkers = ['pyflakes']
+            let g:pymode_trim_whitespaces = 0
+            let g:pymode_options = 0
+            let g:pymode_rope = 0
+        endif
+        "}
 "--------------------《web 插件》--------------------------------------
 "web缩进
 au BufNewFile,BufRead *.js, *.html, *.css
@@ -622,15 +728,6 @@ NeoBundleLazy 'digitaltoad/vim-jade', {'autoload':{'filetypes':['jade']}}
 NeoBundleLazy 'juvenn/mustache.vim', {'autoload':{'filetypes':['mustache']}}
 NeoBundleLazy 'gregsexton/MatchTag', {'autoload':{'filetypes':['html','xml']}}
 
-"java ide
-NeoBundle 'vim-scripts/JavaBrowser'                 "java代码浏览器
-NeoBundle 'wsdjeg/vim-javacomplete2'
-let g:JavaComplete_UseFQN = 1
-let g:JavaComplete_ServerAutoShutdownTime = 300
-let g:JavaComplete_MavenRepositoryDisable = 0
-NeoBundle 'vim-scripts/javacomplete'
-NeoBundle 'vim-scripts/Vim-JDE'
-
 "----------javascript-----------------------
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'nono/jquery.vim'                         "jquery高亮
@@ -648,25 +745,6 @@ NeoBundleLazy 'kchmck/vim-coffee-script', {'autoload':{'filetypes':['coffee']}}
 NeoBundleLazy 'mmalecki/vim-node.js', {'autoload':{'filetypes':['javascript']}}
 NeoBundleLazy 'leshill/vim-json', {'autoload':{'filetypes':['javascript','json']}}
 NeoBundleLazy 'othree/javascript-libraries-syntax.vim', {'autoload':{'filetypes':['javascript','coffee','ls','typescript']}}
-
-" ============《针对部分语言添加字典补全》==============
-"autocmd FileType c          call AddCDict()
-"if WINDOWS()
-"	function AddCDict()
-"        setlocal dict+=$VIM/vimfiles/dict/c.txt
-"	endfunction
-"
-"	function AddCPPDict()
-"        setlocal dict+=$VIM/vimfiles/dict/c.txt
-"        setlocal dict+=$VIM/vimfiles/dict/cpp-stdlib.txt
-"        setlocal dict+=$VIM/vimfiles/dict/cpp-boost.txt
-"	endfunction
-"
-"elseif LINUX()
-"	function AddCDict()
-"        setlocal dict+=~/.vim/dict/c.txt
-"	endfunction
-"endif
 
 "==============《配色主题》==============
 colorscheme molokai
