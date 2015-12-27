@@ -114,46 +114,46 @@ set completeopt=menuone            "关闭顶部函数参数提示窗口
 set completeopt=longest,menu 
 
 "=========================语言与编码===================================
-set helplang=cn		            	"中文帮助
+set helplang=cn                 "中文帮助
 if WINDOWS()
-	set encoding=utf-8 fileencodings=ucs-bom,utf-8,cp936	"自动识别文件编码
+  set encoding=utf-8 fileencodings=ucs-bom,utf-8,cp936  "自动识别文件编码
 elseif LINUX()
-	set encoding=utf-8 fileencodings=ucs-bom,utf-8,cp936	"自动识别文件编码
+  set encoding=utf-8 fileencodings=ucs-bom,utf-8,cp936  "自动识别文件编码
 endif
 if WINDOWS()             "winodws系统下执行的配置
-	set nocompatible
-	behave mswin
-	"解决consle输出乱码  
-	language messages zh_CN.utf-8  
-	set diffexpr=MyDiff()
-	function MyDiff()
-  		let opt = '-a --binary '
-  		if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-  		if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-  		let arg1 = v:fname_in
-  		if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-  		let arg2 = v:fname_new
-  		if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-  		let arg3 = v:fname_out
-  		if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-  		let eq = ''
-  		if $VIMRUNTIME =~ ' '
-    			if &sh =~ '\<cmd'
-      				let cmd = '""' . $VIMRUNTIME . '\diff"'
-      				let eq = '"'
-    			else
-      				let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-    			endif
-  		else
-    			let cmd = $VIMRUNTIME . '\diff'
-  		endif
-  		silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
-	endfunction
+  set nocompatible
+  behave mswin
+  "解决consle输出乱码  
+  language messages zh_CN.utf-8  
+  set diffexpr=MyDiff()
+  function MyDiff()
+      let opt = '-a --binary '
+      if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+      if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+      let arg1 = v:fname_in
+      if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+      let arg2 = v:fname_new
+      if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+      let arg3 = v:fname_out
+      if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+      let eq = ''
+      if $VIMRUNTIME =~ ' '
+          if &sh =~ '\<cmd'
+              let cmd = '""' . $VIMRUNTIME . '\diff"'
+              let eq = '"'
+          else
+              let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+          endif
+      else
+          let cmd = $VIMRUNTIME . '\diff'
+      endif
+      silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+  endfunction
 endif
 
 "=================《公共配置》==================================
-set nocompatible  	            "不使用vi模式"
-set linespace=0 	            "字符间插入的像素行数目
+set nocompatible                "不使用vi模式"
+set linespace=0                 "字符间插入的像素行数目
 set nu
 set showmode "Show current mode down the bottom
 set gcr=a:blinkon0 "Disable cursor blink
@@ -161,9 +161,9 @@ if has('mouse')
   set mouse=a
 endif
 if LINUX()
-	set clipboard=unnamedplus   "复制文件
+  set clipboard=unnamedplus   "复制文件
 elseif WINDOWS()
-	set clipboard+=unnamed 	    "共享粘贴板
+  set clipboard+=unnamed      "共享粘贴板
 endif
 set showcmd                     " 输入的命令显示出来
 nnoremap <C-F2> :vert diffsplit "比较文件
@@ -205,24 +205,24 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set autoindent
-set expandtab                 	    "将Tab自动转化成空格 [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
-set foldmethod=indent		        "折叠方式是使用语法折叠
-"set foldlevel=100 			        "折叠的层次是100,也就是打开所有的折叠
+set expandtab                       "将Tab自动转化成空格 [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
+set foldmethod=indent           "折叠方式是使用语法折叠
+"set foldlevel=100              "折叠的层次是100,也就是打开所有的折叠
 "=================《外观设置》===============================
 if WINDOWS()
-	au GUIEnter * simalt ~x 	    "窗口全屏
-	set columns=80
+  au GUIEnter * simalt ~x       "窗口全屏
+  set columns=80
 elseif LINUX()
     autocmd GUIEnter * winsize 167 41
 endif
 
-set laststatus=2				    "总是显示状态栏
-set ruler						    " 显示光标当前位置
-set cursorline 					    "高亮所在行
-"set cursorcolumn 				    "高亮当前列
-"set guioptions-=T				    "隐藏工具栏
-"set guioptions-=m				    "隐藏菜单
-set cmdheight=1					    " 命令行（在状态行下）的高度，默认为1
+set laststatus=2            "总是显示状态栏
+set ruler               " 显示光标当前位置
+set cursorline              "高亮所在行
+"set cursorcolumn             "高亮当前列
+set guioptions-=T            "隐藏工具栏
+"set guioptions-=m            "隐藏菜单
+set cmdheight=1             " 命令行（在状态行下）的高度，默认为1
 set showmatch                       "高亮显示[] {} ()配对
 if has('statusline')
     set laststatus=2
@@ -255,47 +255,47 @@ elseif LINUX()
 endif
 
 " ==============《根据后缀名指定文件类型》=================
-au BufRead,BufNewFile *.h           	setlocal ft=c
-au BufRead,BufNewFile *.i           	setlocal ft=c
-au BufRead,BufNewFile *.m           	setlocal ft=objc
-au BufRead,BufNewFile *.di          	setlocal ft=d
-au BufRead,BufNewFile *.ss          	setlocal ft=scheme
-au BufRead,BufNewFile *.cl          	setlocal ft=lisp
-au BufRead,BufNewFile *.phpt        	setlocal ft=php
-au BufRead,BufNewFile *.inc         	setlocal ft=php
-au BufRead,BufNewFile *.sql         	setlocal ft=mysql
-au BufRead,BufNewFile *.tpl         	setlocal ft=smarty
-au BufRead,BufNewFile *.txt         	setlocal ft=txt
-au BufRead,BufNewFile *.log         	setlocal ft=conf
-au BufRead,BufNewFile hosts         	setlocal ft=conf
-au BufRead,BufNewFile *.conf        	setlocal ft=nginx
-au BufRead,BufNewFile http*.conf    	setlocal ft=apache
-au BufRead,BufNewFile php-fpm*.conf 	setlocal ft=dosini
-au BufRead,BufNewFile *.ini         	setlocal ft=dosini
+au BufRead,BufNewFile *.h             setlocal ft=c
+au BufRead,BufNewFile *.i             setlocal ft=c
+au BufRead,BufNewFile *.m             setlocal ft=objc
+au BufRead,BufNewFile *.di            setlocal ft=d
+au BufRead,BufNewFile *.ss            setlocal ft=scheme
+au BufRead,BufNewFile *.cl            setlocal ft=lisp
+au BufRead,BufNewFile *.phpt          setlocal ft=php
+au BufRead,BufNewFile *.inc           setlocal ft=php
+au BufRead,BufNewFile *.sql           setlocal ft=mysql
+au BufRead,BufNewFile *.tpl           setlocal ft=smarty
+au BufRead,BufNewFile *.txt           setlocal ft=txt
+au BufRead,BufNewFile *.log           setlocal ft=conf
+au BufRead,BufNewFile hosts           setlocal ft=conf
+au BufRead,BufNewFile *.conf          setlocal ft=nginx
+au BufRead,BufNewFile http*.conf      setlocal ft=apache
+au BufRead,BufNewFile php-fpm*.conf   setlocal ft=dosini
+au BufRead,BufNewFile *.ini           setlocal ft=dosini
  
  "------------声音---------------
-set vb t_vb=		                        "去除报警音
+set vb t_vb=                            "去除报警音
 "====文件============
 set clipboard+=unnamed                      " 共享剪贴板
-set showtabline=2					        "以标签形式打开文件
-autocmd BufNewFile * normal G		        "新建文件后 自动定位到文件末尾
-set nobackup						        "禁止生成临时文件
-setlocal noswapfile					        "不要生成swap文件
-set wrap							        "自动折行
+set showtabline=2                 "以标签形式打开文件
+autocmd BufNewFile * normal G           "新建文件后 自动定位到文件末尾
+set nobackup                    "禁止生成临时文件
+setlocal noswapfile                 "不要生成swap文件
+set wrap                      "自动折行
 set textwidth=79
 "=========按键======="
 set backspace=indent,eol,start              "使用退格键
 
 "===========《插件及配置》==========================="
 "安装neobundle管理插件，先安装git再安装neobundle
-if WINDOWS()  					 "安装:git clone https://github.com/Shougo/neobundle.vim.git
-	set runtimepath+=$VIM/vimfiles/bundle/neobundle.vim 	 " 此处规定neobundle的路径
+if WINDOWS()             "安装:git clone https://github.com/Shougo/neobundle.vim.git
+  set runtimepath+=$VIM/vimfiles/bundle/neobundle.vim    " 此处规定neobundle的路径
     call neobundle#begin(expand('$VIM/vimfiles/bundle/')) "插件安装位置
-elseif LINUX()  					 "安装: git clone https://github.com/Shougo/neobundle.vim.git
-	set runtimepath+=~/.vim/bundle/neobundle.vim/ 	 		 " 此处规定neobundle的路径
+elseif LINUX()             "安装: git clone https://github.com/Shougo/neobundle.vim.git
+  set runtimepath+=~/.vim/bundle/neobundle.vim/        " 此处规定neobundle的路径
     call neobundle#begin(expand('~/.vim/bundle/'))   "插件安装位置
 endif
-NeoBundleFetch 'Shougo/neobundle.vim' 		"必须启用
+NeoBundleFetch 'Shougo/neobundle.vim'     "必须启用
 "==========《neobundle命令说明》"
 ":NeoBundleList - 插件列表
 ":NeoBundleInstall - 安装 (更新) bundles
@@ -320,15 +320,15 @@ function! NERDTree_IsValid()
 endfunction  
 
 NeoBundle  'vim-scripts/bufexplorer.zip'    "显示buf列表
-"let g:bufExplorerSortBy = 'name'		    " 按文件名排序
-NeoBundle 'taglist.vim'						"Tlist 函数列表
+"let g:bufExplorerSortBy = 'name'       " 按文件名排序
+NeoBundle 'taglist.vim'           "Tlist 函数列表
 let Tlist_Use_SingleClick=1                 "单击tag就跳到tag定义的位置
 let Tlist_Show_Menu=1                       "显示taglist菜单
-let Tlist_Auto_Open=0					    "默认打开Taglist
-"let Tlist_Show_One_File = 	 1              "不同时显示多个文件的tag，只显示当前文件的
+let Tlist_Auto_Open=0             "默认打开Taglist
+"let Tlist_Show_One_File =   1              "不同时显示多个文件的tag，只显示当前文件的
 let Tlist_Exit_OnlyWindow =  1              "如果taglist窗口是最后一个窗口，则退出vim
 let Tlist_Use_Right_Window = 1              "在右侧窗口中显示taglist窗口
-let Tlist_Compart_Format = 1    		    " 压缩方式
+let Tlist_Compart_Format = 1            " 压缩方式
 let Tlist_WinWidth = 30
 nmap <F6> :Tlist <cr>
 if WINDOWS()
@@ -341,7 +341,7 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'kien/ctrlp.vim'                  "快速搜索/文件
 
 
-NeoBundle 'scrooloose/nerdtree'			         "树形目录
+NeoBundle 'scrooloose/nerdtree'              "树形目录
 nmap <F9> :NERDTreeToggle<CR>               "F9调出
 let g:NERDTreeWinSize = 30
 let g:NERDTreeHight= 30
@@ -349,13 +349,13 @@ let g:NERDTreeMouseMode = 1
 let g:NERDTreeMapToggleZoom = '<Space>'
 
 "autocmd VimEnter * WMToggle                 "自动开启WMToggle
-" autocmd VimEnter * wincmd w		            "光标停留右侧文件
+" autocmd VimEnter * wincmd w               "光标停留右侧文件
 command  WM :WMToggle
 nmap <F3> :WMToggle<cr>
 set autochdir
 "========================================<IDE>========================================
 "git 
-NeoBundle 'tpope/vim-fugitive'				"git信息
+NeoBundle 'tpope/vim-fugitive'        "git信息
 NeoBundle 'airblade/vim-gitgutter'          "git 插件
 let g:gitgutter_sign_column_always = 1
 let g:gitgutter_max_signs = 500
@@ -367,11 +367,24 @@ nmap <Leader>hv <Plug>GitGutterPreviewHunk
 NeoBundle 'mattn/gist-vim'
 let g:gist_detect_filetype = 1
 
-NeoBundle 'scrooloose/syntastic'			"语法检查
+NeoBundle 'scrooloose/syntastic'      "语法检查
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
+"java
+let g:syntastic_java_javac_delete_output = 0
+let g:syntastic_java_javac_config_file_enabled = 0
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_style_error_symbol = '✠'
+let g:syntastic_warning_symbol = '∆'
+let g:syntastic_style_warning_symbol = '≈'
+
+
 
 NeoBundle 'syngan/vim-vimlint', {
             \ 'depends' : 'ynkdir/vim-vimlparser'}
@@ -386,14 +399,14 @@ NeoBundle 'gcmt/wildfire.vim'
 noremap <SPACE> <Plug>(wildfire-fuel)
 vnoremap <C-SPACE> <Plug>(wildfire-water)
 let g:wildfire_objects = ["i'", 'i"', "i)", "i]", "i}", "ip", "it"]
-NeoBundle 'Raimondi/delimitMate'			"补全括号和引号
+NeoBundle 'Raimondi/delimitMate'      "补全括号和引号
 NeoBundle 'mhinz/vim-startify'              "显示上次编辑的文件列表
 ":SLoad    load a session
 ":SSave    save a session
 ":SDelete  delete a session
-NeoBundle 'majutsushi/tagbar'				"tagbar
-let g:tagbar_sort = 0					    "关闭排序[也就是按标签本身在文件中的位置排序]
-let g:tagbar_show_linenumbers = -1		    "显示行号
+NeoBundle 'majutsushi/tagbar'       "tagbar
+let g:tagbar_sort = 0             "关闭排序[也就是按标签本身在文件中的位置排序]
+let g:tagbar_show_linenumbers = -1        "显示行号
 let g:tagbar_width=30
 let g:tagbar_left = 1
 let g:NERDTreeChDirMode=1
@@ -407,9 +420,9 @@ NeoBundle 'sjl/gundo.vim'                   "查看撤销树,类似版本控制�
 nnoremap <F2> :GundoToggle<CR>
 " 开启自动预览 [随着光标在标签上的移动，顶部会出现一个实时的预览窗口]
 let g:tagbar_autopreview = 1
-NeoBundle 'tomasr/molokai'					"molokai配色
-NeoBundle 'bling/vim-airline'				"状态栏美化
-NeoBundle  'Lokaltog/vim-powerline'		    "状态栏增强
+NeoBundle 'tomasr/molokai'          "molokai配色
+NeoBundle 'bling/vim-airline'       "状态栏美化
+NeoBundle  'Lokaltog/vim-powerline'       "状态栏增强
 NeoBundle 'itchyny/lightline.vim'           "状态栏横条美化
 set laststatus=2
 if !has('gui_running')
@@ -430,7 +443,7 @@ let g:lightline = {
         color solarized             " Load a colorscheme
 
 
-NeoBundle 'terryma/vim-multiple-cursors'	"多光标编辑
+NeoBundle 'terryma/vim-multiple-cursors'  "多光标编辑
     " 默认设置
     let g:multi_cursor_next_key='<C-n>'
     let g:multi_cursor_prev_key='<C-p>'
@@ -450,7 +463,7 @@ NeoBundle 'terryma/vim-multiple-cursors'	"多光标编辑
     "按下I在每行的头部插入
     "键入”, 按下 <C-e> 到达行末, 键入另一个”和逗号
     "然后将每个光标都下移一行，按下delete
-NeoBundle 'yegappan/mru'		            "使用:MRU命令调出最近打开的文档
+NeoBundle 'yegappan/mru'                "使用:MRU命令调出最近打开的文档
 highlight link MRUFileName LineNr
 let MRU_Max_Entries = 100
 
@@ -528,13 +541,13 @@ endif
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 NeoBundle 'tomtom/tcomment_vim'             "快速注释
-NeoBundle 'kien/rainbow_parentheses.vim'	"挂号匹配高亮
+NeoBundle 'kien/rainbow_parentheses.vim'  "挂号匹配高亮
 NeoBundle 'Yggdroot/indentLine'
 let g:indentLine_color_term = 239
 let g:indentLine_color_gui = '#3366ff'
 let g:indentLine_char = '|'
 NeoBundle 'danro/rename.vim'                "重命名插件
-NeoBundle 'jiangmiao/auto-pairs'		    "自动插入和格式化方括号和圆括号
+NeoBundle 'jiangmiao/auto-pairs'        "自动插入和格式化方括号和圆括号
 NeoBundle 'vim-scripts/matchit.zip'             "\ %匹配成对的标签，跳转
 
 "代码块
@@ -554,7 +567,7 @@ NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'tyru/open-browser.vim'               "打开浏览器
 
 "项目管理
-NeoBundle 'tpope/vim-projectionist'		    "项目创建
+NeoBundle 'tpope/vim-projectionist'       "项目创建
 "添加环绕
 NeoBundle 'tpope/vim-surround'              "快速给词加环绕符号,例如引号
 "{{
@@ -676,7 +689,7 @@ au Syntax * RainbowParenthesesLoadBraces
     let g:EasyMotion_use_smartsign_us = 1 " US layout
     let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
 
-    NeoBundle 'davidhalter/jedi-vim'		        "python补全,需要安装:pip install jedi
+    NeoBundle 'davidhalter/jedi-vim'            "python补全,需要安装:pip install jedi
     "pip install jedi
     "pip install tox pytest
     let g:jedi#use_tabs_not_buffers = 1
@@ -693,6 +706,135 @@ au Syntax * RainbowParenthesesLoadBraces
             let g:pymode_rope = 0
         endif
         "}
+
+"----------------------java ide" --------------------------------------
+NeoBundle 'artur-shaik/vim-javacomplete2'
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+let g:JavaComplete_UseFQN = 1
+let g:JavaComplete_ServerAutoShutdownTime = 300
+let g:JavaComplete_MavenRepositoryDisable = 0
+NeoBundle 'VJDE/VJDE'
+NeoBundle 'wsdjeg/java_getset.vim'
+NeoBundle 'JalaiAmitahl/maven-compiler.vim'
+autocmd Filetype pom compiler mvn
+NeoBundle 'vim-jp/vim-java'
+
+autocmd! FileType java call JavaFileTypeInit()
+function! JavaFileTypeInit()
+let b:javagetset_setterTemplate =
+\ "/**\n" .
+\ " * Set %varname%.\n" .
+\ " *\n" .
+\ " * @param %varname% the value to set.\n" .
+\ " */\n" .
+\ "%modifiers% void %funcname%(%type% %varname%){\n" .
+\ " this.%varname% = %varname%;\n" .
+\ "}"
+let b:javagetset_getterTemplate =
+\ "/**\n" .
+\ " * Get %varname%.\n" .
+\ " *\n" .
+\ " * @return %varname% as %type%.\n" .
+\ " */\n" .
+\ "%modifiers% %type% %funcname%(){\n" .
+\ " return %varname%;\n" .
+\ "}"
+execute "source ~/.vim/bundle/java_getset.vim/java_getset.vim"
+"add openjdk-8-src tags
+set tags+=/home/wsdjeg/others/openjdk-8-src/tags
+set omnifunc=javacomplete#Complete
+"add android16 tags
+if filereadable("AndroidManifest.xml")
+set tags+=/home/wsdjeg/others/android-sources-6.0r1/tags
+let g:JavaComplete_SourcesPath = "target/generated-sources/r"
+endif
+"nnoremap <leader>] :tag <c-r>=expand("<cword>")<cr><cr>
+"nnoremap <leader>[ :tp
+inoremap <silent> <buffer> { <C-r>=BracketsFunc()<cr>
+inoremap <silent> <buffer> } <C-r>=JavaCloseBracket()<cr>
+inoremap <silent> <buffer> <CR> <C-r>=MyEnterfunc()<Cr>
+"inoremap <silent> <buffer> <C-u> <esc>bgUwea
+inoremap <silent> <buffer> <leader>uu <esc>bgUwea
+nnoremap <F4> :JCimportAdd<cr>
+inoremap <F4> <esc>:JCimportAddI<cr>
+"inoremap <silent> <buffer> . <C-r>=MyDotfunc()<Cr>
+"inoremap <silent> <buffer> . <C-r>=WSDAutoComplete('.')<CR>
+"inoremap <silent> <buffer> A <C-r>=WSDAutoComplete('A')<CR>
+"inoremap <silent> <buffer> B <C-r>=WSDAutoComplete('B')<CR>
+"inoremap <silent> <buffer> C <C-r>=WSDAutoComplete('C')<CR>
+"inoremap <silent> <buffer> D <C-r>=WSDAutoComplete('D')<CR>
+"inoremap <silent> <buffer> E <C-r>=WSDAutoComplete('E')<CR>
+"inoremap <silent> <buffer> F <C-r>=WSDAutoComplete('F')<CR>
+"inoremap <silent> <buffer> G <C-r>=WSDAutoComplete('G')<CR>
+"inoremap <silent> <buffer> H <C-r>=WSDAutoComplete('H')<CR>
+"inoremap <silent> <buffer> I <C-r>=WSDAutoComplete('I')<CR>
+"inoremap <silent> <buffer> J <C-r>=WSDAutoComplete('J')<CR>
+"inoremap <silent> <buffer> K <C-r>=WSDAutoComplete('K')<CR>
+"inoremap <silent> <buffer> L <C-r>=WSDAutoComplete('L')<CR>
+"inoremap <silent> <buffer> M <C-r>=WSDAutoComplete('M')<CR>
+"inoremap <silent> <buffer> N <C-r>=WSDAutoComplete('N')<CR>
+"inoremap <silent> <buffer> O <C-r>=WSDAutoComplete('O')<CR>
+"inoremap <silent> <buffer> P <C-r>=WSDAutoComplete('P')<CR>
+"inoremap <silent> <buffer> Q <C-r>=WSDAutoComplete('Q')<CR>
+"inoremap <silent> <buffer> R <C-r>=WSDAutoComplete('R')<CR>
+"inoremap <silent> <buffer> S <C-r>=WSDAutoComplete('S')<CR>
+"inoremap <silent> <buffer> T <C-r>=WSDAutoComplete('T')<CR>
+"inoremap <silent> <buffer> U <C-r>=WSDAutoComplete('U')<CR>
+"inoremap <silent> <buffer> V <C-r>=WSDAutoComplete('V')<CR>
+"inoremap <silent> <buffer> W <C-r>=WSDAutoComplete('W')<CR>
+"inoremap <silent> <buffer> X <C-r>=WSDAutoComplete('X')<CR>
+"inoremap <silent> <buffer> Y <C-r>=WSDAutoComplete('Y')<CR>
+"inoremap <silent> <buffer> Z <C-r>=WSDAutoComplete('Z')<CR>
+compiler mvn
+if !filereadable("pom.xml")
+inoremap <F5> <esc>:w<CR>:!javac -cp classes/ -Djava.ext.dirs=lib/ -d classes/ % <CR>
+nnoremap <F5> :!javac -cp classes/ -Djava.ext.dirs=lib/ -d classes/ % <CR>
+nnoremap <F6> :!java -cp classes/ -Djava.ext.dirs=lib/ com.wsdjeg.util.TestMethod
+let g:JavaComplete_LibsPath = 'classes/:lib/:/home/wsdjeg/tools/apache-tomcat-8.0.24/lib'
+else
+"add struts2-core tags
+set tags+=/home/wsdjeg/others/struts/core/tags
+"add tomcat70 tags
+set tags+=/home/wsdjeg/others/tomcat70/tags
+"add hibernate-core tags
+set tags+=/home/wsdjeg/others/hibernate-orm/hibernate-core/src/main/java/tags
+no <F9> :echo system("mvn clean")<CR>
+no <F5> <up>:wa<CR> :echo system("mvn clean compile")<CR>
+no <silent><F6> :echo system("mvn test")<CR>
+endif
+endf
+function JavaCloseBracket()
+  let line = getline('.')
+  let col = col('.')
+  if line[col - 2] == "\\"
+  "Inserting a quoted quotation mark into the string
+  return "}"
+  elseif line[col - 1] == "}"
+    "Escaping out of the string
+    return "\<Right>"
+  elseif match(getline(line('.') + 1), '\s*}') < 0
+    return "\<CR>}"
+  else
+    return "\<Esc>j0f}a"
+  endif
+endf
+
+function! OnmiConfigForJsp()
+  let pos1 = search("</script>","nb",line("w0"))
+  let pos2 = search("<script","nb",line("w0"))
+  let pos3 = search("</script>","n",line("w$"))
+  let pos4 = search("<script","n",line("w$"))
+  let pos0 = line('.')
+  if pos1 < pos2 && pos2 < pos0 && pos0 < pos3
+    set omnifunc=javascriptcomplete#CompleteJS
+    return "\<esc>a."
+  else
+  set omnifunc=javacomplete#Complete
+  return "\<esc>a."
+  endif
+endf
+
+
 "--------------------《web 插件》--------------------------------------
 "web缩进
 au BufNewFile,BufRead *.js, *.html, *.css
@@ -707,13 +849,13 @@ augroup END
 NeoBundle 'gregsexton/MatchTag', {'autoload':{'filetypes':['html','xml']}}
 NeoBundle 'mattn/emmet-vim'                         "emmet 速写
 let g:user_emmet_install_global = 0                                
-autocmd FileType html,css EmmetInstall              "只在html和css中启用
-let g:user_emmet_expandabbr_key='<c-j>'  	        "更改默认按键
+autocmd FileType html,jsp,css EmmetInstall              "只在html和css中启用
+let g:user_emmet_expandabbr_key='<c-j>'           "更改默认按键
 let g:user_emmet_complete_tag=1
 let g:user_emmet_next_key='<c-n>'
 let g:user_emmet_prev_key='<c-p>'
 NeoBundle 'docunext/closetag.vim'                   "关闭标签
-NeoBundle 'othree/xml.vim'							"xml插件
+NeoBundle 'othree/xml.vim'              "xml插件
 "NeoBundle 'ternjs/tern_for_vim'                     "tern js补全
 NeoBundle 'cakebaker/scss-syntax.vim'               "scss css检查
 au BufRead,BufNewFile *.scss set filetype=scss.css
@@ -732,7 +874,7 @@ NeoBundleLazy 'gregsexton/MatchTag', {'autoload':{'filetypes':['html','xml']}}
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'nono/jquery.vim'                         "jquery高亮
 NeoBundle 'elzr/vim-json'                           "json高亮
-NeoBundle 'guileen/vim-node-dict'		            "Node.js 字典
+NeoBundle 'guileen/vim-node-dict'               "Node.js 字典
 "django
 NeoBundle 'django_templates.vim'
 NeoBundle 'Django-Projects'
@@ -759,16 +901,16 @@ syntax on
 ":abbr Lunix Linux
 ":abbr accross across
 "=============<自定义命令>================
-command T :tabnew | WMToggle	"打开新标签页,并加载WMToggle
+command T :tabnew | WMToggle  "打开新标签页,并加载WMToggle
 
 filetype plugin indent on       " 开启自动检测文件类型
 "新建.c,.h,.sh,.java文件，自动插入文件头
 autocmd BufNewFile *.c,*.cpp,*.[ch],*.sh,*.py,*.php  exec ":call SetTitle()"
 ""定义函数SetTitle，自动插入文件头
 func SetTitle()
-	"如果文件类型为.sh文件
-	if &filetype == 'sh'
-		call setline(1,"\#!/bin/bash")
+  "如果文件类型为.sh文件
+  if &filetype == 'sh'
+    call setline(1,"\#!/bin/bash")
         call append(1,"# 作者:" .    "  杨圣亮")
         call append(2,"# 邮箱:" .    "  fedkey@sina.com")
         call append(3,"# 博客:" .    "  yangshengliang.com")
@@ -778,10 +920,10 @@ func SetTitle()
         call setline(1,"#!/usr/bin/env python")
         call append(1,"# coding=utf-8")
         call append(2, "\"\"\"")
-		call append(3,"文件名:      ".expand("%"))
+    call append(3,"文件名:      ".expand("%"))
         call append(4,"创建日期:    " . strftime("%Y-%m-%d"))
-	    call append(5,"作者:        杨圣亮")
-	    call append(6,"邮箱:        fedkey@sina.com")
+      call append(5,"作者:        杨圣亮")
+      call append(6,"邮箱:        fedkey@sina.com")
         call append(7,"博客：       yangshengliang.com")
         call append(8, "\"\"\"")
 
@@ -790,28 +932,28 @@ func SetTitle()
         call append(line("."),"# encoding: utf-8")
 
      elseif &filetype == 'php'
-		call setline(1, "<?php")
-		call append(line("."),"/*")
-		call append(line(".")+1,"文件名:  ".expand("%"))
-		call append(line(".")+2,"作者:    杨圣亮")
-		call append(line(".")+3,"邮箱:    fedkey@sina.com ")
-		call append(line(".")+4,"博客:    yangshengliang.com ")
-		call append(line(".")+5,"创建日期:" . strftime("%Y-%m-%d"))
-		call append(line(".")+6, "*/")
-	endif
-	if expand("%:e") == 'cpp'
-		call setline(1, "#include<iostream>")
-		call append(line("."), "using namespace std;")
-		call append(line(".")+1, "")
-	endif
-	if &filetype == 'c'
+    call setline(1, "<?php")
+    call append(line("."),"/*")
+    call append(line(".")+1,"文件名:  ".expand("%"))
+    call append(line(".")+2,"作者:    杨圣亮")
+    call append(line(".")+3,"邮箱:    fedkey@sina.com ")
+    call append(line(".")+4,"博客:    yangshengliang.com ")
+    call append(line(".")+5,"创建日期:" . strftime("%Y-%m-%d"))
+    call append(line(".")+6, "*/")
+  endif
+  if expand("%:e") == 'cpp'
+    call setline(1, "#include<iostream>")
+    call append(line("."), "using namespace std;")
+    call append(line(".")+1, "")
+  endif
+  if &filetype == 'c'
         call setline(1,"#include<stdid.h>")
     endif
-	if expand("%:e") == 'h'
-		call setline(1, "#ifndef _".toupper(expand("%:r"))."_H")
-		call append(line("."), "#define _".toupper(expand("%:r"))."_H")
-		call append(line(".")+1, "#endif")
-	endif
+  if expand("%:e") == 'h'
+    call setline(1, "#ifndef _".toupper(expand("%:r"))."_H")
+    call append(line("."), "#define _".toupper(expand("%:r"))."_H")
+    call append(line(".")+1, "#endif")
+  endif
 endfun
 autocmd BufNewFile * normal G
 " ====F5 一键运行=====
