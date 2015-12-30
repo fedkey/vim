@@ -91,7 +91,6 @@ let s:settings.max_column = 120
 let s:settings.autocomplete_method = 'neocomplcache'
 let s:settings.enable_cursorcolumn = 0
 "let s:settings.colorscheme = 'jellybeans'
-
 "===========《判断是什么样的系统》============================"
 "选择操作系统(os){{{
 function! OSX()
@@ -107,11 +106,42 @@ endfunction
 
 set completeopt=menuone            "关闭顶部函数参数提示窗口
 set completeopt=longest,menu 
-
 "=========================语言与编码===================================
 set helplang=cn                 "中文帮助
-set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
-
+if WINDOWS()
+  set encoding=utf-8 fileencodings=ucs-bom,utf-9,cp936  "自动识别文件编码
+elseif LINUX()
+  set encoding=utf-8 fileencodings=ucs-bom,utf-8,cp936  "自动识别文件编码
+endif
+if WINDOWS()             "winodws系统下执行的配置
+  behave mswin
+  "解决consle输出乱码  
+  language messages zh_CN.utf-8  
+  set diffexpr=MyDiff()
+  function MyDiff()
+      let opt = '-a --binary '
+      if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+      if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+      let arg1 = v:fname_in
+      if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+      let arg2 = v:fname_new
+      if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+      let arg3 = v:fname_out
+      if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+      let eq = ''
+      if $VIMRUNTIME =~ ' '
+          if &sh =~ '\<cmd'
+              let cmd = '""' . $VIMRUNTIME . '\diff"'
+              let eq = '"'
+          else
+              let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+          endif
+      else
+          let cmd = $VIMRUNTIME . '\diff'
+      endif
+      silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+  endfunction
+endif
 "=================《公共配置》==================================
 set nocompatible                "不使用vi模式"
 set linespace=0                 "字符间插入的像素行数目
@@ -143,18 +173,18 @@ set wildignore=*.o,*~,*.pyc
 set cmdheight=2
 "=======================保存session=========================== 
 "保存session
-"if LINUX()
-"    autocmd VimLeave * mks!  ~/_session.vim
-"    if exists("session.vim")
-"        autocmd set  VimEnter * source! ~/_session.vim 
-"    endif
-"endif
-"if WINDOWS()
-"    autocmd VimLeave * mks!  $VIM/_session.vim
-"    if exists("session.vim")
-"        autocmd set  VimEnter * source! $VIM/_session.vim 
-"    endif
-"endif
+if LINUX()
+    autocmd VimLeave * mks!  ~/_session.vim
+    if exists("session.vim")
+        autocmd set  VimEnter * source! ~/_session.vim 
+    endif
+endif
+if WINDOWS()
+    autocmd VimLeave * mks!  $VIM/_session.vim
+    if exists("session.vim")
+        autocmd set  VimEnter * source! $VIM/_session.vim 
+    endif
+endif
 "" 打开上次关闭的文件
 " <C-o><C-o><cr>
 " 打开文件时，按照 viminfo 保存的上次关闭时的光标位置重新设置光标
@@ -166,7 +196,7 @@ set shiftwidth=4
 set autoindent
 set expandtab                       "将Tab自动转化成空格 [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
 set foldmethod=indent               "折叠方式是使用语法折叠
-"set foldlevel=100                  "折叠的层次是100,也就是打开所有的折叠
+set foldlevel=100                   "折叠的层次是100,也就是打开所有的折叠
 "web缩进
 au BufNewFile,BufRead *.js, *.html, *.css
     \ set tabstop=2
@@ -266,7 +296,7 @@ NeoBundle 'weynhamz/vim-plugin-minibufexpl'
 NeoBundle  'vim-scripts/bufexplorer.zip'    "显示buf列表
 let g:bufExplorerSortBy = 'name'           " 按文件名排序
 NeoBundle 'taglist.vim'                     "Tlist 函数列表
-NeoBundle 'wesleyche/SrcExpl'				"窗口文件着色
+NeoBundle 'wesleyche/SrcExpl'       "窗口文件着色
 nmap <F8> :SrcExplToggle<CR> 
 let g:SrcExpl_winHeight = 8 
 let g:SrcExpl_refreshTime = 100 
@@ -287,16 +317,16 @@ set tags=tags;                          " ';' 不能没有
 "文件,项目查找,搜索
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'kien/ctrlp.vim'                  "快速搜索/文件
-
 NeoBundle 'scrooloose/nerdtree'             "树形目录
-nmap <F9> :NERDTreeToggle<CR>               "F9调出
+nmap <F9>:NERDTree<CR>                      "F9调出
 let g:NERDTreeWinSize = 30
-let g:NERDTreeHight= 30
 let g:NERDTreeMouseMode = 1
 let g:NERDTreeMapToggleZoom = '<Space>'
+autocmd StdinReadPre * let s:std_in=1
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 set autochdir
 "========================================<IDE>========================================
-NeoBundle 'vim-scripts/sessionman.vim'		"session管理
+NeoBundle 'vim-scripts/sessionman.vim'    "session管理
 "q                        - close session list
 "o, <CR>, <2-LeftMouse>   - open session
 "d                        - delete session
@@ -377,7 +407,7 @@ nnoremap <F2> :GundoToggle<CR>
 " 开启自动预览 [随着光标在标签上的移动，顶部会出现一个实时的预览窗口]
 let g:tagbar_autopreview = 1
 NeoBundle 'tomasr/molokai'                  "molokai配色
-NeoBundle 'altercation/solarized'			"solarized配色
+NeoBundle 'altercation/solarized'     "solarized配色
 NeoBundle 'bling/vim-airline'               "状态栏美化
 NeoBundle  'Lokaltog/vim-powerline'         "状态栏增强
 NeoBundle 'itchyny/lightline.vim'           "状态栏横条美化
@@ -392,32 +422,32 @@ NeoBundle 'terryma/vim-multiple-cursors'     "多光标编辑
     
 " neocomplete补全
 if has('lua')
-	NeoBundle 'Shougo/neocomplete.vim'
-	" Disable AutoComplPop.
-	let g:acp_enableAtStartup = 0
-	" Use neocomplete.
-	let g:neocomplete#enable_at_startup = 1
-	" Use smartcase.
-	let g:neocomplete#enable_smart_case = 1
-	" Set minimum syntax keyword length.
-	let g:neocomplete#sources#syntax#min_keyword_length = 3
-	let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-	" Define keyword.
-	if !exists('g:neocomplete#keyword_patterns')
-		let g:neocomplete#keyword_patterns = {}
-	endif
-		let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-		" Plugin key-mappings.
-		inoremap <expr><C-g>     neocomplete#undo_completion()
-		inoremap <expr><C-l>     neocomplete#complete_common_string()
-	" <TAB>: completion.
-	inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-	" <C-h>, <BS>: close popup and delete backword char.
-	inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-	inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-	" Close popup by <Space>.
-	"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-	"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+  NeoBundle 'Shougo/neocomplete.vim'
+  " Disable AutoComplPop.
+  let g:acp_enableAtStartup = 0
+  " Use neocomplete.
+  let g:neocomplete#enable_at_startup = 1
+  " Use smartcase.
+  let g:neocomplete#enable_smart_case = 1
+  " Set minimum syntax keyword length.
+  let g:neocomplete#sources#syntax#min_keyword_length = 3
+  let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+  " Define keyword.
+  if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+  endif
+    let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+    " Plugin key-mappings.
+    inoremap <expr><C-g>     neocomplete#undo_completion()
+    inoremap <expr><C-l>     neocomplete#complete_common_string()
+  " <TAB>: completion.
+  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+  " <C-h>, <BS>: close popup and delete backword char.
+  inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+  inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+  " Close popup by <Space>.
+  "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+  "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 endif
 
 NeoBundle 'tomtom/tcomment_vim'             "快速注释
@@ -461,7 +491,7 @@ NeoBundle 'atom/vim-mode'                       "vim-mode
 NeoBundle 'ervandew/supertab'                   "按<tab>可实现代码提示
 
 "java ide
-NeoBundle 'vim-scripts/JavaRun'						"f5运行java
+NeoBundle 'vim-scripts/JavaRun'           "f5运行java
 NeoBundle 'artur-shaik/vim-javacomplete2'
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
 nmap <F4> <Plug>(JavaComplete-Imports-Add)
@@ -538,9 +568,16 @@ NeoBundle 'elzr/vim-json'                           "json高亮
 NeoBundle 'guileen/vim-node-dict'                   "Node.js 字典
 
 "==============《配色主题》==============
-"colorscheme gruvbox
-"colorscheme
-NeoBundle 'morhetz/gruvbox'
+"solarized
+colorscheme solarized
+if has('gui_running')
+    set background=dark
+    let g:solarized_bold=0    "default value is 1
+    let g:solarized_visibility="low"    "default value is normal
+let g:solarized_diffmode="high"    "default value is normal
+else
+    set background=light
+endif
 call neobundle#end()
 NeoBundleCheck
 filetype plugin indent on
