@@ -181,6 +181,9 @@ elseif LINUX()
     autocmd GUIEnter * winsize 167 41
 endif
 
+"==============《配色主题》==============
+colorscheme Monokai "主题文件在vim-colorschemes插件下
+
 set laststatus=2                            "总是显示状态栏
 set ruler                                   " 显示光标当前位置
 set cursorline                              "高亮所在行
@@ -246,8 +249,8 @@ set showtabline=2                       "以标签形式打开文件
 autocmd BufNewFile * normal G           "新建文件后 自动定位到文件末尾
 set nobackup                            "禁止生成临时文件
 setlocal noswapfile                     "不要生成swap文件
-set wrap                                "自动折行
-set textwidth=79
+"set wrap                                "自动折行
+"set textwidth=79
 "=========按键======="
 set backspace=indent,eol,start          "使用退格键
 
@@ -261,11 +264,8 @@ elseif LINUX()             "安装: git clone https://github.com/Shougo/neobundl
     call neobundle#begin(expand('~/.vim/bundle/'))   "插件安装位置
 endif
 NeoBundleFetch 'Shougo/neobundle.vim'       "必须启用
-
-NeoBundle 'weynhamz/vim-plugin-minibufexpl'
-NeoBundle  'vim-scripts/bufexplorer.zip'    "显示buf列表
-let g:bufExplorerSortBy = 'name'           " 按文件名排序
 NeoBundle 'taglist.vim'                     "Tlist 函数列表
+let g:Tlist_Use_Right_Window = 1
 NeoBundle 'wesleyche/SrcExpl'				"窗口文件着色
 nmap <F8> :SrcExplToggle<CR> 
 let g:SrcExpl_winHeight = 8 
@@ -287,7 +287,6 @@ set tags=tags;                          " ';' 不能没有
 "文件,项目查找,搜索
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'kien/ctrlp.vim'                  "快速搜索/文件
-
 NeoBundle 'scrooloose/nerdtree'             "树形目录
 nmap <F9> :NERDTreeToggle<CR>               "F9调出
 let g:NERDTreeWinSize = 30
@@ -356,10 +355,6 @@ noremap <SPACE> <Plug>(wildfire-fuel)
 vnoremap <C-SPACE> <Plug>(wildfire-water)
 let g:wildfire_objects = ["i'", 'i"', "i)", "i]", "i}", "ip", "it"]
 NeoBundle 'Raimondi/delimitMate'                "补全括号和引号
-NeoBundle 'mhinz/vim-startify'                 "显示上次编辑的文件列表
-":SLoad    load a session
-":SSave    save a session
-":SDelete  delete a session
 NeoBundle 'majutsushi/tagbar'                   "tagbar
 let g:tagbar_sort = 0                           "关闭排序[也就是按标签本身在文件中的位置排序]
 let g:tagbar_show_linenumbers = -1              "显示行号
@@ -367,7 +362,6 @@ let g:tagbar_width=30
 let g:tagbar_left = 1
 let g:NERDTreeChDirMode=1
 nmap <F8> :TagbarToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 NeoBundle 'vim-scripts/YankRing.vim'        "剪贴板增强
 
 " 撤销
@@ -435,15 +429,28 @@ NeoBundle 'msanders/snipmate.vim'           "spipmate代码片段
 "------ snipmate dependencies -------
 NeoBundle 'MarcWeber/vim-addon-mw-utils'
 
+NeoBundle 'powerline/fonts'
+           NeoBundle 'bling/vim-bufferline'
+           NeoBundle 'easymotion/vim-easymotion'
+           NeoBundle 'jistr/vim-nerdtree-tabs'
+           NeoBundle 'flazz/vim-colorschemes'
+           NeoBundle 'mbbill/undotree'
+           NeoBundle 'nathanaelkane/vim-indent-guides'
+           NeoBundle 'vim-scripts/restore_view.vim'
+           NeoBundle 'mhinz/vim-signify'
+           NeoBundle 'tpope/vim-abolish.git'
+           NeoBundle 'osyo-manga/vim-over'
+           NeoBundle 'kana/vim-textobj-user'
+           NeoBundle 'kana/vim-textobj-indent'
+           NeoBundle 'gcmt/wildfire.vim'
+
+
 "搜索
 NeoBundle 'grep.vim'
 " Fast navigation
 "-----------------
 NeoBundle 'edsono/vim-matchit'
 NeoBundle 'Lokaltog/vim-easymotion'
-
-"打开浏览器
-NeoBundle 'tyru/open-browser.vim'               "打开浏览器
 
 "项目管理
 NeoBundle 'tpope/vim-projectionist'             "项目创建
@@ -459,18 +466,6 @@ NeoBundle 'godlygeek/tabular'                   " Tabular: 自动对齐。
 NeoBundle 'shemerey/vim-project'                "项目管理
 NeoBundle 'atom/vim-mode'                       "vim-mode
 NeoBundle 'ervandew/supertab'                   "按<tab>可实现代码提示
-
-"java ide
-NeoBundle 'artur-shaik/vim-javacomplete2'
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
-nmap <F4> <Plug>(JavaComplete-Imports-Add)
-imap <F4> <Plug>(JavaComplete-Imports-Add)
-nmap <F5> <Plug>(JavaComplete-Imports-AddMissing)
-imap <F5> <Plug>(JavaComplete-Imports-AddMissing)
-nmap <F6> <Plug>(JavaComplete-Imports-RemoveUnused)
-imap <F6> <Plug>(JavaComplete-Imports-RemoveUnused)
-"let g:JavaComplete_JavaviLogfileDirectory = expand("%")
-let g:JavaComplete_JavaviDebug = 1
 
 "==================python IDE============
     NeoBundle 'vim-scripts/indentpython.vim'        "python自动缩进
@@ -511,7 +506,7 @@ NeoBundle 'Django-Projects'
 NeoBundle 'gregsexton/MatchTag', {'autoload':{'filetypes':['html','xml']}}
 NeoBundle 'mattn/emmet-vim'                         "emmet 速写
 let g:user_emmet_install_global = 0                                
-autocmd FileType html,jsp,css EmmetInstall           "只在html和css中启用
+autocmd FileType html,css EmmetInstall           "只在html和css中启用
 let g:user_emmet_expandabbr_key='<c-e>'              "更改默认按键
 let g:user_emmet_complete_tag=1
 let g:user_emmet_next_key='<c-n>'
@@ -535,15 +530,10 @@ NeoBundle 'nono/jquery.vim'                         "jquery高亮
 NeoBundle 'elzr/vim-json'                           "json高亮
 NeoBundle 'guileen/vim-node-dict'                   "Node.js 字典
 
-"==============《配色主题》==============
-"colorscheme gruvbox
-"colorscheme
-NeoBundle 'morhetz/gruvbox'
 call neobundle#end()
 NeoBundleCheck
 filetype plugin indent on
 syntax on
-
 
 "=============<自定义命令>================
 filetype plugin indent on                           " 开启自动检测文件类型
