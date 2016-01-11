@@ -1,3 +1,4 @@
+scriptencoding utf-8
 "-----------------      作者: 杨圣亮
 "-----------------      邮箱: fedkey@sina.com
 " -----------------     博客: http://huimingcc.com
@@ -108,6 +109,8 @@ endfunction
 set completeopt=menuone            "关闭顶部函数参数提示窗口
 set completeopt=longest,menu 
 
+filetype plugin indent on
+syntax on
 "=========================语言与编码===================================
 set helplang=cn                 "中文帮助
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
@@ -503,6 +506,23 @@ NeoBundle 'ervandew/supertab'                   "按<tab>可实现代码提示
 "django
 NeoBundle 'django_templates.vim'
 NeoBundle 'Django-Projects'
+
+" =====================java ide 
+NeoBundle 'vim-scripts/JavaBrowser'
+let g:Javabrowser_Use_Icon = 1
+let g:JavaBrowser_Use_Highlight_Tag = 1
+map <F11> :JavaBrowser<CR> 
+imap <F11> <ESC><F11>
+NeoBundle 'cespare/vjde'
+NeoBundle 'artur-shaik/vim-javacomplete2'    "java补全
+autocmd FileType java set omnifunc=javacomplete#Complete
+nmap <F4> <Plug>(JavaComplete-Imports-Add)
+imap <F4> <Plug>(JavaComplete-Imports-Add)
+nmap <F6> <Plug>(JavaComplete-Imports-AddMissing)
+imap <F6> <Plug>(JavaComplete-Imports-AddMissing)
+nmap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
+imap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
+
 "--------------------《web 插件》--------------------------------------
 NeoBundle 'gregsexton/MatchTag', {'autoload':{'filetypes':['html','xml']}}
 NeoBundle 'mattn/emmet-vim'                         "emmet 速写
@@ -533,8 +553,6 @@ NeoBundle 'guileen/vim-node-dict'                   "Node.js 字典
 
 call neobundle#end()
 NeoBundleCheck
-filetype plugin indent on
-syntax on
 
 "=============<自定义命令>================
 filetype plugin indent on                           " 开启自动检测文件类型
@@ -615,4 +633,3 @@ map <F5> :call RunScript()<CR>
 "技巧
 "文本单词中添加符号,如：wwflwlf/fwfwekfek kfwkeowofeowoee 想在wwflwlf/fwfwekfek前后加一个双引号
 "操作,光标定位到wwf处：vt空格 S"   以此类推,可以快速添加其他的符号 
-
