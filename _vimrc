@@ -182,7 +182,8 @@ elseif LINUX()
 endif
 
 "==============《配色主题》==============
-colorscheme Monokai "主题文件在vim-colorschemes插件下
+colorscheme molokai "主题文件在vim-colorschemes插件下
+set t_Co=256
 
 set laststatus=2                            "总是显示状态栏
 set ruler                                   " 显示光标当前位置
@@ -580,16 +581,14 @@ func SetTitle()
   endif
 
   if expand("%:e") == 'java'
-    call setline(1, "package ".expand("%").";")
-    call append(1, "import ".expand("%").".*;")
-    call append(2,"/*")
-    call append(3, "\"\"\"")
-    call append(4,"文件名:      ".expand("%"))
-    call append(5,"创建日期:    " . strftime("%Y-%m-%d"))
-    call append(6,"作者:        杨圣亮")
-    call append(7,"邮箱:        fedkey@sina.com")
-    call append(8,"博客：       huimingcc.com")
-    call append(9, "*/")
+      call setline(1,"/*")
+    call append(1, "\"\"\"")
+    call append(2,"文件名:      ".expand("%"))
+    call append(3,"创建日期:    " . strftime("%Y-%m-%d"))
+    call append(4,"作者:        杨圣亮")
+    call append(5,"邮箱:        fedkey@sina.com")
+    call append(6,"博客：       huimingcc.com")
+    call append(7, "*/")
   endif
 
   if &filetype == 'c'
@@ -608,7 +607,7 @@ if &filetype == 'python'
     exec "!python %"
 elseif &filetype == 'java'
     exec "!javac %"
-    exec "!java %/%<"
+    exec "!java %<"
 endif
 endfunc
 map <F5> :call RunScript()<CR>
@@ -616,3 +615,4 @@ map <F5> :call RunScript()<CR>
 "技巧
 "文本单词中添加符号,如：wwflwlf/fwfwekfek kfwkeowofeowoee 想在wwflwlf/fwfwekfek前后加一个双引号
 "操作,光标定位到wwf处：vt空格 S"   以此类推,可以快速添加其他的符号 
+
