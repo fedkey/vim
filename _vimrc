@@ -369,8 +369,6 @@ let g:tagbar_left = 1
 let g:NERDTreeChDirMode=1
 nmap <F8> :TagbarToggle<CR>
 NeoBundle 'vim-scripts/YankRing.vim'        "剪贴板增强
-NeoBundle 'thinca/vim-quickrun'				"快速运行java,php等
-nnoremap <F10> :QuickRun<cr>
 NeoBundle 'vim-scripts/vimgdb'				"gdb
 NeoBundle 'vim-scripts/Conque-GDB' 			
 " 撤销
