@@ -328,6 +328,8 @@ nmap <Leader>hv <Plug>GitGutterPreviewHunk
 NeoBundle 'mattn/gist-vim'
 let g:gist_detect_filetype = 1
 
+NeoBundle 'vim-scripts/Align'
+
 NeoBundle 'scrooloose/syntastic'            "语法检查
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -367,7 +369,10 @@ let g:tagbar_left = 1
 let g:NERDTreeChDirMode=1
 nmap <F8> :TagbarToggle<CR>
 NeoBundle 'vim-scripts/YankRing.vim'        "剪贴板增强
-
+NeoBundle 'thinca/vim-quickrun'				"快速运行java,php等
+nnoremap <F10> :QuickRun<cr>
+NeoBundle 'vim-scripts/vimgdb'				"gdb
+NeoBundle 'vim-scripts/Conque-GDB' 			
 " 撤销
 NeoBundle 'mbbill/undotree'                 "撤销树
 NeoBundle 'sjl/gundo.vim'                   "查看撤销树,类似版本控制系统,可恢复到某一阶段
@@ -417,6 +422,8 @@ if has('lua')
 	"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 	"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 endif
+NeoBundle 'languagetool-org/languagetool'
+NeoBundle 'kablamo/VimDebug'
 
 NeoBundle 'tomtom/tcomment_vim'             "快速注释
 NeoBundle 'kien/rainbow_parentheses.vim'    "挂号匹配高亮
@@ -466,11 +473,23 @@ vnoremap <silent> <C-T> <Esc>:Ydv<CR>
 nnoremap <silent> <C-T> <Esc>:Ydc<CR>
 noremap <leader>yd :Yde<CR>
 NeoBundle 'godlygeek/tabular'                   " Tabular: 自动对齐。
-
+NeoBundle 'vim-scripts/ZoomWin'					"窗口最大化
+" Press <c-w>o : 最大化当前窗口
+" Press <c-w>o again: 前一组窗口恢复
 NeoBundle 'shemerey/vim-project'                "项目管理
 NeoBundle 'atom/vim-mode'                       "vim-mode
 NeoBundle 'ervandew/supertab'                   "按<tab>可实现代码提示
 
+" ============ c/c++ ide
+NeoBundle 'vim-scripts/c.vim'
+NeoBundle 'Rip-Rip/clang_complete'
+NeoBundle 'vim-scripts/OmniCppComplete'
+NeoBundle 'vim-scripts/AutoComplPop'
+NeoBundle 'vim-scripts/cppcomplete'
+NeoBundle 'vim-scripts/a.vim'
+NeoBundle 'vim-scripts/Conque-Shell'
+NeoBundle 'hari-rangarajan/CCTree/'
+NeoBundle 'vim-scripts/cpp.vim'
 "==================python IDE============
     NeoBundle 'vim-scripts/indentpython.vim'        "python自动缩进
     NeoBundle 'klen/python-mode'
@@ -504,8 +523,20 @@ NeoBundle 'ervandew/supertab'                   "按<tab>可实现代码提示
             let g:pymode_rope = 0
         endif
 "django
-NeoBundle 'django_templates.vim'
 NeoBundle 'Django-Projects'
+"=============php ide
+NeoBundle 'shawncplus/phpcomplete.vim'
+let g:phpcomplete_relax_static_constraint = 1
+let g:phpcomplete_cache_taglists = 1
+let g:phpcomplete_mappings = {
+   \ 'jump_to_def': '<C-]>',
+   \ 'jump_to_def_split': '<C-W><C-]>',
+   \ 'jump_to_def_vsplit': '<C-W><C-\>',
+   \}
+let g:phpcomplete_remove_function_extensions = ['xslt_php_4']
+let g:phpcomplete_remove_constant_extensions = ['xslt_php_4']
+
+NeoBundle 'spf13/PIV'					"php集成
 
 " =====================java ide 
 NeoBundle 'vim-scripts/JavaBrowser'
