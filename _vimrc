@@ -573,11 +573,6 @@ func SetTitle()
   if &filetype == 'c'
         call setline(1,"#include<stdid.h>")
     endif
-  if expand("%:e") == 'h'
-    call setline(1, "#ifndef _".toupper(expand("%:r"))."_H")
-    call append(line("."), "#define _".toupper(expand("%:r"))."_H")
-    call append(line(".")+1, "#endif")
-  endif
 endfun
 autocmd BufNewFile * normal G
 " ====F5 一键运行=====
