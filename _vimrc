@@ -106,7 +106,7 @@ function! WINDOWS()
 endfunction
 "}}}
 
-set completeopt=menuone            "关闭顶部函数参数提示窗口
+"set completeopt=menuone            "关闭顶部函数参数提示窗口
 set completeopt=longest,menu 
 
 filetype plugin indent on
@@ -168,7 +168,7 @@ set softtabstop=4
 set shiftwidth=4
 set autoindent
 set expandtab                       "将Tab自动转化成空格 [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
-set foldmethod=indent               "折叠方式是使用语法折叠
+"set foldmethod=indent               "折叠方式是使用语法折叠
 "set foldlevel=100                  "折叠的层次是100,也就是打开所有的折叠
 "web缩进
 au BufNewFile,BufRead *.js, *.html, *.css
@@ -378,7 +378,6 @@ nnoremap <F2> :GundoToggle<CR>
 " 开启自动预览 [随着光标在标签上的移动，顶部会出现一个实时的预览窗口]
 let g:tagbar_autopreview = 1
 NeoBundle 'tomasr/molokai'                  "molokai配色
-NeoBundle 'altercation/solarized'			"solarized配色
 NeoBundle 'bling/vim-airline'               "状态栏美化
 NeoBundle  'Lokaltog/vim-powerline'         "状态栏增强
 NeoBundle 'itchyny/lightline.vim'           "状态栏横条美化
@@ -420,7 +419,6 @@ if has('lua')
 	"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 	"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 endif
-NeoBundle 'languagetool-org/languagetool'
 NeoBundle 'kablamo/VimDebug'
 
 NeoBundle 'tomtom/tcomment_vim'             "快速注释
@@ -435,25 +433,12 @@ NeoBundle 'vim-scripts/matchit.zip'         "\ %匹配成对的标签，跳转
 
 "代码块
 NeoBundle 'msanders/snipmate.vim'           "spipmate代码片段
-"------ snipmate dependencies -------
-NeoBundle 'MarcWeber/vim-addon-mw-utils'
 
 NeoBundle 'powerline/fonts'
            NeoBundle 'bling/vim-bufferline'
-           NeoBundle 'easymotion/vim-easymotion'
            NeoBundle 'jistr/vim-nerdtree-tabs'
            NeoBundle 'flazz/vim-colorschemes'
-           NeoBundle 'mbbill/undotree'
            NeoBundle 'nathanaelkane/vim-indent-guides'
-           NeoBundle 'vim-scripts/restore_view.vim'
-           NeoBundle 'mhinz/vim-signify'
-           NeoBundle 'tpope/vim-abolish.git'
-           NeoBundle 'osyo-manga/vim-over'
-           NeoBundle 'kana/vim-textobj-user'
-           NeoBundle 'kana/vim-textobj-indent'
-           NeoBundle 'gcmt/wildfire.vim'
-
-
 "搜索
 NeoBundle 'grep.vim'
 " Fast navigation
@@ -480,19 +465,13 @@ NeoBundle 'ervandew/supertab'                   "按<tab>可实现代码提示
 
 " ============ c/c++ ide
 NeoBundle 'vim-scripts/c.vim'
-NeoBundle 'Rip-Rip/clang_complete'
 NeoBundle 'vim-scripts/OmniCppComplete'
 NeoBundle 'vim-scripts/AutoComplPop'
-NeoBundle 'vim-scripts/cppcomplete'
 NeoBundle 'vim-scripts/a.vim'
-NeoBundle 'vim-scripts/Conque-Shell'
-NeoBundle 'hari-rangarajan/CCTree/'
 NeoBundle 'vim-scripts/cpp.vim'
 "==================python IDE============
     NeoBundle 'vim-scripts/indentpython.vim'        "python自动缩进
-    NeoBundle 'klen/python-mode'
     NeoBundle 'yssource/python.vim'
-    NeoBundle 'python_match.vim'
     NeoBundle 'pythoncomplete'
     "快速跳转
     NeoBundle 'easymotion/vim-easymotion'
@@ -509,54 +488,11 @@ NeoBundle 'vim-scripts/cpp.vim'
     "pip install tox pytest
     let g:jedi#use_tabs_not_buffers = 1
 
- " PyMode {
-        " Disable if python support not present
-        if !has('python') && !has('python3')
-            let g:pymode = 0
-        endif
-        if isdirectory(expand("~/.vim/bundle/python-mode"))
-            let g:pymode_lint_checkers = ['pyflakes']
-            let g:pymode_trim_whitespaces = 0
-            let g:pymode_options = 0
-            let g:pymode_rope = 0
-        endif
-"django
-NeoBundle 'Django-Projects'
-"=============php ide
-NeoBundle 'shawncplus/phpcomplete.vim'
-let g:phpcomplete_relax_static_constraint = 1
-let g:phpcomplete_cache_taglists = 1
-let g:phpcomplete_mappings = {
-   \ 'jump_to_def': '<C-]>',
-   \ 'jump_to_def_split': '<C-W><C-]>',
-   \ 'jump_to_def_vsplit': '<C-W><C-\>',
-   \}
-let g:phpcomplete_remove_function_extensions = ['xslt_php_4']
-let g:phpcomplete_remove_constant_extensions = ['xslt_php_4']
-
-NeoBundle 'spf13/PIV'					"php集成
-
-" =====================java ide 
-NeoBundle 'vim-scripts/JavaBrowser'
-let g:Javabrowser_Use_Icon = 1
-let g:JavaBrowser_Use_Highlight_Tag = 1
-map <F11> :JavaBrowser<CR> 
-imap <F11> <ESC><F11>
-NeoBundle 'cespare/vjde'
-NeoBundle 'artur-shaik/vim-javacomplete2'    "java补全
-autocmd FileType java set omnifunc=javacomplete#Complete
-nmap <F4> <Plug>(JavaComplete-Imports-Add)
-imap <F4> <Plug>(JavaComplete-Imports-Add)
-nmap <F6> <Plug>(JavaComplete-Imports-AddMissing)
-imap <F6> <Plug>(JavaComplete-Imports-AddMissing)
-nmap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
-imap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
-
 "--------------------《web 插件》--------------------------------------
 NeoBundle 'gregsexton/MatchTag', {'autoload':{'filetypes':['html','xml']}}
 NeoBundle 'mattn/emmet-vim'                         "emmet 速写
 let g:user_emmet_install_global = 0                                
-autocmd FileType html,css EmmetInstall           "只在html和css中启用
+autocmd FileType html,css EmmetInstall              "只在html和css中启用
 let g:user_emmet_expandabbr_key='<c-e>'              "更改默认按键
 let g:user_emmet_complete_tag=1
 let g:user_emmet_next_key='<c-n>'
@@ -564,21 +500,17 @@ let g:user_emmet_prev_key='<c-p>'
 NeoBundle 'docunext/closetag.vim'                    "关闭标签
 NeoBundle 'othree/xml.vim'                           "xml插件
 NeoBundle 'ap/vim-css-color', {'autoload':{'filetypes':['css','scss','sass','less','styl']}}
-
 NeoBundleLazy 'groenewege/vim-less', {'autoload':{'filetypes':['less']}}
 NeoBundleLazy 'cakebaker/scss-syntax.vim', {'autoload':{'filetypes':['scss','sass']}}
 NeoBundleLazy 'ap/vim-css-color', {'autoload':{'filetypes':['css','scss','sass','less','styl']}}
 NeoBundleLazy 'othree/html5.vim', {'autoload':{'filetypes':['html']}}
 NeoBundleLazy 'wavded/vim-stylus', {'autoload':{'filetypes':['styl']}}
-NeoBundleLazy 'digitaltoad/vim-jade', {'autoload':{'filetypes':['jade']}}
 NeoBundleLazy 'juvenn/mustache.vim', {'autoload':{'filetypes':['mustache']}}
 NeoBundleLazy 'gregsexton/MatchTag', {'autoload':{'filetypes':['html','xml']}}
 
 "----------javascript-----------------------
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'nono/jquery.vim'                         "jquery高亮
-NeoBundle 'elzr/vim-json'                           "json高亮
-NeoBundle 'guileen/vim-node-dict'                   "Node.js 字典
 
 call neobundle#end()
 NeoBundleCheck
@@ -650,13 +582,19 @@ endfun
 autocmd BufNewFile * normal G
 " ====F5 一键运行=====
 func! RunScript()
-if &filetype == 'python'
-    exec "!python %"
-elseif &filetype == 'java'
-    exec "!javac %"
-    exec "!java %<"
-endif
+    if &filetype == 'python'
+        exec "!python %"
+    elseif &filetype == 'c'
+        exec "w"
+        exec "!gcc % -o %<"
+        exec "! ./%<"
+    elseif &filetype == 'cpp'
+        exec "w"
+        exec "!g++ % -o %<"
+        exec "! ./%<"
+    endif
 endfunc
+
 map <F5> :call RunScript()<CR>
 
 "技巧
