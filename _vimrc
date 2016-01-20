@@ -472,7 +472,7 @@ NeoBundle 'vim-scripts/cpp.vim'
 "==================python IDE============
     NeoBundle 'vim-scripts/indentpython.vim'        "python自动缩进
     NeoBundle 'yssource/python.vim'
-    NeoBundle 'pythoncomplete'
+    "NeoBundle 'pythoncomplete'
     "快速跳转
     NeoBundle 'easymotion/vim-easymotion'
     " Gif config
@@ -580,13 +580,25 @@ func! RunScript()
     if &filetype == 'python'
         exec "!python %"
     elseif &filetype == 'c'
-        exec "w"
-        exec "!gcc % -o %<"
-        exec "! ./%<"
+		if LINUX()
+			exec "w"
+			exec "!gcc % -o %<"
+			exec "! ./%<"
+		if WINDOWS()
+			exec "w"
+			exec "!gcc % -o %<"
+			exec "!%<.exe"
+		endif
+		
     elseif &filetype == 'cpp'
-        exec "w"
-        exec "!g++ % -o %<"
-        exec "! ./%<"
+		if LINUX()
+			exec "w"
+			exec "!g++ % -o %<"
+			exec "! ./%<"
+		elseif WINDOWS()
+			exec "!g++ % -o %<"
+			exec "! %<.exe"
+		endif
     endif
 endfunc
 
