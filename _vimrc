@@ -342,9 +342,9 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_style_error_symbol = '✠'
-let g:syntastic_warning_symbol = '∆'
+let g:syntastic_error_symbol = '?'
+let g:syntastic_style_error_symbol = '?'
+let g:syntastic_warning_symbol = '?'
 let g:syntastic_style_warning_symbol = '≈'
 
 NeoBundle 'syngan/vim-vimlint', {
@@ -570,7 +570,7 @@ func SetTitle()
     call append(7, "*/")
   endif
 
-  if &filetype == 'c'
+	if &filetype == 'c'
         call setline(1,"#include<stdid.h>")
     endif
 endfun
@@ -584,7 +584,7 @@ func! RunScript()
 			exec "w"
 			exec "!gcc % -o %<"
 			exec "! ./%<"
-		if WINDOWS()
+		elseif WINDOWS()
 			exec "w"
 			exec "!gcc % -o %<"
 			exec "!%<.exe"
