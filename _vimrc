@@ -8,36 +8,20 @@ scriptencoding utf-8
 "sudo yum install build-essential cmake python-dev  #编译YCM自动补全插件依赖
 "sudo yum install silversearcher-ag
 "软件安装
-"python2.7  许多插件依赖python2.7,必装
-"java       sudo yum install openjdk-8-jdk 或者自行到甲骨文下载java进行安装
+"python2.7  windows自行安装,linux自带
+"java       [http://www.java.com]
 "npm        sudo yum install npm
 "clang      sudo yum install clang
 "cmake      sudo yum install cmake
 "python-dev sudo yum install pythoon-dev
 "gvim       sudo yum install vim-gtk
-" Ctrl + K                   --光标移上一行末尾
-" Ctrl + H                   --光标移行首
-" Ctrl + L                   --光标移行尾
-" Ctrl + Z                   --取代ESC模式键 [和Lingos快捷键有冲突]
-" Ctrl + S                   --保存文件
-" Ctrl + C                   --编译 [支持C/C++、Java]
-" Ctrl + R                   --运行 [支持C/C++、Java、Lua、Perl、Python、Ruby]
 " Ctrl + ]                   --转到函数定义
 " Ctrl + T                   --返回调用函数
-" Ctrl + E                   --添加注释 [插入模式] [添加的是C语言的多行注释，所以适用于C/C++/Java等]
-" Ctrl + E                   --一步加载语法模板和作者、时间信息 [非插入模式]
-" <C-P>                      --单词补全
-" <C-X><C-L>                 --整行补全
-" Tab键                      --插入模式下的全功能语法结构补全 [snipMate插件]
-" wm                         --开启文档浏览窗口
-" \ww                        --进入vimWiki模式
+" Tab键                      --插入模式下的全功能语法结构补全
 " za                         --打开或关闭当前折叠
 " zM                         --关闭所有折叠
 " zR                         --打开所有折叠
-" :set syntax=cpp            --手动选择语法高亮 [或 :set filetype=cpp]
-" :%!xxd                     --转储二进制文件，以十六进制形式显示
-" :%!xxd -r                  --还原二进制文件
-"使用Python
+"使用Python语法检测
 "sudo pip install pyflakes
 "sudo pip install pylint
 "sudo pip install pep8
@@ -104,7 +88,7 @@ let s:settings.max_column = 120
 let s:settings.enable_cursorcolumn = 0
 "let s:settings.colorscheme = 'jellybeans'
 
-"===========《判断是什么样的系统》============================"
+"===========《判断是什么样的系统》============================
 "选择操作系统(os){{{
 function! OSX()
     return has('macunix')
@@ -121,11 +105,11 @@ set completeopt=menuone            "关闭顶部函数参数提示窗口
 set completeopt=longest,menu 
 filetype plugin indent on
 syntax on
-"=========================语言与编码===================================
+"=========================语言与编码===========================
 set helplang=cn                 "中文帮助
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 set termencoding=utf-8  
-"=================《公共配置》==================================
+"=================《公共配置》=================================
 set nocompatible                "不使用vi模式"
 set linespace=0                 "字符间插入的像素行数目
 set nu
@@ -221,7 +205,7 @@ elseif LINUX()
     set guifont=DroidSansMono\ 11
 endif
 
-" ==============《根据后缀名指定文件类型》=================
+" ==============《根据后缀名指定文件类型》================
 au BufRead,BufNewFile *.h             setlocal ft=c
 au BufRead,BufNewFile *.i             setlocal ft=c
 au BufRead,BufNewFile *.m             setlocal ft=objc
@@ -302,7 +286,7 @@ NeoBundle 'vim-scripts/minibufexplorerpp'
     let g:miniBufExplModSelTarget = 1  
     let g:miniBufExplMoreThanOne=0  
 
-"========================================<IDE>========================================
+"========================================<IDE>========================
 NeoBundle 'vim-scripts/sessionman.vim'		"session管理
 let g:session_menu = 1
 "q                        - close session list
@@ -591,7 +575,8 @@ func SetTitle()
     endif
 endfun
 autocmd BufNewFile * normal G
-" ====F5 一键运行=====
+
+"====F5 一键运行=====
 func! RunScript()
     if &filetype == 'python'
         exec "!python %"
@@ -617,5 +602,4 @@ func! RunScript()
 		endif
     endif
 endfunc
-
 map <F5> :call RunScript()<CR>
