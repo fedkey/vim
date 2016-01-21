@@ -1,15 +1,15 @@
 scriptencoding utf-8
-"-----------------      作者: 杨圣亮
+"-----------------      作者: fedkey
 "-----------------      邮箱: fedkey@sina.com
 " -----------------     博客: http://huimingcc.com
 "系统依赖
-"linux-fedora
+"linux-debian fedora ubuntu
 "sudo yum install ctags
 "sudo yum install build-essential cmake python-dev  #编译YCM自动补全插件依赖
 "sudo yum install silversearcher-ag
 "软件安装
 "python2.7  许多插件依赖python2.7,必装
-"java       sudo yum install openjdk-8-jdk
+"java       sudo yum install openjdk-8-jdk 或者自行到甲骨文下载java进行安装
 "npm        sudo yum install npm
 "clang      sudo yum install clang
 "cmake      sudo yum install cmake
@@ -42,8 +42,17 @@ scriptencoding utf-8
 "sudo pip install pylint
 "sudo pip install pep8
 
+"#######################教程#########################################################################
+"   # 一："技巧
+"   # 1.文本单词中添加符号,如：wwflwlf/fwfwekfek kfwkeowofeowoee 想在wwflwlf/fwfwekfek前后加一个双引号#
+"   # 操作,光标定位到wwf处：vt空格 S"   以此类推,可以快速添加其他的符号
+"   2.进入vim,按两次c-o 即可载入上次关闭vim时编辑的文件
+"
+
+"####################################################################################################
+
 "快捷键定制,双键取自emacs按键方式
-"双按键示例 nmap模式
+"双键示例 nmap模式
 " nmap <C-x><C-s> :w!<CR>
 " 插入模式
 " imap <C-x><C-s> <ESC> :w!<cr>
@@ -83,13 +92,11 @@ nmap ,ox :%!xxd<CR>
 " 恢复原始制式
 nmap ,-ox :%!xxd -r<CR>
 
-
 "vim 设置{{{
 "initialize default settings
 let s:settings = {}
 let s:settings.default_indent = 2
 let s:settings.max_column = 120
-let s:settings.autocomplete_method = 'neocomplcache'
 let s:settings.enable_cursorcolumn = 0
 "let s:settings.colorscheme = 'jellybeans'
 
@@ -106,15 +113,14 @@ function! WINDOWS()
 endfunction
 "}}}
 
-"set completeopt=menuone            "关闭顶部函数参数提示窗口
+set completeopt=menuone            "关闭顶部函数参数提示窗口
 set completeopt=longest,menu 
-
 filetype plugin indent on
 syntax on
 "=========================语言与编码===================================
 set helplang=cn                 "中文帮助
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
-
+set termencoding=utf-8  
 "=================《公共配置》==================================
 set nocompatible                "不使用vi模式"
 set linespace=0                 "字符间插入的像素行数目
@@ -144,22 +150,7 @@ set wildmenu
 set wildignore=*.o,*~,*.pyc
 
 set cmdheight=2
-"=======================保存session=========================== 
-"保存session
-"if LINUX()
-"    autocmd VimLeave * mks!  ~/_session.vim
-"    if exists("session.vim")
-"        autocmd set  VimEnter * source! ~/_session.vim 
-"    endif
-"endif
-"if WINDOWS()
-"    autocmd VimLeave * mks!  $VIM/_session.vim
-"    if exists("session.vim")
-"        autocmd set  VimEnter * source! $VIM/_session.vim 
-"    endif
-"endif
-"" 打开上次关闭的文件
-" <C-o><C-o><cr>
+
 " 打开文件时，按照 viminfo 保存的上次关闭时的光标位置重新设置光标
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 "================《缩进设置》===================================
@@ -291,8 +282,10 @@ set tags=tags;                          " ';' 不能没有
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'kien/ctrlp.vim'                  "快速搜索/文件
 NeoBundle 'scrooloose/nerdtree'             "树形目录
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 nmap <F9> :NERDTreeToggle<CR>               "F9调出
-let g:NERDTreeWinSize = 30
+let g:NERDTreeWinSize = 22
 let g:NERDTreeHight= 30
 let g:NERDTreeMouseMode = 1
 let g:NERDTreeMapToggleZoom = '<Space>'
@@ -307,6 +300,7 @@ NeoBundle 'vim-scripts/minibufexplorerpp'
 
 "========================================<IDE>========================================
 NeoBundle 'vim-scripts/sessionman.vim'		"session管理
+let g:session_menu = 1
 "q                        - close session list
 "o, <CR>, <2-LeftMouse>   - open session
 "d                        - delete session
@@ -335,24 +329,11 @@ nmap <Leader>hv <Plug>GitGutterPreviewHunk
 NeoBundle 'mattn/gist-vim'
 let g:gist_detect_filetype = 1
 
-NeoBundle 'vim-scripts/Align'
-
 NeoBundle 'scrooloose/syntastic'            "语法检查
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-"java
-let g:syntastic_java_javac_delete_output = 0
-let g:syntastic_java_javac_config_file_enabled = 0
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_error_symbol = '?'
-let g:syntastic_style_error_symbol = '?'
-let g:syntastic_warning_symbol = '?'
-let g:syntastic_style_warning_symbol = '≈'
 
 NeoBundle 'syngan/vim-vimlint', {
             \ 'depends' : 'ynkdir/vim-vimlparser'}
@@ -554,7 +535,7 @@ func SetTitle()
   "如果文件类型为.sh文件
   if &filetype == 'sh'
     call setline(1,"\#!/bin/bash")
-        call append(1,"# 作者:" .    "  杨圣亮")
+        call append(1,"# 作者:" .    "  fedkey")
         call append(2,"# 邮箱:" .    "  fedkey@sina.com")
         call append(3,"# 博客:" .    "  huimingcc.com")
         call append(4,"# 创建日期:" .strftime("%Y-%m-%d"))
@@ -565,7 +546,7 @@ func SetTitle()
         call append(2, "\"\"\"")
     call append(3,"文件名:      ".expand("%"))
         call append(4,"创建日期:    " . strftime("%Y-%m-%d"))
-      call append(5,"作者:        杨圣亮")
+      call append(5,"作者:        fedkey")
       call append(6,"邮箱:        fedkey@sina.com")
         call append(7,"博客：       huimingcc.com")
         call append(8, "\"\"\"")
@@ -578,7 +559,7 @@ func SetTitle()
     call setline(1, "<?php")
     call append(line("."),"/*")
     call append(line(".")+1,"文件名:  ".expand("%"))
-    call append(line(".")+2,"作者:    杨圣亮")
+    call append(line(".")+2,"作者:    fedkey")
     call append(line(".")+3,"邮箱:    fedkey@sina.com ")
     call append(line(".")+4,"博客:    huimingcc.com ")
     call append(line(".")+5,"创建日期:" . strftime("%Y-%m-%d"))
@@ -595,7 +576,7 @@ func SetTitle()
     call append(1, "\"\"\"")
     call append(2,"文件名:      ".expand("%"))
     call append(3,"创建日期:    " . strftime("%Y-%m-%d"))
-    call append(4,"作者:        杨圣亮")
+    call append(4,"作者:        fedkey")
     call append(5,"邮箱:        fedkey@sina.com")
     call append(6,"博客：       huimingcc.com")
     call append(7, "*/")
@@ -634,7 +615,3 @@ func! RunScript()
 endfunc
 
 map <F5> :call RunScript()<CR>
-
-"技巧
-"文本单词中添加符号,如：wwflwlf/fwfwekfek kfwkeowofeowoee 想在wwflwlf/fwfwekfek前后加一个双引号
-"操作,光标定位到wwf处：vt空格 S"   以此类推,可以快速添加其他的符号
