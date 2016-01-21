@@ -185,7 +185,7 @@ elseif LINUX()
 endif
 
 "==============《配色主题》==============
-colorscheme zenburn "主题文件在vim-colorschemes插件下
+colorscheme blackboard "主题文件在vim-colorschemes插件下
 set t_Co=256
 
 set laststatus=2                            "总是显示状态栏
@@ -637,4 +637,4 @@ map <F5> :call RunScript()<CR>
 
 "技巧
 "文本单词中添加符号,如：wwflwlf/fwfwekfek kfwkeowofeowoee 想在wwflwlf/fwfwekfek前后加一个双引号
-"操作,光标定位到wwf处：vt空格 S"   以此类推,可以快速添加其他的符号 
+"操作,光标定位到wwf处：vt空格 S"   以此类推,可以快速添加其他的符号
