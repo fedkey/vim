@@ -185,7 +185,7 @@ elseif LINUX()
 endif
 
 "==============《配色主题》==============
-colorscheme molokai "主题文件在vim-colorschemes插件下
+colorscheme zenburn "主题文件在vim-colorschemes插件下
 set t_Co=256
 
 set laststatus=2                            "总是显示状态栏
