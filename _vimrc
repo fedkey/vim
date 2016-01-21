@@ -278,7 +278,6 @@ let g:SrcExpl_jumpKey = "<ENTER>"
 let g:SrcExpl_gobackKey = "<SPACE>" 
 let g:SrcExpl_pluginList = [ 
         \ "__Tag_List__", 
-        \ "_NERD_tree_" 
     \ ] 
 let g:SrcExpl_searchLocalDef = 1 
 let g:SrcExpl_isUpdateTags = 0 
@@ -298,6 +297,14 @@ let g:NERDTreeHight= 30
 let g:NERDTreeMouseMode = 1
 let g:NERDTreeMapToggleZoom = '<Space>'
 set autochdir
+"界面
+NeoBundle 'vim-scripts/minibufexplorerpp'
+    let g:miniBufExplMapWindowNavVim = 1   
+    let g:miniBufExplMapWindowNavArrows = 1   
+    let g:miniBufExplMapCTabSwitchBufs = 1   
+    let g:miniBufExplModSelTarget = 1  
+    let g:miniBufExplMoreThanOne=0  
+
 "========================================<IDE>========================================
 NeoBundle 'vim-scripts/sessionman.vim'		"session管理
 "q                        - close session list
@@ -419,7 +426,23 @@ if has('lua')
 	"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 	"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 endif
+"调试
 NeoBundle 'kablamo/VimDebug'
+NeoBundle 'vim-scripts/Conque-GDB'
+let g:ConqueTerm_PyVersion = 2
+let g:ConqueTerm_StartMessages = 1
+let g:ConqueTerm_CloseOnEnd = 0
+let g:ConqueTerm_Color = 1
+let g:ConqueTerm_FastMode = 0
+
+"---------------------------------
+"在 vim 中导入 shell 的输出
+NeoBundle 'vim-scripts/Conque-Shell'
+let g:ConqueTerm_TERM ='xterm'
+nmap <Leader>sh :ConqueTerm bash<CR>
+nmap <Leader>shs :ConqueTermSplit bash<CR>
+nmap <Leader>shv :ConqueTermVSplit bash<CR>
+nmap <Leader>sht :ConqueTermTab bash<CR>
 
 NeoBundle 'tomtom/tcomment_vim'             "快速注释
 NeoBundle 'kien/rainbow_parentheses.vim'    "挂号匹配高亮
@@ -442,6 +465,14 @@ NeoBundle 'powerline/fonts'
 "搜索
 NeoBundle 'grep.vim'
 " Fast navigation
+NeoBundle 'vim-scripts/cscope.vim'  "交互式查询语言符号功能查询哪些地方使用某个变量或调用某个函数
+"为了界面更好看，可以把Cscope的查找结果输出到quickfix窗口
+set cscopequickfix=s-,c-,d-,i-,t-,e-  
+"使用Cscope需要生成cscope数据库文件。进入项目代码根目录运行命令：
+"cscope -Rbq -f path/xxx.out  
+"  Ctrl-\ s 查找所有当前光标所在符号出现过位置
+"  Ctrl-\ c 查找所有调用当前光标所在函数的函数
+
 "-----------------
 NeoBundle 'edsono/vim-matchit'
 NeoBundle 'Lokaltog/vim-easymotion'
