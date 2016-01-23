@@ -583,22 +583,22 @@ func! RunScript()
     elseif &filetype == 'c'
 		if LINUX()
 			exec "w"
-			exec "!gcc % -o %<"
+			exec "!gcc -g % -o %<"
 			exec "! ./%<"
-		elseif WINDOWS()
+		elseif WINDOWS() "添加dgb
 			exec "w"
-			exec "!gcc % -o %<"
-			exec "!%<.exe"
+			exec "!gcc -g % -o %<"
+			exec "!%<"
 		endif
 		
     elseif &filetype == 'cpp'
 		if LINUX()
 			exec "w"
-			exec "!g++ % -o %<"
+			exec "!gcc -g % -o %<"
 			exec "! ./%<"
 		elseif WINDOWS()
-			exec "!g++ % -o %<"
-			exec "! %<.exe"
+			exec "!g++ -g % -o %<"
+			exec "! %<"
 		endif
     endif
 endfunc
