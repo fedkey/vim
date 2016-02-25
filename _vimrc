@@ -101,6 +101,43 @@ function! WINDOWS()
 endfunction
 "}}}
 
+if WINDOWS()
+	set nocompatible
+	source $VIMRUNTIME/vimrc_example.vim
+	source $VIMRUNTIME/mswin.vim
+	behave mswin
+
+	set diffexpr=MyDiff()
+	function MyDiff()
+  	let opt = '-a --binary '
+  	if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+  	if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+  	let arg1 = v:fname_in
+  	if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+  	let arg2 = v:fname_new
+  	if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+  	let arg3 = v:fname_out
+  	if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+  	if $VIMRUNTIME =~ ' '
+    	if &sh =~ '\<cmd'
+      		if empty(&shellxquote)
+        		let l:shxq_sav = ''
+        		set shellxquote&
+      		endif
+      		let cmd = '"' . $VIMRUNTIME . '\diff"'
+    	else
+      		let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+    	endif
+  	else
+    		let cmd = $VIMRUNTIME . '\diff'
+  	endif
+  	silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
+  	if exists('l:shxq_sav')
+    		let &shellxquote=l:shxq_sav
+  	endif
+  endfunction
+endif
+
 set completeopt=menuone            "关闭顶部函数参数提示窗口
 set completeopt=longest,menu 
 filetype plugin indent on
@@ -171,7 +208,7 @@ set laststatus=2                            "总是显示状态栏
 set ruler                                   " 显示光标当前位置
 set cursorline                              "高亮所在行
 "set cursorcolumn                           "高亮当前列
-set guioptions-=T                           "隐藏工具栏
+"set guioptions-=T                           "隐藏工具栏
 "set guioptions-=m                          "隐藏菜单
 set cmdheight=1                             " 命令行（在状态行下）的高度，默认为1
 set showmatch                               "高亮显示[] {} ()配对
@@ -346,7 +383,7 @@ let g:NERDTreeChDirMode=1
 nmap <F8> :TagbarToggle<CR>
 NeoBundle 'vim-scripts/YankRing.vim'        "剪贴板增强
 NeoBundle 'vim-scripts/vimgdb'				"gdb
-NeoBundle 'vim-scripts/Conque-GDB' 			
+ 			
 " 撤销
 NeoBundle 'mbbill/undotree'                 "撤销树
 NeoBundle 'sjl/gundo.vim'                   "查看撤销树,类似版本控制系统,可恢复到某一阶段
@@ -397,12 +434,7 @@ if has('lua')
 endif
 "调试
 NeoBundle 'kablamo/VimDebug'
-NeoBundle 'vim-scripts/Conque-GDB'
-let g:ConqueTerm_PyVersion = 2
-let g:ConqueTerm_StartMessages = 1
-let g:ConqueTerm_CloseOnEnd = 0
-let g:ConqueTerm_Color = 1
-let g:ConqueTerm_FastMode = 0
+
 
 "---------------------------------
 "在 vim 中导入 shell 的输出
@@ -451,10 +483,10 @@ NeoBundle 'tpope/vim-projectionist'             "项目创建
 "添加环绕
 NeoBundle 'tpope/vim-surround'                  "快速给词加环绕符号,例如引号
 
-NeoBundle 'ianva/vim-youdao-translater'         "有道翻译
-vnoremap <silent> <C-T> <Esc>:Ydv<CR>
-nnoremap <silent> <C-T> <Esc>:Ydc<CR>
-noremap <leader>yd :Yde<CR>
+"NeoBundle 'ianva/vim-youdao-translater'         "有道翻译"
+"vnoremap <silent> <C-T> <Esc>:Ydv<CR>
+"nnoremap <silent> <C-T> <Esc>:Ydc<CR>
+"noremap <leader>yd :Yde<CR>
 NeoBundle 'godlygeek/tabular'                   " Tabular: 自动对齐。
 NeoBundle 'vim-scripts/ZoomWin'					"窗口最大化
 " Press <c-w>o : 最大化当前窗口
@@ -603,3 +635,4 @@ func! RunScript()
     endif
 endfunc
 map <F5> :call RunScript()<CR>
+
