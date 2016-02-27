@@ -495,6 +495,25 @@ NeoBundle 'shemerey/vim-project'                "项目管理
 NeoBundle 'atom/vim-mode'                       "vim-mode
 NeoBundle 'ervandew/supertab'                   "按<tab>可实现代码提示
 
+"golang
+NeoBundle 'fatih/vim-go'
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_interfaces = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_fmt_fail_silently = 1
+"自动保存
+let g:go_fmt_autosave = 1
+"go 检查
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+
 " ============ c/c++ ide
 NeoBundle 'vim-scripts/c.vim'
 NeoBundle 'vim-scripts/OmniCppComplete'
@@ -635,4 +654,3 @@ func! RunScript()
     endif
 endfunc
 map <F5> :call RunScript()<CR>
-
