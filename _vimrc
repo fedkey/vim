@@ -651,6 +651,16 @@ func! RunScript()
 			exec "!g++ -g % -o %<"
 			exec "! %<"
 		endif
+		"golang
+	elseif &filetype == 'go'
+		if LINUX()
+			exec "w"
+			exec "!go build %"
+			exec "! ./%<"
+		elseif WINDOWS()
+			exec "!go build %"
+			exec "!%<"
+		endif
     endif
 endfunc
 map <F5> :call RunScript()<CR>
