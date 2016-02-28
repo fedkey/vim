@@ -5,12 +5,14 @@
 
 
 ## 支持的语言类型
+* c/c++
 * javascript
 * html
 * css 
 * python
 * php
 * shell
+* go语言
 
 ## 快捷键
 * 按照emacs快捷键的双键模式定义的一整套快捷键，用过emacs的人可以快速上手。当然，没有使用过emacs的人也不用担心，放着无害，永远不会触发。
