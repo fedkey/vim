@@ -88,6 +88,9 @@ let s:settings.max_column = 120
 let s:settings.enable_cursorcolumn = 0
 "let s:settings.colorscheme = 'jellybeans'
 
+" 修改 _vimrc 后自动生效 
+autocmd! bufwritepost _vimrc source %
+
 "===========《判断是什么样的系统》============================
 "选择操作系统(os){{{
 function! OSX()
@@ -138,17 +141,17 @@ if WINDOWS()
   endfunction
 endif
 
-set completeopt=menuone            "关闭顶部函数参数提示窗口
-set completeopt=longest,menu 
+"set completeopt=menuone            "关闭函数preview预览窗口
+set completeopt=longest,menu 		"打开函数preview预览窗口
 filetype plugin indent on
 syntax on
 "=========================语言与编码===========================
-set helplang=cn                 "中文帮助
+set helplang=cn                 	"中文帮助
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 set termencoding=utf-8  
 "=================《公共配置》=================================
-set nocompatible                "不使用vi模式"
-set linespace=0                 "字符间插入的像素行数目
+set nocompatible                	"不使用vi模式"
+set linespace=0                 	"字符间插入的像素行数目
 set nu
 set showmode "Show current mode down the bottom
 set gcr=a:blinkon0 "Disable cursor blink
@@ -191,6 +194,11 @@ au BufNewFile,BufRead *.js, *.html, *.css
     \ set tabstop=2
     \ set softtabstop=2
     \ set shiftwidth=2
+"编程语言缩进
+au BufNewFile,BufRead *.java,*.php,*.c,*cpp,*.py,*.go
+	\ set tabstop=4
+	\ set softtabstop=4
+	\ set shiftwidth=4
 
 "=================《外观设置》===============================
 if WINDOWS()
@@ -201,7 +209,7 @@ elseif LINUX()
 endif
 
 "==============《配色主题》==============
-colorscheme blackboard "主题文件在vim-colorschemes插件下
+"colorscheme default "默认主题
 set t_Co=256
 
 set laststatus=2                            "总是显示状态栏
@@ -269,7 +277,7 @@ set showtabline=2                       "以标签形式打开文件
 autocmd BufNewFile * normal G           "新建文件后 自动定位到文件末尾
 set nobackup                            "禁止生成临时文件
 setlocal noswapfile                     "不要生成swap文件
-"set wrap                                "自动折行
+"set wrap                               "自动折行
 "set textwidth=79
 "=========按键======="
 set backspace=indent,eol,start          "使用退格键
@@ -304,13 +312,13 @@ let g:SrcExpl_nextDefKey = "<F4>"
 set tags=tags;                          " ';' 不能没有
 
 "文件,项目查找,搜索
-NeoBundle 'Shougo/unite.vim'
 NeoBundle 'kien/ctrlp.vim'                  "快速搜索/文件
 NeoBundle 'scrooloose/nerdtree'             "树形目录
+let g:winManagerWindowLayout="NERDTree|TagList"    
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 nmap <F9> :NERDTreeToggle<CR>               "F9调出
-let g:NERDTreeWinSize = 22
+let NERDTreeWinSize=25  
 let g:NERDTreeHight= 30
 let g:NERDTreeMouseMode = 1
 let g:NERDTreeMapToggleZoom = '<Space>'
@@ -334,13 +342,9 @@ let g:session_menu = 1
 
 "{
 NeoBundle 'vim-scripts/vim-babel'
-NeoBundle 'mattn/webapi-vim'
+"NeoBundle 'mattn/webapi-vim'
 ""}
-NeoBundle 'jceb/vim-orgmode'
-NeoBundle 'drmikehenry/vim-fontsize'
-NeoBundle 'Mizuchi/vim-ranger'
-
-NeoBundle 'Shougo/unite.vim'          
+NeoBundle 'jceb/vim-orgmode'  
 "git 
 NeoBundle 'tpope/vim-fugitive'              "git信息
 NeoBundle 'airblade/vim-gitgutter'          "git 插件
@@ -359,16 +363,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-
-NeoBundle 'syngan/vim-vimlint', {
-            \ 'depends' : 'ynkdir/vim-vimlparser'}
-let g:syntastic_vimlint_options = {
-            \'EVL102': 1 ,
-            \'EVL103': 1 ,
-            \'EVL205': 1 ,
-            \'EVL105': 1 ,
-            \}
-NeoBundle 'ynkdir/vim-vimlparser'
+"文本选择
 NeoBundle 'gcmt/wildfire.vim'
 noremap <SPACE> <Plug>(wildfire-fuel)
 vnoremap <C-SPACE> <Plug>(wildfire-water)
@@ -380,10 +375,26 @@ let g:tagbar_show_linenumbers = -1              "显示行号
 let g:tagbar_width=30
 let g:tagbar_left = 1
 let g:NERDTreeChDirMode=1
-nmap <F8> :TagbarToggle<CR>
 NeoBundle 'vim-scripts/YankRing.vim'        "剪贴板增强
 NeoBundle 'vim-scripts/vimgdb'				"gdb
- 			
+" 命令
+        ":A 头文件／源文件切换
+        ":AS 分割窗后并切换头/源文件(切割为上下两个窗口)
+       	":AV 垂直切割窗口后切换头/源文件(切割为左右两个窗口)
+        ":AT 新建Vim标签式窗口后切换
+        ":AN 在多个匹配文件间循环切换,将光标所在处单词作为文件名打开
+        ":IH 切换至光标所在文件
+        ":IHS 分割窗口后切换至光标所在文件(指将光标所在处单词作为文件名打开)
+        ":IHV 垂直分割窗口后切换
+        ":IHT 新建标签式窗口后切换
+        ":IHN 在多个匹配文件间循环切换
+    	"快捷键操作
+        	"<Leader>ih 切换至光标所在文件*
+        	"<Leader>is 切换至光标所在处(单词所指)文件的配对文件(如光标所在处为foo.h，则切换至foo.c/foo.cpp...)
+        	"<Leader>ihn 在多个匹配文件间循环切换
+
+"快速文件切换插件a.vim 
+NeoBundle 'vim-scripts/a.vim'		
 " 撤销
 NeoBundle 'mbbill/undotree'                 "撤销树
 NeoBundle 'sjl/gundo.vim'                   "查看撤销树,类似版本控制系统,可恢复到某一阶段
@@ -391,6 +402,7 @@ nnoremap <F2> :GundoToggle<CR>
 " 开启自动预览 [随着光标在标签上的移动，顶部会出现一个实时的预览窗口]
 let g:tagbar_autopreview = 1
 NeoBundle 'tomasr/molokai'                  "molokai配色
+"状态栏
 NeoBundle 'bling/vim-airline'               "状态栏美化
 NeoBundle  'Lokaltog/vim-powerline'         "状态栏增强
 NeoBundle 'itchyny/lightline.vim'           "状态栏横条美化
@@ -435,7 +447,6 @@ endif
 "调试
 NeoBundle 'kablamo/VimDebug'
 
-
 "---------------------------------
 "在 vim 中导入 shell 的输出
 NeoBundle 'vim-scripts/Conque-Shell'
@@ -463,10 +474,9 @@ NeoBundle 'powerline/fonts'
            NeoBundle 'jistr/vim-nerdtree-tabs'
            NeoBundle 'flazz/vim-colorschemes'
            NeoBundle 'nathanaelkane/vim-indent-guides'
-"搜索
-NeoBundle 'grep.vim'
+
 " Fast navigation
-NeoBundle 'vim-scripts/cscope.vim'  "交互式查询语言符号功能查询哪些地方使用某个变量或调用某个函数
+NeoBundle 'vim-scripts/cscope.vim'  		"交互式查询语言符号功能查询哪些地方使用某个变量或调用某个函数
 "为了界面更好看，可以把Cscope的查找结果输出到quickfix窗口
 set cscopequickfix=s-,c-,d-,i-,t-,e-  
 "使用Cscope需要生成cscope数据库文件。进入项目代码根目录运行命令：
@@ -492,10 +502,9 @@ NeoBundle 'vim-scripts/ZoomWin'					"窗口最大化
 " Press <c-w>o : 最大化当前窗口
 " Press <c-w>o again: 前一组窗口恢复
 NeoBundle 'shemerey/vim-project'                "项目管理
-NeoBundle 'atom/vim-mode'                       "vim-mode
 NeoBundle 'ervandew/supertab'                   "按<tab>可实现代码提示
 
-"golang
+"go语言
 NeoBundle 'fatih/vim-go'
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
@@ -516,9 +525,6 @@ let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 " ============ c/c++ ide
 NeoBundle 'vim-scripts/c.vim'
-NeoBundle 'vim-scripts/OmniCppComplete'
-NeoBundle 'vim-scripts/AutoComplPop'
-NeoBundle 'vim-scripts/a.vim'
 NeoBundle 'vim-scripts/cpp.vim'
 "==================python IDE============
     NeoBundle 'vim-scripts/indentpython.vim'        "python自动缩进
@@ -535,6 +541,7 @@ NeoBundle 'vim-scripts/cpp.vim'
     let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
 
     NeoBundle 'davidhalter/jedi-vim'                "python补全,需要安装:pip install jedi
+    autocmd FileType python setlocal completeopt-=preview
     "pip install jedi
     "pip install tox pytest
     let g:jedi#use_tabs_not_buffers = 1
@@ -544,24 +551,19 @@ NeoBundle 'gregsexton/MatchTag', {'autoload':{'filetypes':['html','xml']}}
 NeoBundle 'mattn/emmet-vim'                         "emmet 速写
 let g:user_emmet_install_global = 0                                
 autocmd FileType html,css EmmetInstall              "只在html和css中启用
-let g:user_emmet_expandabbr_key='<c-e>'              "更改默认按键
+let g:user_emmet_expandabbr_key='<Tab>'              "更改默认按键
 let g:user_emmet_complete_tag=1
 let g:user_emmet_next_key='<c-n>'
 let g:user_emmet_prev_key='<c-p>'
 NeoBundle 'docunext/closetag.vim'                    "关闭标签
 NeoBundle 'othree/xml.vim'                           "xml插件
-NeoBundle 'ap/vim-css-color', {'autoload':{'filetypes':['css','scss','sass','less','styl']}}
-NeoBundleLazy 'groenewege/vim-less', {'autoload':{'filetypes':['less']}}
-NeoBundleLazy 'cakebaker/scss-syntax.vim', {'autoload':{'filetypes':['scss','sass']}}
-NeoBundleLazy 'ap/vim-css-color', {'autoload':{'filetypes':['css','scss','sass','less','styl']}}
-NeoBundleLazy 'othree/html5.vim', {'autoload':{'filetypes':['html']}}
-NeoBundleLazy 'wavded/vim-stylus', {'autoload':{'filetypes':['styl']}}
-NeoBundleLazy 'juvenn/mustache.vim', {'autoload':{'filetypes':['mustache']}}
-NeoBundleLazy 'gregsexton/MatchTag', {'autoload':{'filetypes':['html','xml']}}
 
 "----------javascript-----------------------
-NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'nono/jquery.vim'                         "jquery高亮
+
+"php
+NeoBundle 'shawncplus/phpcomplete.vim'
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 
 call neobundle#end()
 NeoBundleCheck
