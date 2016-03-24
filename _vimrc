@@ -190,18 +190,8 @@ set softtabstop=4
 set shiftwidth=4
 set autoindent
 set expandtab                       "将Tab自动转化成空格 [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
-"set foldmethod=indent               "折叠方式是使用语法折叠
+"set foldmethod=indent              "折叠方式是使用语法折叠
 "set foldlevel=100                  "折叠的层次是100,也就是打开所有的折叠
-"web缩进
-au BufNewFile,BufRead *.js, *.html, *.css
-    \ set tabstop=2
-    \ set softtabstop=2
-    \ set shiftwidth=2
-"编程语言缩进
-au BufNewFile,BufRead *.java,*.php,*.c,*cpp,*.py,*.go
-	\ set tabstop=4
-	\ set softtabstop=4
-	\ set shiftwidth=4
 
 "=================《外观设置》===============================
 if WINDOWS()
@@ -286,20 +276,20 @@ setlocal noswapfile                     "不要生成swap文件
 set backspace=indent,eol,start          "使用退格键
 
 
-"安装neobundle管理插件，先安装git再安装neobundle
-if WINDOWS()             "安装:git clone https://github.com/Shougo/neobundle.vim.git
-  set runtimepath+=$VIM/vimfiles/bundle/neobundle.vim    " 此处规定neobundle的路径
-    call neobundle#begin(expand('$VIM/vimfiles/bundle/')) "插件安装位置
-elseif LINUX()             "安装: git clone https://github.com/Shougo/neobundle.vim.git
-  set runtimepath+=~/.vim/bundle/neobundle.vim/        " 此处规定neobundle的路径
-    call neobundle#begin(expand('~/.vim/bundle/'))   "插件安装位置
+"安装vundle管理插件，先安装git再安装vundle
+if WINDOWS()             "安装:git clone https://github.com/gmarik/vundle.git
+  set runtimepath+=$VIM/vimfiles/bundle/vundle    			" 此处规定vundle的路径
+    call vundle#begin(expand('$VIM/vimfiles/bundle/')) 	"插件安装位置
+elseif LINUX()             "安装:git clone https://github.com/gmarik/vundle.git
+  set runtimepath+=~/.vim/bundle/vundle/         			" 此处规定vundle的路径
+    call vundle#begin(expand('~/.vim/bundle/'))   		"插件安装位置
 endif
-NeoBundleFetch 'Shougo/neobundle.vim'       "必须启用
-NeoBundle 'taglist.vim'                     "Tlist 函数列表
+Plugin 'gmarik/vundle'       				"必须启用
+Plugin 'taglist.vim'                     "Tlist 函数列表
 let g:Tlist_Use_Right_Window = 1			"位置右栏
-let Tlist_Auto_Open=1						"打开vim时启动
+"let Tlist_Auto_Open=1						"打开vim时启动
 
-NeoBundle 'wesleyche/SrcExpl'				"窗口文件着色
+Plugin 'wesleyche/SrcExpl'				"窗口文件着色
 nmap <F8> :SrcExplToggle<CR> 
 let g:SrcExpl_winHeight = 8 
 let g:SrcExpl_refreshTime = 100 
@@ -312,27 +302,29 @@ let g:SrcExpl_searchLocalDef = 1
 let g:SrcExpl_isUpdateTags = 0 
 let g:SrcExpl_updateTagsCmd = "ctags --sort=foldcase -R ." 
 let g:SrcExpl_updateTagsKey = "<F12>" 
-let g:SrcExpl_prevDefKey = "<F3>" 
+let g:SrcExpl_prevDefKey = "<F6>" 
 let g:SrcExpl_nextDefKey = "<F4>" 
-set tags=ctags;                          " ';' 不能没有
+set tags=tags;                          " ';' 不能没有
 
 "文件,项目查找,搜索
-NeoBundle 'kien/ctrlp.vim'                   	"快速搜索/文件
-NeoBundle 'scrooloose/nerdtree'             	"树形目录
-nmap <F9> :NERDTreeToggle<CR>               	"F9调出
+Plugin 'kien/ctrlp.vim'                   	"快速搜索/文件
+Plugin 'scrooloose/nerdtree'             	"树形目录
+nmap <F3> :NERDTreeToggle<CR>               	"F9调出
 let NERDTreeWinSize=25  
 let g:NERDTreeHight= 30
 let g:NERDTreeMouseMode = 1
 set autochdir
 "界面
-NeoBundle 'jlanzarotta/bufexplorer'
+Plugin 'jlanzarotta/bufexplorer'
 "QuickFix窗口
 nmap <F6> :cn<cr>							"// 切换到下一个结果
 nmap <F7> :cp<cr>							"// 切换到上一个结果
 
 let g:winManagerWindowLayout = "TagList|FileExplorer,BufExplorer"
 "========================================<IDE>========================
-NeoBundle 'vim-scripts/sessionman.vim'		"session管理
+
+Plugin 'mhinz/vim-startify'				"显示最近使用的文件列表
+Plugin 'vim-scripts/sessionman.vim'		"session管理
 let g:session_menu = 1
 "q                        - close session list
 "o, <CR>, <2-LeftMouse>   - open session
@@ -340,13 +332,13 @@ let g:session_menu = 1
 "e                        - edit session
 "x                        - edit extra session script
 "{
-NeoBundle 'vim-scripts/vim-babel'
-NeoBundle 'mattn/webapi-vim'
+Plugin 'vim-scripts/vim-babel'
+Plugin 'mattn/webapi-vim'
 ""}
-NeoBundle 'jceb/vim-orgmode'  
+Plugin 'jceb/vim-orgmode'  
 "git 
-NeoBundle 'tpope/vim-fugitive'              "git信息
-NeoBundle 'airblade/vim-gitgutter'          "git 插件
+Plugin 'tpope/vim-fugitive'              "git信息
+Plugin 'airblade/vim-gitgutter'          "git 插件
 let g:gitgutter_sign_column_always = 1
 let g:gitgutter_max_signs = 500
 nmap ]h <Plug>GitGutterNextHunk
@@ -354,28 +346,24 @@ nmap [h <Plug>GitGutterPrevHunk
 nmap <Leader>ha <Plug>GitGutterStageHunk
 nmap <Leader>hu <Plug>GitGutterRevertHunk
 nmap <Leader>hv <Plug>GitGutterPreviewHunk
-NeoBundle 'mattn/gist-vim'
+Plugin 'mattn/gist-vim'
 let g:gist_detect_filetype = 1
 
-NeoBundle 'scrooloose/syntastic'            "语法检查
+Plugin 'scrooloose/syntastic'            "语法检查
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_open = 1 			"自动开启检查
 let g:syntastic_check_on_wq = 0
-"文本选择
-NeoBundle 'gcmt/wildfire.vim'
-noremap <SPACE> <Plug>(wildfire-fuel)
-vnoremap <C-SPACE> <Plug>(wildfire-water)
-let g:wildfire_objects = ["i'", 'i"', "i)", "i]", "i}", "ip", "it"]
-NeoBundle 'Raimondi/delimitMate'                "补全括号和引号
-NeoBundle 'majutsushi/tagbar'                   "tagbar
+
+Plugin 'Raimondi/delimitMate'                "补全括号和引号
+Plugin 'majutsushi/tagbar'                   "tagbar
 let g:tagbar_sort = 0                           "关闭排序[也就是按标签本身在文件中的位置排序]
 let g:tagbar_show_linenumbers = -1              "显示行号
 let g:tagbar_width=30
 let g:tagbar_left = 1
 let g:NERDTreeChDirMode=1
-NeoBundle 'vim-scripts/YankRing.vim'        	"剪贴板增强
-NeoBundle 'vim-scripts/vimgdb'					"gdb
+Plugin 'vim-scripts/YankRing.vim'        	"剪贴板增强
+Plugin 'vim-scripts/vimgdb'					"gdb
 " 命令
         ":A 头文件／源文件切换
         ":AS 分割窗后并切换头/源文件(切割为上下两个窗口)
@@ -393,23 +381,26 @@ NeoBundle 'vim-scripts/vimgdb'					"gdb
         	"<Leader>ihn 在多个匹配文件间循环切换
 
 "快速文件切换插件a.vim 
-NeoBundle 'vim-scripts/a.vim'		
+Plugin 'vim-scripts/a.vim'		
 " 撤销
-NeoBundle 'mbbill/undotree'                 "撤销树
-NeoBundle 'sjl/gundo.vim'                   "查看撤销树,类似版本控制系统,可恢复到某一阶段
+Plugin 'mbbill/undotree'                 "撤销树
+Plugin 'sjl/gundo.vim'                   "查看撤销树,类似版本控制系统,可恢复到某一阶段
 nnoremap <F2> :GundoToggle<CR>
 " 开启自动预览 [随着光标在标签上的移动，顶部会出现一个实时的预览窗口]
 let g:tagbar_autopreview = 1
-NeoBundle 'tomasr/molokai'                  "molokai配色
+Plugin 'tomasr/molokai'                  "molokai配色
 "状态栏
-NeoBundle 'bling/vim-airline'               "状态栏美化
-NeoBundle  'Lokaltog/vim-powerline'         "状态栏增强
-NeoBundle 'itchyny/lightline.vim'           "状态栏横条美化
-set laststatus=2
-set laststatus=2                            "总是显示状态栏
+Plugin 'bling/vim-airline'               "状态栏美化
+Plugin  'Lokaltog/vim-powerline'         "状态栏增强
+Plugin 'itchyny/lightline.vim'           "状态栏横条美化
+set laststatus=2                      		"总是显示状态栏
+" 状态栏样式
+set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
 set ruler                                   " 显示光标当前位置
 
-NeoBundle 'terryma/vim-multiple-cursors'    "多光标编辑
+Plugin 'pbrisbin/vim-mkdir'				"新建文件时,自动创建不存在的目录
+
+Plugin 'terryma/vim-multiple-cursors'    "多光标编辑
     " 默认设置
     let g:multi_cursor_next_key='<C-n>'
     let g:multi_cursor_prev_key='<C-p>'
@@ -418,7 +409,7 @@ NeoBundle 'terryma/vim-multiple-cursors'    "多光标编辑
     
 " neocomplete补全
 if has('lua')
-	NeoBundle 'Shougo/neocomplete.vim'
+	Plugin 'Shougo/neocomplete.vim'
 	" Disable AutoComplPop.
 	let g:acp_enableAtStartup = 0
 	" Use neocomplete.
@@ -447,36 +438,36 @@ if has('lua')
 endif
 
 "调试
-NeoBundle 'kablamo/VimDebug'
+Plugin 'kablamo/VimDebug'
 
 "---------------------------------
 "在 vim 中导入 shell 的输出
-NeoBundle 'vim-scripts/Conque-Shell'
+Plugin 'vim-scripts/Conque-Shell'
 let g:ConqueTerm_TERM ='xterm'
 nmap <Leader>sh :ConqueTerm bash<CR>
 nmap <Leader>shs :ConqueTermSplit bash<CR>
 nmap <Leader>shv :ConqueTermVSplit bash<CR>
 nmap <Leader>sht :ConqueTermTab bash<CR>
 
-NeoBundle 'tomtom/tcomment_vim'             "快速注释
-NeoBundle 'kien/rainbow_parentheses.vim'    "挂号匹配高亮
-NeoBundle 'Yggdroot/indentLine'
+Plugin 'tomtom/tcomment_vim'             "快速注释
+Plugin 'kien/rainbow_parentheses.vim'    "挂号匹配高亮
+Plugin 'Yggdroot/indentLine'
 let g:indentLine_color_term = 239
 let g:indentLine_color_gui = '#3366ff'
 let g:indentLine_char = '|'
-NeoBundle 'danro/rename.vim'                "重命名插件
-NeoBundle 'jiangmiao/auto-pairs'            "自动插入和格式化方括号和圆括号
-NeoBundle 'vim-scripts/matchit.zip'         "\ %匹配成对的标签，跳转
+Plugin 'danro/rename.vim'                "重命名插件
+Plugin 'jiangmiao/auto-pairs'            "自动插入和格式化方括号和圆括号
+Plugin 'vim-scripts/matchit.zip'         "\ %匹配成对的标签，跳转
 
 "代码块
-NeoBundle 'msanders/snipmate.vim'           "spipmate代码片段
+Plugin 'msanders/snipmate.vim'           "spipmate代码片段
 
-NeoBundle 'nathanaelkane/vim-indent-guides'
+Plugin 'nathanaelkane/vim-indent-guides'
 
 " Fast navigation
 
 if LINUX()
-	NeoBundle 'vim-scripts/cscope.vim'  	"交互式查询语言符号功能查询哪些地方使用某个变量或调用某个函数
+	Plugin 'vim-scripts/cscope.vim'  	"交互式查询语言符号功能查询哪些地方使用某个变量或调用某个函数
 	"为了界面更好看，可以把Cscope的查找结果输出到quickfix窗口
 	set cscopequickfix=s-,c-,d-,i-,t-,e-  
 	"使用Cscope需要生成cscope数据库文件。进入项目代码根目录运行命令：
@@ -486,25 +477,24 @@ if LINUX()
 endif
 
 "-----------------
-NeoBundle 'edsono/vim-matchit'
-NeoBundle 'Lokaltog/vim-easymotion'
+Plugin 'edsono/vim-matchit'
 
 "项目管理
-NeoBundle 'tpope/vim-projectionist'             "项目创建
+Plugin 'tpope/vim-projectionist'             "项目创建
 "添加环绕
-NeoBundle 'tpope/vim-surround'                  "快速给词加环绕符号,例如引号
+Plugin 'tpope/vim-surround'                  "快速给词加环绕符号,例如引号
 
-"NeoBundle 'ianva/vim-youdao-translater'         "有道翻译"
+"Plugin 'ianva/vim-youdao-translater'         "有道翻译"
 "vnoremap <silent> <C-T> <Esc>:Ydv<CR>
 "nnoremap <silent> <C-T> <Esc>:Ydc<CR>
 "noremap <leader>yd :Yde<CR>
-NeoBundle 'godlygeek/tabular'                   " Tabular: 自动对齐。
+Plugin 'godlygeek/tabular'                   " Tabular: 自动对齐。
 
-NeoBundle 'shemerey/vim-project'                "项目管理
-NeoBundle 'ervandew/supertab'                   "按<tab>可实现代码提示
+Plugin 'shemerey/vim-project'                "项目管理
+Plugin 'ervandew/supertab'                   "按<tab>可实现代码提示
 
 "go语言
-NeoBundle 'fatih/vim-go'
+Plugin 'fatih/vim-go'
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>t <Plug>(go-test)
@@ -522,20 +512,27 @@ let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 " ============ c/c++ ide
-NeoBundle 'vim-scripts/c.vim'
-NeoBundle 'vim-scripts/cpp.vim'
-NeoBundle 'WolfgangMehner/vim-plugins'
+Plugin 'vim-scripts/c.vim'
+Plugin 'vim-scripts/cpp.vim'
+Plugin 'WolfgangMehner/vim-plugins'
 	let  g:C_UseTool_cmake    = 'yes'
 	let  g:C_UseTool_doxygen = 'yes'
 
 "==================python IDE============
-NeoBundle 'vim-scripts/indentpython.vim'        "python自动缩进
-NeoBundle 'yssource/python.vim'
-NeoBundle 'pythoncomplete'						"自动补全
-autocmd FileType python set omnifunc=pythoncomplete#Complete  
+Plugin 'vim-scripts/indentpython.vim'        	"python自动缩进
+Plugin 'yssource/python.vim'
+Plugin 'davidhalter/jedi-vim'                	"python补全,需要安装:pip install jedi
+    autocmd FileType python setlocal completeopt-=preview
+    "pip install jedi
+    "pip install tox pytest
+    let g:jedi#use_tabs_not_buffers = 1
+Plugin 'PyCQA/pycodestyle'						"python代码检查
+	"pip install pep8
+	"pep8 --first optparse.py 					"例子
+
 
 "快速跳转
-NeoBundle 'easymotion/vim-easymotion'
+Plugin 'easymotion/vim-easymotion'
 " Gif config
     map <Leader>l <Plug>(easymotion-lineforward)
     map <Leader>j <Plug>(easymotion-j)
@@ -544,41 +541,33 @@ NeoBundle 'easymotion/vim-easymotion'
     let g:EasyMotion_use_smartsign_us = 1 " US layout
     let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
 
-NeoBundle 'davidhalter/jedi-vim'                "python补全,需要安装:pip install jedi
-    autocmd FileType python setlocal completeopt-=preview
-    "pip install jedi
-    "pip install tox pytest
-    let g:jedi#use_tabs_not_buffers = 1
-NeoBundle 'PyCQA/pycodestyle'					"python代码检查
-	"pip install pep8
-	"pep8 --first optparse.py 					"例子
-
+"Coffeescript ide
+Plugin 'kchmck/vim-coffee-script'
 
 "--------------------《web 插件》--------------------------------------
-NeoBundle 'gregsexton/MatchTag', {'autoload':{'filetypes':['html','xml']}}
-NeoBundle 'mattn/emmet-vim'                         "emmet 速写
+Plugin 'gregsexton/MatchTag', {'autoload':{'filetypes':['html','xml']}}
+Plugin 'mattn/emmet-vim'                         "emmet 速写
 let g:user_emmet_install_global = 0                                
 autocmd FileType html,css EmmetInstall              "只在html和css中启用
 let g:user_emmet_expandabbr_key='<c-e>'              "更改默认按键
 let g:user_emmet_complete_tag=1
 let g:user_emmet_next_key='<c-n>'
 let g:user_emmet_prev_key='<c-p>'
-NeoBundle 'docunext/closetag.vim'                    "关闭标签
-NeoBundle 'othree/xml.vim'                           "xml插件
+Plugin 'docunext/closetag.vim'                    "关闭标签
+Plugin 'othree/xml.vim'                           "xml插件
 
 "----------javascript-----------------------
-NeoBundle 'nono/jquery.vim'                         "jquery高亮
+Plugin 'nono/jquery.vim'                         "jquery高亮
 
 "php
-NeoBundle 'shawncplus/phpcomplete.vim'
+Plugin 'shawncplus/phpcomplete.vim'
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 
-call neobundle#end()
-NeoBundleCheck
+call vundle#end()
 
 "=============<自定义命令>================
 filetype plugin indent on                           " 开启自动检测文件类型
-autocmd BufNewFile *.c,*.cpp,*.sh,*.py,*.java,*.php  exec ":call SetTitle()"
+autocmd BufNewFile *.cpp,*.sh,*.py,*.java,*.php  exec ":call SetTitle()"
 ""定义函数SetTitle，自动插入文件头
 func SetTitle()
   "如果文件类型为.sh文件
@@ -674,3 +663,7 @@ func! RunScript()
     endif
 endfunc
 map <F5> :call RunScript()<CR>
+
+"设置自定义字典
+"au FileType * execute 'setlocal dict+=~/.vim/words/'.&filetype.'.txt'
+"set complete-=k complete +=k
