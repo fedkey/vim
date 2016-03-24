@@ -141,8 +141,11 @@ if WINDOWS()
   endfunction
 endif
 
+"视图
 "set completeopt=menuone            "关闭函数preview预览窗口
 set completeopt=longest,menu 		"打开函数preview预览窗口
+set previewwindow    				" 标识预览窗口
+
 filetype plugin indent on
 syntax on
 "=========================语言与编码===========================
@@ -212,11 +215,10 @@ endif
 "colorscheme default "默认主题
 set t_Co=256
 
-set laststatus=2                            "总是显示状态栏
-set ruler                                   " 显示光标当前位置
+
 set cursorline                              "高亮所在行
 "set cursorcolumn                           "高亮当前列
-"set guioptions-=T                           "隐藏工具栏
+"set guioptions-=T                          "隐藏工具栏
 "set guioptions-=m                          "隐藏菜单
 set cmdheight=1                             " 命令行（在状态行下）的高度，默认为1
 set showmatch                               "高亮显示[] {} ()配对
@@ -240,7 +242,8 @@ endif
 "================《搜索设置》========================================
 set incsearch                               "当输入的时候,跳到你搜索的关键字那去
 set hlsearch                                "高亮被搜索的关键字
-
+set ignorecase								"搜索模式里忽略大小写
+set smartcase        " 如果搜索模式包含大写字符，不使用 'ignorecase' 选项。只有在输入搜索模式并且打开 'ignorecase' 选项时才会使用。
 "=================《字体》================================
 if WINDOWS()
     set guifont=courier_new:h11
@@ -293,7 +296,9 @@ elseif LINUX()             "安装: git clone https://github.com/Shougo/neobundl
 endif
 NeoBundleFetch 'Shougo/neobundle.vim'       "必须启用
 NeoBundle 'taglist.vim'                     "Tlist 函数列表
-let g:Tlist_Use_Right_Window = 1
+let g:Tlist_Use_Right_Window = 1			"右栏
+let Tlist_Auto_Open=1						"打开vim时启动
+
 NeoBundle 'wesleyche/SrcExpl'				"窗口文件着色
 nmap <F8> :SrcExplToggle<CR> 
 let g:SrcExpl_winHeight = 8 
@@ -309,28 +314,25 @@ let g:SrcExpl_updateTagsCmd = "ctags --sort=foldcase -R ."
 let g:SrcExpl_updateTagsKey = "<F12>" 
 let g:SrcExpl_prevDefKey = "<F3>" 
 let g:SrcExpl_nextDefKey = "<F4>" 
-set tags=tags;                          " ';' 不能没有
+set tags=ctags;                          " ';' 不能没有
 
 "文件,项目查找,搜索
-NeoBundle 'kien/ctrlp.vim'                  "快速搜索/文件
-NeoBundle 'scrooloose/nerdtree'             "树形目录
-let g:winManagerWindowLayout="NERDTree|TagList"    
+NeoBundle 'kien/ctrlp.vim'                   	"快速搜索/文件
+NeoBundle 'scrooloose/nerdtree'             	"树形目录
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-nmap <F9> :NERDTreeToggle<CR>               "F9调出
+nmap <F9> :NERDTreeToggle<CR>               	"F9调出
 let NERDTreeWinSize=25  
 let g:NERDTreeHight= 30
 let g:NERDTreeMouseMode = 1
 let g:NERDTreeMapToggleZoom = '<Space>'
 set autochdir
 "界面
-NeoBundle 'vim-scripts/minibufexplorerpp'
-    let g:miniBufExplMapWindowNavVim = 1   
-    let g:miniBufExplMapWindowNavArrows = 1   
-    let g:miniBufExplMapCTabSwitchBufs = 1   
-    let g:miniBufExplModSelTarget = 1  
-    let g:miniBufExplMoreThanOne=0  
+NeoBundle 'jlanzarotta/bufexplorer'
+"QuickFix窗口
+nmap <F6> :cn<cr>							"// 切换到下一个结果
+nmap <F7> :cp<cr>							"// 切换到上一个结果
 
+let g:winManagerWindowLayout = "TagList|FileExplorer,BufExplorer"
 "========================================<IDE>========================
 NeoBundle 'vim-scripts/sessionman.vim'		"session管理
 let g:session_menu = 1
@@ -407,6 +409,8 @@ NeoBundle 'bling/vim-airline'               "状态栏美化
 NeoBundle  'Lokaltog/vim-powerline'         "状态栏增强
 NeoBundle 'itchyny/lightline.vim'           "状态栏横条美化
 set laststatus=2
+set laststatus=2                            "总是显示状态栏
+set ruler                                   " 显示光标当前位置
 
 NeoBundle 'terryma/vim-multiple-cursors'     "多光标编辑
     " 默认设置
@@ -444,6 +448,7 @@ if has('lua')
 	"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 	"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 endif
+
 "调试
 NeoBundle 'kablamo/VimDebug'
 
@@ -476,13 +481,16 @@ NeoBundle 'powerline/fonts'
            NeoBundle 'nathanaelkane/vim-indent-guides'
 
 " Fast navigation
-NeoBundle 'vim-scripts/cscope.vim'  		"交互式查询语言符号功能查询哪些地方使用某个变量或调用某个函数
-"为了界面更好看，可以把Cscope的查找结果输出到quickfix窗口
-set cscopequickfix=s-,c-,d-,i-,t-,e-  
-"使用Cscope需要生成cscope数据库文件。进入项目代码根目录运行命令：
-"cscope -Rbq -f path/xxx.out  
-"  Ctrl-\ s 查找所有当前光标所在符号出现过位置
-"  Ctrl-\ c 查找所有调用当前光标所在函数的函数
+
+if LINUX()
+	NeoBundle 'vim-scripts/cscope.vim'  		"交互式查询语言符号功能查询哪些地方使用某个变量或调用某个函数
+	"为了界面更好看，可以把Cscope的查找结果输出到quickfix窗口
+	set cscopequickfix=s-,c-,d-,i-,t-,e-  
+	"使用Cscope需要生成cscope数据库文件。进入项目代码根目录运行命令：
+	"cscope -Rbq -f path/xxx.out  
+	"  Ctrl-\ s 查找所有当前光标所在符号出现过位置
+	"  Ctrl-\ c 查找所有调用当前光标所在函数的函数
+endif
 
 "-----------------
 NeoBundle 'edsono/vim-matchit'
@@ -517,8 +525,7 @@ let g:go_highlight_interfaces = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_fail_silently = 1
-"自动保存
-let g:go_fmt_autosave = 1
+
 "go 检查
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
@@ -526,13 +533,17 @@ let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 " ============ c/c++ ide
 NeoBundle 'vim-scripts/c.vim'
 NeoBundle 'vim-scripts/cpp.vim'
+NeoBundle 'WolfgangMehner/vim-plugins'
+	let  g:C_UseTool_cmake    = 'yes'
+	let  g:C_UseTool_doxygen = 'yes'
+
 "==================python IDE============
-    NeoBundle 'vim-scripts/indentpython.vim'        "python自动缩进
-    NeoBundle 'yssource/python.vim'
-    "NeoBundle 'pythoncomplete'
-    "快速跳转
-    NeoBundle 'easymotion/vim-easymotion'
-    " Gif config
+NeoBundle 'vim-scripts/indentpython.vim'        "python自动缩进
+NeoBundle 'yssource/python.vim'
+"NeoBundle 'pythoncomplete'
+"快速跳转
+NeoBundle 'easymotion/vim-easymotion'
+" Gif config
     map <Leader>l <Plug>(easymotion-lineforward)
     map <Leader>j <Plug>(easymotion-j)
     map <Leader>k <Plug>(easymotion-k)
@@ -540,11 +551,15 @@ NeoBundle 'vim-scripts/cpp.vim'
     let g:EasyMotion_use_smartsign_us = 1 " US layout
     let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
 
-    NeoBundle 'davidhalter/jedi-vim'                "python补全,需要安装:pip install jedi
+NeoBundle 'davidhalter/jedi-vim'                "python补全,需要安装:pip install jedi
     autocmd FileType python setlocal completeopt-=preview
     "pip install jedi
     "pip install tox pytest
     let g:jedi#use_tabs_not_buffers = 1
+NeoBundle 'PyCQA/pycodestyle'					"python代码检查
+	"pip install pep8
+	"pep8 --first optparse.py 					"例子
+
 
 "--------------------《web 插件》--------------------------------------
 NeoBundle 'gregsexton/MatchTag', {'autoload':{'filetypes':['html','xml']}}
@@ -570,7 +585,7 @@ NeoBundleCheck
 
 "=============<自定义命令>================
 filetype plugin indent on                           " 开启自动检测文件类型
-autocmd BufNewFile *.c,*.cpp,*.[ch],*.sh,*.py,*.java,*.php  exec ":call SetTitle()"
+autocmd BufNewFile *.c,*.cpp,*.sh,*.py,*.java,*.php  exec ":call SetTitle()"
 ""定义函数SetTitle，自动插入文件头
 func SetTitle()
   "如果文件类型为.sh文件
