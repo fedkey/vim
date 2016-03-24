@@ -212,7 +212,7 @@ elseif LINUX()
 endif
 
 "==============《配色主题》==============
-"colorscheme default "默认主题
+colorscheme molokai 			"主题
 set t_Co=256
 
 
@@ -296,7 +296,7 @@ elseif LINUX()             "安装: git clone https://github.com/Shougo/neobundl
 endif
 NeoBundleFetch 'Shougo/neobundle.vim'       "必须启用
 NeoBundle 'taglist.vim'                     "Tlist 函数列表
-let g:Tlist_Use_Right_Window = 1			"右栏
+let g:Tlist_Use_Right_Window = 1			"位置右栏
 let Tlist_Auto_Open=1						"打开vim时启动
 
 NeoBundle 'wesleyche/SrcExpl'				"窗口文件着色
@@ -477,7 +477,6 @@ NeoBundle 'msanders/snipmate.vim'           "spipmate代码片段
 NeoBundle 'powerline/fonts'
            NeoBundle 'bling/vim-bufferline'
            NeoBundle 'jistr/vim-nerdtree-tabs'
-           NeoBundle 'flazz/vim-colorschemes'
            NeoBundle 'nathanaelkane/vim-indent-guides'
 
 " Fast navigation
@@ -540,7 +539,9 @@ NeoBundle 'WolfgangMehner/vim-plugins'
 "==================python IDE============
 NeoBundle 'vim-scripts/indentpython.vim'        "python自动缩进
 NeoBundle 'yssource/python.vim'
-"NeoBundle 'pythoncomplete'
+NeoBundle 'pythoncomplete'						"自动补全
+autocmd FileType python set omnifunc=pythoncomplete#Complete  
+
 "快速跳转
 NeoBundle 'easymotion/vim-easymotion'
 " Gif config
