@@ -319,12 +319,10 @@ set tags=ctags;                          " ';' 不能没有
 "文件,项目查找,搜索
 NeoBundle 'kien/ctrlp.vim'                   	"快速搜索/文件
 NeoBundle 'scrooloose/nerdtree'             	"树形目录
-autocmd StdinReadPre * let s:std_in=1
 nmap <F9> :NERDTreeToggle<CR>               	"F9调出
 let NERDTreeWinSize=25  
 let g:NERDTreeHight= 30
 let g:NERDTreeMouseMode = 1
-let g:NERDTreeMapToggleZoom = '<Space>'
 set autochdir
 "界面
 NeoBundle 'jlanzarotta/bufexplorer'
@@ -341,10 +339,9 @@ let g:session_menu = 1
 "d                        - delete session
 "e                        - edit session
 "x                        - edit extra session script
-
 "{
 NeoBundle 'vim-scripts/vim-babel'
-"NeoBundle 'mattn/webapi-vim'
+NeoBundle 'mattn/webapi-vim'
 ""}
 NeoBundle 'jceb/vim-orgmode'  
 "git 
@@ -377,8 +374,8 @@ let g:tagbar_show_linenumbers = -1              "显示行号
 let g:tagbar_width=30
 let g:tagbar_left = 1
 let g:NERDTreeChDirMode=1
-NeoBundle 'vim-scripts/YankRing.vim'        "剪贴板增强
-NeoBundle 'vim-scripts/vimgdb'				"gdb
+NeoBundle 'vim-scripts/YankRing.vim'        	"剪贴板增强
+NeoBundle 'vim-scripts/vimgdb'					"gdb
 " 命令
         ":A 头文件／源文件切换
         ":AS 分割窗后并切换头/源文件(切割为上下两个窗口)
@@ -412,7 +409,7 @@ set laststatus=2
 set laststatus=2                            "总是显示状态栏
 set ruler                                   " 显示光标当前位置
 
-NeoBundle 'terryma/vim-multiple-cursors'     "多光标编辑
+NeoBundle 'terryma/vim-multiple-cursors'    "多光标编辑
     " 默认设置
     let g:multi_cursor_next_key='<C-n>'
     let g:multi_cursor_prev_key='<C-p>'
@@ -474,15 +471,12 @@ NeoBundle 'vim-scripts/matchit.zip'         "\ %匹配成对的标签，跳转
 "代码块
 NeoBundle 'msanders/snipmate.vim'           "spipmate代码片段
 
-NeoBundle 'powerline/fonts'
-           NeoBundle 'bling/vim-bufferline'
-           NeoBundle 'jistr/vim-nerdtree-tabs'
-           NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'nathanaelkane/vim-indent-guides'
 
 " Fast navigation
 
 if LINUX()
-	NeoBundle 'vim-scripts/cscope.vim'  		"交互式查询语言符号功能查询哪些地方使用某个变量或调用某个函数
+	NeoBundle 'vim-scripts/cscope.vim'  	"交互式查询语言符号功能查询哪些地方使用某个变量或调用某个函数
 	"为了界面更好看，可以把Cscope的查找结果输出到quickfix窗口
 	set cscopequickfix=s-,c-,d-,i-,t-,e-  
 	"使用Cscope需要生成cscope数据库文件。进入项目代码根目录运行命令：
@@ -505,9 +499,7 @@ NeoBundle 'tpope/vim-surround'                  "快速给词加环绕符号,例
 "nnoremap <silent> <C-T> <Esc>:Ydc<CR>
 "noremap <leader>yd :Yde<CR>
 NeoBundle 'godlygeek/tabular'                   " Tabular: 自动对齐。
-NeoBundle 'vim-scripts/ZoomWin'					"窗口最大化
-" Press <c-w>o : 最大化当前窗口
-" Press <c-w>o again: 前一组窗口恢复
+
 NeoBundle 'shemerey/vim-project'                "项目管理
 NeoBundle 'ervandew/supertab'                   "按<tab>可实现代码提示
 
@@ -567,7 +559,7 @@ NeoBundle 'gregsexton/MatchTag', {'autoload':{'filetypes':['html','xml']}}
 NeoBundle 'mattn/emmet-vim'                         "emmet 速写
 let g:user_emmet_install_global = 0                                
 autocmd FileType html,css EmmetInstall              "只在html和css中启用
-let g:user_emmet_expandabbr_key='<Tab>'              "更改默认按键
+let g:user_emmet_expandabbr_key='<c-e>'              "更改默认按键
 let g:user_emmet_complete_tag=1
 let g:user_emmet_next_key='<c-n>'
 let g:user_emmet_prev_key='<c-p>'
