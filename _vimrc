@@ -185,13 +185,11 @@ set cmdheight=2
 " 打开文件时，按照 viminfo 保存的上次关闭时的光标位置重新设置光标
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 "================《缩进设置》===================================
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set autoindent
-set expandtab                       "将Tab自动转化成空格 [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
-"set foldmethod=indent              "折叠方式是使用语法折叠
-"set foldlevel=100                  "折叠的层次是100,也就是打开所有的折叠
+set ts=4                           "tab 用空格表示,对python编程尤其重要,因为python是以缩进来局限代码块的
+set expandtab                      "将Tab自动转化成空格 [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
+
+set foldmethod=indent              "折叠方式是使用语法折叠
+set foldlevel=10                   "折叠的层次是100,也就是打开所有的折叠
 
 "=================《外观设置》===============================
 if WINDOWS()
