@@ -145,26 +145,6 @@ endif
 "set completeopt=menuone            "关闭函数preview预览窗口
 set completeopt=longest,menu 		"打开函数preview预览窗口
 set previewwindow    				" 标识预览窗口
-"不要关闭窗口，当删除缓冲区
-command! Bclose call <SID>BufcloseCloseIt()
-function! <SID>BufcloseCloseIt()
-   let l:currentBufNum = bufnr("%")
-   let l:alternateBufNum = bufnr("#")
-
-   if buflisted(l:alternateBufNum)
-     buffer #
-   else
-     bnext
-   endif
-
-   if bufnr("%") == l:currentBufNum
-     new
-   endif
-
-   if buflisted(l:currentBufNum)
-     execute("bdelete! ".l:currentBufNum)
-   endif
-endfunction
 
 filetype plugin indent on
 syntax on
@@ -176,9 +156,10 @@ nmap <leader>w :w!<cr>
 
 "=========================语言与编码===========================
 set helplang=cn                 	"中文帮助
-set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
+set fileencodings=utf-8,ucs-bom,gbk,gb2312,cp936
 set termencoding=utf-8  
 set ffs=unix,dos,mac				"使用UNIX的标准文件类型
+set imcmdline 
 
 "=================《公共配置》=================================
 set nocompatible                	"不使用vi模式"
@@ -532,7 +513,6 @@ endif
 "调试
 Plugin 'kablamo/VimDebug'
 
-
 "---------------------------------
 "在 vim 中导入 shell 的输出
 Plugin 'vim-scripts/Conque-Shell'
@@ -585,6 +565,9 @@ Plugin 'godlygeek/tabular'                   " Tabular: 自动对齐。
 
 Plugin 'shemerey/vim-project'                "项目管理
 Plugin 'ervandew/supertab'                   "按<tab>可实现代码提示
+"使用tab可补全,使用supertab不占用<tab>键
+let g:SuperTabRetainCompletionType = 2 
+let g:SuperTabDefaultCompletionType = "<C-X><C-O>" 
 
 "go语言
 Plugin 'fatih/vim-go'
@@ -621,7 +604,7 @@ Plugin 'davidhalter/jedi-vim'                	"python补全,需要安装:pip ins
     "pip install tox pytest
     let g:jedi#use_tabs_not_buffers = 1
 Plugin 'kevinw/pyflakes-vim'						"python代码检查
-"pip install flakes
+"pip install pyflakes
 let g:syntastic_python_checkers=['pyflakes']
 
 
