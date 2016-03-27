@@ -1,11 +1,11 @@
 ##注意：此为Gvim配置,可以在windows和linux下运行。
 
 * 该项目是我自己的vim配置,可以在linux和windows上通用。<br><br>
-* 使用Neobundle来管理所有的插件包,利于后期更改，使用方法见：https://github.com/Shougo/neobundle.vim<br>
-
+* 使用vundle来管理所有的插件包,利于后期更改，使用方法见：https://github.com/gmarik/vundle.git<br>
 
 ## 支持的语言类型
-* c/c++
+* c
+* c++
 * javascript
 * html
 * css 
@@ -23,8 +23,8 @@
 * windows用户
 * git clone https://github.com/fedkey/vim.git
 * 找到下载的文件夹,复制_vimrc到  $VIM 下。替换之前最好备份一下<br>
- * 创建bundle目录，位置为： $VIM/vimfiles/bundle    （$VIM代表你的vim安装目录）<br>
- * 创建colors目录，位置为：$VIM/vimfiles/colors     如果有就不需创建,到https://github.com/altercation/solarized/tree/master/vim-colors-solarized/colors,将
+* 创建bundle目录，位置为： $VIM/vimfiles/bundle    （$VIM代表你的vim安装目录）<br>
+* 创建colors目录，位置为：$VIM/vimfiles/colors     如果有就不需创建,到https://github.com/altercation/solarized/tree/master/vim-colors-solarized/colors,将
  solarized.vim 放入：colors文件夹中 
   * 需要ctags，请自行下载,地址：http://ctags.sourceforge.net/  
   * 上述步骤完成后，进入：gvim ，执行：NeoBundleInstall 即可。
@@ -47,31 +47,7 @@
 
 * gvim for ubuntu  [solarized dark]
 ![image](https://github.com/fedkey/vim/blob/master/images/linux_gvim.png)
- 
-## 插件bug报备
-启动gvim后，会自己生成一个空白文档。不得不手动关闭。源于winmanager--fox的一个小Bug,解决方法如下：
-进入 winmanager--fox/plugin/ 打开：winmanager.vim   文件。查找：ToggleWindowsManager()函数。原本的ToggleWindowsManager函数为：
-<pre>function! <SID>ToggleWindowsManager()
-	if IsWinManagerVisible()
-		call s:CloseWindowsManager()
-	else
-		call s:StartWindowsManager()
-	end
-endfunction
-</pre>
-修改后的为：
-<pre>
-function! <SID>ToggleWindowsManager()
-	if IsWinManagerVisible()
-		call s:CloseWindowsManager()
-	else
-		call s:StartWindowsManager()
-  exe 'q'
-	end
-endfunction
-</pre>
-
-注：call s:StartWindowsManager() 处，加一行：exe 'q'       方法来源：http://blog.csdn.net/bokee/article/details/6633193
 
 ## 特别声明
 此配置是我自己使用的环境，会不断变化，不敢保证你所拿到的和图上的一致。但可保证的是，配置会越来越强大。
+
