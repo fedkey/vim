@@ -145,13 +145,41 @@ endif
 "set completeopt=menuone            "关闭函数preview预览窗口
 set completeopt=longest,menu 		"打开函数preview预览窗口
 set previewwindow    				" 标识预览窗口
+"不要关闭窗口，当删除缓冲区
+command! Bclose call <SID>BufcloseCloseIt()
+function! <SID>BufcloseCloseIt()
+   let l:currentBufNum = bufnr("%")
+   let l:alternateBufNum = bufnr("#")
+
+   if buflisted(l:alternateBufNum)
+     buffer #
+   else
+     bnext
+   endif
+
+   if bufnr("%") == l:currentBufNum
+     new
+   endif
+
+   if buflisted(l:currentBufNum)
+     execute("bdelete! ".l:currentBufNum)
+   endif
+endfunction
 
 filetype plugin indent on
 syntax on
+"map
+let mapleader = ","
+let g:mapleader = ","
+" 快速保存
+nmap <leader>w :w!<cr>
+
 "=========================语言与编码===========================
 set helplang=cn                 	"中文帮助
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 set termencoding=utf-8  
+set ffs=unix,dos,mac				"使用UNIX的标准文件类型
+
 "=================《公共配置》=================================
 set nocompatible                	"不使用vi模式"
 set linespace=0                 	"字符间插入的像素行数目
@@ -187,6 +215,7 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 "================《缩进设置》===================================
 set ts=4                           "tab 用空格表示,对python编程尤其重要,因为python是以缩进来局限代码块的
 set expandtab                      "将Tab自动转化成空格 [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
+set smarttab
 
 set foldmethod=indent              "折叠方式是使用语法折叠
 set foldlevel=10                   "折叠的层次是100,也就是打开所有的折叠
@@ -208,7 +237,11 @@ set cursorline                              "高亮所在行
 "set cursorcolumn                           "高亮当前列
 "set guioptions-=T                          "隐藏工具栏
 "set guioptions-=m                          "隐藏菜单
-set cmdheight=1                             " 命令行（在状态行下）的高度，默认为1
+" 打开原生菜单
+set wildmenu
+
+set cmdheight=2                             " 命令行（在状态行下）的高度，默认为1
+
 set showmatch                               "高亮显示[] {} ()配对
 if has('statusline')
     set laststatus=2
@@ -231,7 +264,7 @@ endif
 set incsearch                               "当输入的时候,跳到你搜索的关键字那去
 set hlsearch                                "高亮被搜索的关键字
 set ignorecase								"搜索模式里忽略大小写
-set smartcase        " 如果搜索模式包含大写字符，不使用 'ignorecase' 选项。只有在输入搜索模式并且打开 'ignorecase' 选项时才会使用。
+set smartcase        						" 如果搜索模式包含大写字符，不使用 'ignorecase' 选项。只有在输入搜索模式并且打开 'ignorecase' 选项时才会使用。
 "=================《字体》================================
 if WINDOWS()
     set guifont=courier_new:h11
@@ -240,6 +273,9 @@ elseif LINUX()
     " Droid sans mono需要下载
     set guifont=DroidSansMono\ 11
 endif
+
+"性能设置
+set lazyredraw 								"不重绘执行宏
 
 " ==============《根据后缀名指定文件类型》================
 au BufRead,BufNewFile *.h             setlocal ft=c
@@ -259,19 +295,34 @@ au BufRead,BufNewFile *.conf          setlocal ft=nginx
 au BufRead,BufNewFile http*.conf      setlocal ft=apache
 au BufRead,BufNewFile php-fpm*.conf   setlocal ft=dosini
 au BufRead,BufNewFile *.ini           setlocal ft=dosini
- 
- "------------声音---------------
+"鼠标样式
+set so=7
+
+"------------声音---------------
 set vb t_vb=                            "去除报警音
+set noerrorbells
+set novisualbell
+set tm=500
+
 "====文件============
 set clipboard+=unnamed                  " 共享剪贴板
 set showtabline=2                       "以标签形式打开文件
 autocmd BufNewFile * normal G           "新建文件后 自动定位到文件末尾
+"关闭临时文件和备份
 set nobackup                            "禁止生成临时文件
+set nowb
 setlocal noswapfile                     "不要生成swap文件
-"set wrap                               "自动折行
-"set textwidth=79
-"=========按键======="
-set backspace=indent,eol,start          "使用退格键
+set wrap                               	"自动折行
+set textwidth=79
+
+"保存文件后重新载入文件
+if has("autocmd")
+   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
+"=========控制退格键======="
+set backspace=indent,eol,start          
+set whichwrap+=<,>,h,l
 
 
 "安装vundle管理插件，先安装git再安装vundle
@@ -283,11 +334,11 @@ elseif LINUX()             "安装:git clone https://github.com/gmarik/vundle.gi
     call vundle#begin(expand('~/.vim/bundle/'))   		"插件安装位置
 endif
 Plugin 'gmarik/vundle'       				"必须启用
-Plugin 'taglist.vim'                     "Tlist 函数列表
+Plugin 'taglist.vim'                     	"Tlist 函数列表
 let g:Tlist_Use_Right_Window = 1			"位置右栏
 "let Tlist_Auto_Open=1						"打开vim时启动
 
-Plugin 'wesleyche/SrcExpl'				"窗口文件着色
+Plugin 'wesleyche/SrcExpl'					"窗口文件着色
 nmap <F8> :SrcExplToggle<CR> 
 let g:SrcExpl_winHeight = 8 
 let g:SrcExpl_refreshTime = 100 
@@ -305,18 +356,55 @@ let g:SrcExpl_nextDefKey = "<F4>"
 set tags=tags;                          " ';' 不能没有
 
 "文件,项目查找,搜索
-Plugin 'kien/ctrlp.vim'                   	"快速搜索/文件
-Plugin 'scrooloose/nerdtree'             	"树形目录
+Plugin 'mileszs/ack.vim'					"工程查找
+"使用方法: Ack [options] {pattern} [{directories}]
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+let Grep_Skip_Dirs = 'RCS CVS SCCS .svn generated'
+set grepprg=/bin/grep\ -nH
+
+	" 快捷键
+	" ?    a quick summary of these keys, repeat to close
+	" o    to open (same as Enter)
+	" O    to open and close the quickfix window
+	" go   to preview file, open but maintain focus on ack.vim results
+	" t    to open in new tab
+	" T    to open in new tab without moving to it
+	" h    to open in horizontal split
+	" H    to open in horizontal split, keeping focus on the results
+	" v    to open in vertical split
+	" gv   to open in vertical split, keeping focus on the results
+	" q    to close the quickfix window
+
+if LINUX()	
+	Plugin 'rking/ag.vim'							"代码搜索,提供上下文搜索
+	let g:ag_prg="<custom-ag-path-goes-here> --vimgrep"
+	let g:ag_working_path_mode="r"
+endif
+
+
+Plugin 'kien/ctrlp.vim'						"ctrl p查找
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_map = '<c-f>'
+map <leader>j :CtrlP<cr>
+map <c-b> :CtrlPBuffer<cr>
+
+let g:ctrlp_max_height = 20
+let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
+
+
+"界面
+Plugin 'corntrace/bufexplorer'
+"QuickFix窗口
+nmap <F6> :cn<cr>							"// 切换到下一个结果
+nmap <F7> :cp<cr>							"// 切换到上一个结果
+Plugin 'scrooloose/nerdtree'             		"树形目录
 nmap <F3> :NERDTreeToggle<CR>               	"F9调出
 let NERDTreeWinSize=25  
 let g:NERDTreeHight= 30
 let g:NERDTreeMouseMode = 1
 set autochdir
-"界面
-Plugin 'jlanzarotta/bufexplorer'
-"QuickFix窗口
-nmap <F6> :cn<cr>							"// 切换到下一个结果
-nmap <F7> :cp<cr>							"// 切换到上一个结果
 
 let g:winManagerWindowLayout = "TagList|FileExplorer,BufExplorer"
 "========================================<IDE>========================
@@ -361,6 +449,12 @@ let g:tagbar_width=30
 let g:tagbar_left = 1
 let g:NERDTreeChDirMode=1
 Plugin 'vim-scripts/YankRing.vim'        	"剪贴板增强
+	if has("win16") || has("win32")
+		" Don't do anything
+	else
+		let g:yankring_history_dir = '~/.vim_runtime/temp_dirs/'
+	endif
+
 Plugin 'vim-scripts/vimgdb'					"gdb
 " 命令
         ":A 头文件／源文件切换
@@ -438,6 +532,7 @@ endif
 "调试
 Plugin 'kablamo/VimDebug'
 
+
 "---------------------------------
 "在 vim 中导入 shell 的输出
 Plugin 'vim-scripts/Conque-Shell'
@@ -504,6 +599,7 @@ let g:go_highlight_interfaces = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_fail_silently = 1
+let g:go_fmt_command = "goimports"
 
 "go 检查
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
@@ -524,9 +620,10 @@ Plugin 'davidhalter/jedi-vim'                	"python补全,需要安装:pip ins
     "pip install jedi
     "pip install tox pytest
     let g:jedi#use_tabs_not_buffers = 1
-Plugin 'PyCQA/pycodestyle'						"python代码检查
-	"pip install pep8
-	"pep8 --first optparse.py 					"例子
+Plugin 'kevinw/pyflakes-vim'						"python代码检查
+"pip install flakes
+let g:syntastic_python_checkers=['pyflakes']
+
 
 
 "快速跳转
@@ -547,6 +644,7 @@ Plugin 'gregsexton/MatchTag', {'autoload':{'filetypes':['html','xml']}}
 Plugin 'mattn/emmet-vim'                         "emmet 速写
 let g:user_emmet_install_global = 0                                
 autocmd FileType html,css EmmetInstall              "只在html和css中启用
+let g:user_zen_mode='a'
 let g:user_emmet_expandabbr_key='<c-e>'              "更改默认按键
 let g:user_emmet_complete_tag=1
 let g:user_emmet_next_key='<c-n>'
