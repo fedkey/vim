@@ -642,6 +642,9 @@ Plugin 'nono/jquery.vim'                         "jquery高亮
 Plugin 'shawncplus/phpcomplete.vim'
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 
+"扩展
+Plugin 'amoffat/snake'							"可使用python写插件
+
 call vundle#end()
 
 "=============<自定义命令>================
