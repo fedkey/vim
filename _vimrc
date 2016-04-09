@@ -74,20 +74,6 @@ imap <C-x><C-f> <ESC>:browse confirm e<CR>
 nmap <C-x><C-n>  :!ctags -R .<CR>
 imap <C-x><C-n> <ESC>:!ctags -R .<CR>
 
-
-" 转换成16进制
-nmap ,ox :%!xxd<CR>
-" 恢复原始制式
-nmap ,-ox :%!xxd -r<CR>
-
-"vim 设置{{{
-"initialize default settings
-let s:settings = {}
-let s:settings.default_indent = 2
-let s:settings.max_column = 120
-let s:settings.enable_cursorcolumn = 0
-"let s:settings.colorscheme = 'jellybeans'
-
 " 修改 _vimrc 后自动生效 
 autocmd! bufwritepost _vimrc source %
 
@@ -144,7 +130,7 @@ endif
 "视图
 "set completeopt=menuone            "关闭函数preview预览窗口
 set completeopt=longest,menu 		"打开函数preview预览窗口
-set previewwindow    				" 标识预览窗口
+"set previewwindow    				" 标识预览窗口,开启后 python会报错
 
 filetype plugin indent on
 syntax on
@@ -196,10 +182,11 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 "================《缩进设置》===================================
 set ts=4                           "tab 用空格表示,对python编程尤其重要,因为python是以缩进来局限代码块的
 set expandtab                      "将Tab自动转化成空格 [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
+%retab!
 set smarttab
 
 set foldmethod=indent              "折叠方式是使用语法折叠
-set foldlevel=10                   "折叠的层次是100,也就是打开所有的折叠
+set foldlevel=100                   "折叠的层次是100,也就是打开所有的折叠
 
 "=================《外观设置》===============================
 if WINDOWS()
@@ -210,33 +197,20 @@ elseif LINUX()
 endif
 
 "==============《配色主题》==============
-colorscheme molokai 			"主题
 set t_Co=256
 
 
 set cursorline                              "高亮所在行
-"set cursorcolumn                           "高亮当前列
+set cursorcolumn                            "高亮当前列
 "set guioptions-=T                          "隐藏工具栏
 "set guioptions-=m                          "隐藏菜单
-" 打开原生菜单
+"打开原生菜单
 set wildmenu
 
-set cmdheight=2                             " 命令行（在状态行下）的高度，默认为1
+set cmdheight=1                             " 命令行（在状态行下）的高度，默认为1
 
 set showmatch                               "高亮显示[] {} ()配对
-if has('statusline')
-    set laststatus=2
 
-    " Broken down into easily includeable segments
-    set statusline=%<%f\                     " Filename
-    set statusline+=%w%h%m%r                 " Options
-    if !exists('g:override_spf13_bundles')
-        set statusline+=%{fugitive#statusline()} " Git Hotness
-    endif
-    set statusline+=\ [%{&ff}/%Y]            " Filetype
-    set statusline+=\ [%{getcwd()}]          " Current dir
-    set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
-endif
 "--------------------高级技巧---------------------------------
 "autocmd BufWritePre * :%s/\s\+$//e "保存文件时自动去除行末空格
 "指定文件类型去除行末空格
@@ -308,18 +282,18 @@ set whichwrap+=<,>,h,l
 
 "安装vundle管理插件，先安装git再安装vundle
 if WINDOWS()             "安装:git clone https://github.com/gmarik/vundle.git
-  set runtimepath+=$VIM/vimfiles/bundle/vundle    			" 此处规定vundle的路径
+  set runtimepath+=$VIM/vimfiles/bundle/vundle    		" 此处规定vundle的路径
     call vundle#begin(expand('$VIM/vimfiles/bundle/')) 	"插件安装位置
 elseif LINUX()             "安装:git clone https://github.com/gmarik/vundle.git
   set runtimepath+=~/.vim/bundle/vundle/         			" 此处规定vundle的路径
     call vundle#begin(expand('~/.vim/bundle/'))   		"插件安装位置
 endif
-Plugin 'gmarik/vundle'       				"必须启用
-Plugin 'taglist.vim'                     	"Tlist 函数列表
-let g:Tlist_Use_Right_Window = 1			"位置右栏
-"let Tlist_Auto_Open=1						"打开vim时启动
+Plugin 'gmarik/vundle'       							"必须启用
+Plugin 'taglist.vim'                     				"Tlist 函数列表
+let g:Tlist_Use_Right_Window = 1						"位置右栏
+"let Tlist_Auto_Open=1									"打开vim时启动
 
-Plugin 'wesleyche/SrcExpl'					"窗口文件着色
+Plugin 'wesleyche/SrcExpl'								"窗口文件着色
 nmap <F8> :SrcExplToggle<CR> 
 let g:SrcExpl_winHeight = 8 
 let g:SrcExpl_refreshTime = 100 
@@ -380,16 +354,15 @@ Plugin 'corntrace/bufexplorer'
 "QuickFix窗口
 nmap <F6> :cn<cr>							"// 切换到下一个结果
 nmap <F7> :cp<cr>							"// 切换到上一个结果
-Plugin 'scrooloose/nerdtree'             		"树形目录
-nmap <F3> :NERDTreeToggle<CR>               	"F9调出
+Plugin 'scrooloose/nerdtree'             	"树形目录
+nmap <F3> :NERDTreeToggle<CR>               "F9调出
 let NERDTreeWinSize=25  
 let g:NERDTreeHight= 30
 let g:NERDTreeMouseMode = 1
 set autochdir
-
 let g:winManagerWindowLayout = "TagList|FileExplorer,BufExplorer"
-"========================================<IDE>========================
 
+"========================================<IDE>========================
 Plugin 'mhinz/vim-startify'				"显示最近使用的文件列表
 Plugin 'vim-scripts/sessionman.vim'		"session管理
 let g:session_menu = 1
@@ -399,24 +372,10 @@ let g:session_menu = 1
 "e                        - edit session
 "x                        - edit extra session script
 "{
-Plugin 'vim-scripts/vim-babel'
-Plugin 'mattn/webapi-vim'
-""}
-Plugin 'jceb/vim-orgmode'  
-"git 
-Plugin 'tpope/vim-fugitive'              "git信息
-Plugin 'airblade/vim-gitgutter'          "git 插件
-let g:gitgutter_sign_column_always = 1
-let g:gitgutter_max_signs = 500
-nmap ]h <Plug>GitGutterNextHunk
-nmap [h <Plug>GitGutterPrevHunk
-nmap <Leader>ha <Plug>GitGutterStageHunk
-nmap <Leader>hu <Plug>GitGutterRevertHunk
-nmap <Leader>hv <Plug>GitGutterPreviewHunk
-Plugin 'mattn/gist-vim'
-let g:gist_detect_filetype = 1
 
-Plugin 'scrooloose/syntastic'            "语法检查
+Plugin 'jceb/vim-orgmode'  
+
+Plugin 'scrooloose/syntastic'            	"语法检查
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1 			"自动开启检查
@@ -424,34 +383,11 @@ let g:syntastic_check_on_wq = 0
 
 Plugin 'Raimondi/delimitMate'                "补全括号和引号
 Plugin 'majutsushi/tagbar'                   "tagbar
-let g:tagbar_sort = 0                           "关闭排序[也就是按标签本身在文件中的位置排序]
-let g:tagbar_show_linenumbers = -1              "显示行号
+let g:tagbar_sort = 0                        "关闭排序[也就是按标签本身在文件中的位置排序]
+"let g:tagbar_show_linenumbers = -1          "显示行号
 let g:tagbar_width=30
 let g:tagbar_left = 1
-let g:NERDTreeChDirMode=1
-Plugin 'vim-scripts/YankRing.vim'        	"剪贴板增强
-	if has("win16") || has("win32")
-		" Don't do anything
-	else
-		let g:yankring_history_dir = '~/.vim_runtime/temp_dirs/'
-	endif
 
-Plugin 'vim-scripts/vimgdb'					"gdb
-" 命令
-        ":A 头文件／源文件切换
-        ":AS 分割窗后并切换头/源文件(切割为上下两个窗口)
-       	":AV 垂直切割窗口后切换头/源文件(切割为左右两个窗口)
-        ":AT 新建Vim标签式窗口后切换
-        ":AN 在多个匹配文件间循环切换,将光标所在处单词作为文件名打开
-        ":IH 切换至光标所在文件
-        ":IHS 分割窗口后切换至光标所在文件(指将光标所在处单词作为文件名打开)
-        ":IHV 垂直分割窗口后切换
-        ":IHT 新建标签式窗口后切换
-        ":IHN 在多个匹配文件间循环切换
-    	"快捷键操作
-        	"<Leader>ih 切换至光标所在文件*
-        	"<Leader>is 切换至光标所在处(单词所指)文件的配对文件(如光标所在处为foo.h，则切换至foo.c/foo.cpp...)
-        	"<Leader>ihn 在多个匹配文件间循环切换
 
 "快速文件切换插件a.vim 
 Plugin 'vim-scripts/a.vim'		
@@ -461,17 +397,16 @@ Plugin 'sjl/gundo.vim'                   "查看撤销树,类似版本控制系�
 nnoremap <F2> :GundoToggle<CR>
 " 开启自动预览 [随着光标在标签上的移动，顶部会出现一个实时的预览窗口]
 let g:tagbar_autopreview = 1
-Plugin 'tomasr/molokai'                  "molokai配色
 "状态栏
 Plugin 'bling/vim-airline'               "状态栏美化
-Plugin  'Lokaltog/vim-powerline'         "状态栏增强
+"Plugin  'Lokaltog/vim-powerline'         "状态栏增强
 Plugin 'itchyny/lightline.vim'           "状态栏横条美化
-set laststatus=2                      		"总是显示状态栏
+set laststatus=2                      	 "总是显示状态栏
 " 状态栏样式
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
 set ruler                                   " 显示光标当前位置
 
-Plugin 'pbrisbin/vim-mkdir'				"新建文件时,自动创建不存在的目录
+Plugin 'pbrisbin/vim-mkdir'				 "新建文件时,自动创建不存在的目录
 
 Plugin 'terryma/vim-multiple-cursors'    "多光标编辑
     " 默认设置
@@ -510,20 +445,7 @@ if has('lua')
 	"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 endif
 
-"调试
-Plugin 'kablamo/VimDebug'
-
 "---------------------------------
-"在 vim 中导入 shell 的输出
-Plugin 'vim-scripts/Conque-Shell'
-let g:ConqueTerm_TERM ='xterm'
-nmap <Leader>sh :ConqueTerm bash<CR>
-nmap <Leader>shs :ConqueTermSplit bash<CR>
-nmap <Leader>shv :ConqueTermVSplit bash<CR>
-nmap <Leader>sht :ConqueTermTab bash<CR>
-
-Plugin 'tomtom/tcomment_vim'             "快速注释
-Plugin 'kien/rainbow_parentheses.vim'    "挂号匹配高亮
 Plugin 'Yggdroot/indentLine'
 let g:indentLine_color_term = 239
 let g:indentLine_color_gui = '#3366ff'
@@ -537,30 +459,9 @@ Plugin 'msanders/snipmate.vim'           "spipmate代码片段
 
 Plugin 'nathanaelkane/vim-indent-guides'
 
-" Fast navigation
-
-if LINUX()
-	Plugin 'vim-scripts/cscope.vim'  	"交互式查询语言符号功能查询哪些地方使用某个变量或调用某个函数
-	"为了界面更好看，可以把Cscope的查找结果输出到quickfix窗口
-	set cscopequickfix=s-,c-,d-,i-,t-,e-  
-	"使用Cscope需要生成cscope数据库文件。进入项目代码根目录运行命令：
-	"cscope -Rbq -f path/xxx.out  
-	"  Ctrl-\ s 查找所有当前光标所在符号出现过位置
-	"  Ctrl-\ c 查找所有调用当前光标所在函数的函数
-endif
-
-"-----------------
-Plugin 'edsono/vim-matchit'
-
-"项目管理
-Plugin 'tpope/vim-projectionist'             "项目创建
 "添加环绕
 Plugin 'tpope/vim-surround'                  "快速给词加环绕符号,例如引号
 
-"Plugin 'ianva/vim-youdao-translater'         "有道翻译"
-"vnoremap <silent> <C-T> <Esc>:Ydv<CR>
-"nnoremap <silent> <C-T> <Esc>:Ydc<CR>
-"noremap <leader>yd :Yde<CR>
 Plugin 'godlygeek/tabular'                   " Tabular: 自动对齐。
 
 Plugin 'shemerey/vim-project'                "项目管理
@@ -591,22 +492,25 @@ let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 " ============ c/c++ ide
 Plugin 'vim-scripts/c.vim'
 Plugin 'vim-scripts/cpp.vim'
-Plugin 'WolfgangMehner/vim-plugins'
-	let  g:C_UseTool_cmake    = 'yes'
-	let  g:C_UseTool_doxygen = 'yes'
 
 "==================python IDE============
-Plugin 'vim-scripts/indentpython.vim'        	"python自动缩进
-Plugin 'yssource/python.vim'
-Plugin 'davidhalter/jedi-vim'                	"python补全,需要安装:pip install jedi
-    autocmd FileType python setlocal completeopt-=preview
-    "pip install jedi
-    "pip install tox pytest
-    let g:jedi#use_tabs_not_buffers = 1
+Plugin 'yssource/python.vim'            	
+Plugin 'klen/python-mode'
+
+Plugin 'davidhalter/jedi-vim' 
+"python补全,需要安装:pip install jedi
+"let g:jedi#auto_initialization = 0
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#use_tabs_not_buffers = 1
+let g:jedi#popup_on_dot = 0
+let g:jedi#popup_select_first = 0
+let g:jedi#completions_enabled = 1
+
+let g:jedi#show_call_signatures = 0
+
 Plugin 'kevinw/pyflakes-vim'						"python代码检查
 "pip install pyflakes
 let g:syntastic_python_checkers=['pyflakes']
-
 
 
 "快速跳转
@@ -618,32 +522,17 @@ Plugin 'easymotion/vim-easymotion'
     map <Leader>h <Plug>(easymotion-linebackward)
     let g:EasyMotion_use_smartsign_us = 1 " US layout
     let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
-
-"Coffeescript ide
-Plugin 'kchmck/vim-coffee-script'
-
 "--------------------《web 插件》--------------------------------------
 Plugin 'gregsexton/MatchTag', {'autoload':{'filetypes':['html','xml']}}
 Plugin 'mattn/emmet-vim'                         "emmet 速写
 let g:user_emmet_install_global = 0                                
 autocmd FileType html,css EmmetInstall              "只在html和css中启用
 let g:user_zen_mode='a'
-let g:user_emmet_expandabbr_key='<c-e>'              "更改默认按键
+let g:user_emmet_expandabbr_key='<c-e>'             "更改默认按键
 let g:user_emmet_complete_tag=1
 let g:user_emmet_next_key='<c-n>'
 let g:user_emmet_prev_key='<c-p>'
-Plugin 'docunext/closetag.vim'                    "关闭标签
-Plugin 'othree/xml.vim'                           "xml插件
-
-"----------javascript-----------------------
-Plugin 'nono/jquery.vim'                         "jquery高亮
-
-"php
-Plugin 'shawncplus/phpcomplete.vim'
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-
-"扩展
-Plugin 'amoffat/snake'							"可使用python写插件
+Plugin 'docunext/closetag.vim'                    	"关闭标签
 
 call vundle#end()
 
