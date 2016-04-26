@@ -180,7 +180,9 @@ set cmdheight=2
 " 打开文件时，按照 viminfo 保存的上次关闭时的光标位置重新设置光标
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 "================《缩进设置》===================================
-set ts=4                           "tab 用空格表示,对python编程尤其重要,因为python是以缩进来局限代码块的
+set ts=2                           "tab 用空格表示,对python编程尤其重要,因为python是以缩进来局限代码块的
+set shiftwidth=4		       "缩进为4个空格
+set autoindent			"每行的缩进值与上一行相等
 set expandtab                      "将Tab自动转化成空格 [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
 %retab!
 set smarttab
@@ -533,6 +535,17 @@ let g:user_emmet_complete_tag=1
 let g:user_emmet_next_key='<c-n>'
 let g:user_emmet_prev_key='<c-p>'
 Plugin 'docunext/closetag.vim'                    	"关闭标签
+"-----------------------java ide -------------------------------------
+Plugin 'artur-shaik/vim-javacomplete2'
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+nmap <F4> <Plug>(JavaComplete-Imports-AddSmart)
+imap <F4> <Plug>(JavaComplete-Imports-AddSmart)
+nmap <F5> <Plug>(JavaComplete-Imports-Add)
+imap <F5> <Plug>(JavaComplete-Imports-Add)
+let g:JavaComplete_UseFQN = 1
+let g:JavaComplete_ImportOrder = ['java.', 'javax.', 'com.', 'org.', 'net.']
+
+Plugin 'tpope/vim-classpath'
 
 call vundle#end()
 
@@ -588,7 +601,14 @@ func SetTitle()
     call append(4,"作者:        fedkey")
     call append(5,"邮箱:        fedkey@sina.com")
     call append(6,"博客：       huimingcc.com")
-    call append(7, "*/")
+    call append(7,"*/")
+    call append(8,"public class ".expand("%<"))
+    call append(9,"{")
+    call append(10,"    public static void main(String[] args)")
+    call append(11,"    {")
+    call append(12,"        //todo")
+    call append(13,"    }")
+    call append(14, "}")
   endif
 
 	if &filetype == 'c'
@@ -631,6 +651,10 @@ func! RunScript()
 			exec "!go build %"
 			exec "!%<"
 		endif
+	elseif &filetype == 'java'
+		exec "!javac %"
+		exec "!java %<"
+
     endif
 endfunc
 map <F5> :call RunScript()<CR>
