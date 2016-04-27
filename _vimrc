@@ -352,6 +352,14 @@ let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
 
 
 "界面
+Plugin 'ryanoasis/nerd-fonts'
+Plugin 'ryanoasis/vim-devicons' 
+let g:airline_powerline_fonts = 1
+Plugin 'junegunn/vim-github-dashboard.git'
+" ----- man pages, tmux -----------------------------------------------
+Plugin 'jez/vim-superman'
+Plugin 'christoomey/vim-tmux-navigator'
+
 Plugin 'corntrace/bufexplorer'
 "QuickFix窗口
 nmap <F6> :cn<cr>							"// 切换到下一个结果
@@ -362,6 +370,14 @@ let NERDTreeWinSize=25
 let g:NERDTreeHight= 30
 let g:NERDTreeMouseMode = 1
 set autochdir
+Plugin 'fholgado/minibufexpl.vim'
+    " MiniBufExpl Colors
+    hi MBENormal               guifg=#808080 guibg=fg
+    hi MBEChanged              guifg=#CD5907 guibg=fg
+    hi MBEVisibleNormal        guifg=#5DC2D6 guibg=fg
+    hi MBEVisibleChanged       guifg=#F1266F guibg=fg
+    hi MBEVisibleActiveNormal  guifg=#A6DB29 guibg=fg
+    hi MBEVisibleActiveChanged guifg=#F1266F guibg=fg
 let g:winManagerWindowLayout = "TagList|FileExplorer,BufExplorer"
 
 "========================================<IDE>========================
@@ -374,6 +390,7 @@ let g:session_menu = 1
 "e                        - edit session
 "x                        - edit extra session script
 "{
+
 
 Plugin 'jceb/vim-orgmode'  
 
@@ -427,6 +444,10 @@ set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ 
 set ruler                                   " 显示光标当前位置
 
 Plugin 'pbrisbin/vim-mkdir'				 "新建文件时,自动创建不存在的目录
+"编辑
+Plugin 'FredKSchott/CoVim'         "协同编辑vim
+"pip install twisted argparse
+Plugin 'xolox/vim-misc'
 
 Plugin 'terryma/vim-multiple-cursors'    "多光标编辑
     " 默认设置
@@ -464,6 +485,9 @@ if has('lua')
 	"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 	"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 endif
+Plugin 'donnemartin/dev-setup'
+"终端
+Plugin 'Shougo/vimshell.vim'
 
 "---------------------------------
 Plugin 'Yggdroot/indentLine'
@@ -516,8 +540,6 @@ Plugin 'vim-scripts/cpp.vim'
 
 "==================python IDE============
 Plugin 'yssource/python.vim'            	
-Plugin 'klen/python-mode'
-
 Plugin 'davidhalter/jedi-vim' 
 "python补全,需要安装:pip install jedi
 "let g:jedi#auto_initialization = 0
@@ -532,7 +554,7 @@ let g:jedi#show_call_signatures = 0
 Plugin 'kevinw/pyflakes-vim'						"python代码检查
 "pip install pyflakes
 let g:syntastic_python_checkers=['pyflakes']
-
+Plugin 'ivanov/vim-ipython'
 
 "快速跳转
 Plugin 'easymotion/vim-easymotion'
@@ -570,7 +592,8 @@ let g:JavaComplete_UseFQN = 1
 let g:JavaComplete_ImportOrder = ['java.', 'javax.', 'com.', 'org.', 'net.']
 
 Plugin 'tpope/vim-classpath'
-
+"other
+Plugin 'evanmiller/nginx-vim-syntax'                "nginx
 call vundle#end()
 
 "=============<自定义命令>================
