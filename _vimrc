@@ -188,7 +188,7 @@ set expandtab                      "将Tab自动转化成空格 [需要输入真
 set smarttab
 
 set foldmethod=indent              "折叠方式是使用语法折叠
-set foldlevel=100                   "折叠的层次是100,也就是打开所有的折叠
+"set foldlevel=100                   "折叠的层次是100,也就是打开所有的折叠
 
 "=================《外观设置》===============================
 if WINDOWS()
@@ -203,11 +203,11 @@ set t_Co=256
 
 
 set cursorline                              "高亮所在行
-set cursorcolumn                            "高亮当前列
-"set guioptions-=T                          "隐藏工具栏
+"set cursorcolumn                           "高亮当前列
+set guioptions-=T                           "隐藏工具栏
 "set guioptions-=m                          "隐藏菜单
 "打开原生菜单
-set wildmenu
+"set wildmenu
 
 set cmdheight=1                             " 命令行（在状态行下）的高度，默认为1
 
@@ -345,13 +345,6 @@ Plugin 'ctrlpvim/ctrlp.vim'						"ctrl p查找
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
- let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 "界面
 Plugin 'ryanoasis/vim-devicons' 
@@ -447,8 +440,6 @@ set ruler                                   " 显示光标当前位置
 
 Plugin 'pbrisbin/vim-mkdir'				 "新建文件时,自动创建不存在的目录
 "编辑
-Plugin 'FredKSchott/CoVim'         "协同编辑vim
-"pip install twisted argparse
 Plugin 'xolox/vim-misc'
 
 Plugin 'terryma/vim-multiple-cursors'    "多光标编辑
@@ -583,14 +574,9 @@ Plugin 'wsdjeg/java_getset.vim'
 Plugin 'vim-scripts/JavaBrowser'
 Plugin 'vim-jp/vim-java'
 Plugin 'vim-scripts/Vim-JDE'
-Plugin 'vim-scripts/javacomplete'
+Plugin 'jostillmanns/javacomplete'
 Plugin 'artur-shaik/vim-javacomplete2'
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
-nmap <F4> <Plug>(JavaComplete-Imports-AddSmart)
-imap <F4> <Plug>(JavaComplete-Imports-AddSmart)
-nmap <F5> <Plug>(JavaComplete-Imports-Add)
-imap <F5> <Plug>(JavaComplete-Imports-Add)
-let g:JavaComplete_UseFQN = 1
 
 "other
 Plugin 'evanmiller/nginx-vim-syntax'                "nginx
