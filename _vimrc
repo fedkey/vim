@@ -352,8 +352,8 @@ let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
 
 
 "界面
-Plugin 'ryanoasis/nerd-fonts'
 Plugin 'ryanoasis/vim-devicons' 
+"需要安装ryanoasis/nerd-fonts  地址：github.com/ryanoasis/nerd-fonts.git
 let g:airline_powerline_fonts = 1
 Plugin 'junegunn/vim-github-dashboard.git'
 " ----- man pages, tmux -----------------------------------------------
@@ -589,9 +589,7 @@ imap <F4> <Plug>(JavaComplete-Imports-AddSmart)
 nmap <F5> <Plug>(JavaComplete-Imports-Add)
 imap <F5> <Plug>(JavaComplete-Imports-Add)
 let g:JavaComplete_UseFQN = 1
-let g:JavaComplete_ImportOrder = ['java.', 'javax.', 'com.', 'org.', 'net.']
 
-Plugin 'tpope/vim-classpath'
 "other
 Plugin 'evanmiller/nginx-vim-syntax'                "nginx
 call vundle#end()
