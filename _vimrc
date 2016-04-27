@@ -287,7 +287,7 @@ if WINDOWS()             "安装:git clone https://github.com/gmarik/vundle.git
   set runtimepath+=$VIM/vimfiles/bundle/vundle    		" 此处规定vundle的路径
     call vundle#begin(expand('$VIM/vimfiles/bundle/')) 	"插件安装位置
 elseif LINUX()             "安装:git clone https://github.com/gmarik/vundle.git
-  set runtimepath+=~/.vim/bundle/vundle/         			" 此处规定vundle的路径
+  set rtp+=~/.vim/bundle/vundle         			" 此处规定vundle的路径
     call vundle#begin(expand('~/.vim/bundle/'))   		"插件安装位置
 endif
 Plugin 'gmarik/vundle'       							"必须启用
@@ -382,6 +382,24 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1 			"自动开启检查
 let g:syntastic_check_on_wq = 0
+let g:syntastic_java_javac_delete_output = 0
+let g:syntastic_java_javac_config_file_enabled = 0
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_style_error_symbol = '✠'
+let g:syntastic_warning_symbol = '∆'
+let g:syntastic_style_warning_symbol = '≈'
+Plugin 'syngan/vim-vimlint', {
+            \ 'depends' : 'ynkdir/vim-vimlparser'}
+let g:syntastic_vimlint_options = { 
+            \'EVL102': 1 ,
+            \'EVL103': 1 ,
+            \'EVL205': 1 ,
+            \'EVL105': 1 ,
+            \}
 
 Plugin 'Raimondi/delimitMate'                "补全括号和引号
 Plugin 'majutsushi/tagbar'                   "tagbar
@@ -396,7 +414,7 @@ Plugin 'vim-scripts/a.vim'
 " 撤销
 Plugin 'mbbill/undotree'                 "撤销树
 Plugin 'sjl/gundo.vim'                   "查看撤销树,类似版本控制系统,可恢复到某一阶段
-nnoremap <F2> :GundoToggle<CR>
+nnoremap <F7> :GundoToggle<CR>
 " 开启自动预览 [随着光标在标签上的移动，顶部会出现一个实时的预览窗口]
 let g:tagbar_autopreview = 1
 "状态栏
@@ -467,6 +485,7 @@ Plugin 'tpope/vim-surround'                  "快速给词加环绕符号,例如
 Plugin 'godlygeek/tabular'                   " Tabular: 自动对齐。
 
 Plugin 'shemerey/vim-project'                "项目管理
+
 Plugin 'ervandew/supertab'                   "按<tab>可实现代码提示
 "使用tab可补全,使用supertab不占用<tab>键
 let g:SuperTabRetainCompletionType = 2 
@@ -536,6 +555,11 @@ let g:user_emmet_next_key='<c-n>'
 let g:user_emmet_prev_key='<c-p>'
 Plugin 'docunext/closetag.vim'                    	"关闭标签
 "-----------------------java ide -------------------------------------
+Plugin 'wsdjeg/java_getset.vim'
+Plugin 'vim-scripts/JavaBrowser'
+Plugin 'vim-jp/vim-java'
+Plugin 'vim-scripts/Vim-JDE'
+Plugin 'vim-scripts/javacomplete'
 Plugin 'artur-shaik/vim-javacomplete2'
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
 nmap <F4> <Plug>(JavaComplete-Imports-AddSmart)
