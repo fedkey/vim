@@ -572,7 +572,7 @@ Plugin 'docunext/closetag.vim'                    	"关闭标签
 Plugin 'wsdjeg/java_getset.vim'
 Plugin 'vim-scripts/JavaBrowser'
 Plugin 'vim-jp/vim-java'
-Plugin 'vim-scripts/Vim-JDE'
+"Plugin 'vim-scripts/Vim-JDE'
 Plugin 'jostillmanns/javacomplete'
 Plugin 'artur-shaik/vim-javacomplete2'
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
