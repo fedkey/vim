@@ -145,7 +145,6 @@ set helplang=cn                 	"中文帮助
 set fileencodings=utf-8,ucs-bom,gbk,gb2312,cp936
 set termencoding=utf-8  
 set ffs=unix,dos,mac				"使用UNIX的标准文件类型
-set imcmdline 
 
 "=================《公共配置》=================================
 set nocompatible                	"不使用vi模式"
@@ -547,7 +546,7 @@ let g:jedi#show_call_signatures = 0
 Plugin 'kevinw/pyflakes-vim'						"python代码检查
 "pip install pyflakes
 let g:syntastic_python_checkers=['pyflakes']
-Plugin 'ivanov/vim-ipython'
+"Plugin 'ivanov/vim-ipython'
 
 "快速跳转
 Plugin 'easymotion/vim-easymotion'
