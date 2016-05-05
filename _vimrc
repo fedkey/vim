@@ -145,6 +145,7 @@ set helplang=cn                 	"中文帮助
 set fileencodings=utf-8,ucs-bom,gbk,gb2312,cp936
 set termencoding=utf-8  
 set ffs=unix,dos,mac				"使用UNIX的标准文件类型
+set imcmdline 
 
 "=================《公共配置》=================================
 set nocompatible                	"不使用vi模式"
@@ -268,8 +269,8 @@ autocmd BufNewFile * normal G           "新建文件后 自动定位到文件�
 set nobackup                            "禁止生成临时文件
 set nowb
 setlocal noswapfile                     "不要生成swap文件
-set wrap                               	"自动折行
-set textwidth=79
+"set wrap                               	"自动折行
+"set textwidth=79
 
 "保存文件后重新载入文件
 if has("autocmd")
@@ -527,8 +528,8 @@ let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 " ============ c/c++ ide
-Plugin 'vim-scripts/c.vim'
-Plugin 'vim-scripts/cpp.vim'
+"Plugin 'vim-scripts/c.vim'
+"Plugin 'vim-scripts/cpp.vim'
 
 "==================python IDE============
 Plugin 'yssource/python.vim'            	
@@ -656,12 +657,12 @@ func! RunScript()
     elseif &filetype == 'c'
 		if LINUX()
 			exec "w"
-			exec "!gcc -g % -o %<"
+      exec "!gcc -g % -o  %<"
 			exec "! ./%<"
 		elseif WINDOWS() "添加dgb
 			exec "w"
-			exec "!gcc -g % -o %<"
-			exec "!%<"
+      exec "!gcc %<"
+			exec "! %<.exe"
 		endif
 		
     elseif &filetype == 'cpp'
