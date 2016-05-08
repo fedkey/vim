@@ -530,22 +530,17 @@ let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 
 "==================python IDE============
-Plugin 'yssource/python.vim'            	
-Plugin 'davidhalter/jedi-vim' 
-"python补全,需要安装:pip install jedi
-"let g:jedi#auto_initialization = 0
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#use_tabs_not_buffers = 1
-let g:jedi#popup_on_dot = 0
-let g:jedi#popup_select_first = 0
-let g:jedi#completions_enabled = 1
+Plugin 'klen/python-mode'
+" Override go-to.definition key shortcut to Ctrl-]
+let g:pymode_rope_goto_definition_bind = "<C-]>"
 
-let g:jedi#show_call_signatures = 0
+" Override run current python file key shortcut to Ctrl-Shift-e
+let g:pymode_run_bind = "<C-S-e>"
 
-Plugin 'kevinw/pyflakes-vim'						"python代码检查
-"pip install pyflakes
-let g:syntastic_python_checkers=['pyflakes']
-"Plugin 'ivanov/vim-ipython'
+" Override view python doc key shortcut to Ctrl-Shift-d
+let g:pymode_doc_bind = "<C-S-d>"
+
+
 
 "快速跳转
 Plugin 'easymotion/vim-easymotion'
