@@ -347,9 +347,6 @@ set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
 
 "界面
-Plugin 'ryanoasis/vim-devicons' 
-"需要安装ryanoasis/nerd-fonts  地址：github.com/ryanoasis/nerd-fonts.git
-let g:airline_powerline_fonts = 1
 Plugin 'junegunn/vim-github-dashboard.git'
 " ----- man pages, tmux -----------------------------------------------
 Plugin 'jez/vim-superman'
@@ -376,6 +373,8 @@ Plugin 'fholgado/minibufexpl.vim'
 let g:winManagerWindowLayout = "TagList|FileExplorer,BufExplorer"
 
 "========================================<IDE>========================
+"colorscheme
+colorscheme murphy
 Plugin 'mhinz/vim-startify'				"显示最近使用的文件列表
 Plugin 'vim-scripts/sessionman.vim'		"session管理
 let g:session_menu = 1
@@ -386,6 +385,8 @@ let g:session_menu = 1
 "x                        - edit extra session script
 "{
 
+"AWK,Bash,C/C++,LaTeX,Perl ,Vim-Script  IDE并集成git插件
+Plugin 'WolfgangMehner/vim-plugins'        
 
 Plugin 'jceb/vim-orgmode'  
 
@@ -527,9 +528,6 @@ let g:go_fmt_command = "goimports"
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
-" ============ c/c++ ide
-"Plugin 'vim-scripts/c.vim'
-"Plugin 'vim-scripts/cpp.vim'
 
 "==================python IDE============
 Plugin 'yssource/python.vim'            	
