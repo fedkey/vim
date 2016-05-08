@@ -541,7 +541,6 @@ let g:pymode_run_bind = "<C-S-e>"
 let g:pymode_doc_bind = "<C-S-d>"
 
 
-
 "快速跳转
 Plugin 'easymotion/vim-easymotion'
 " Gif config
@@ -650,8 +649,7 @@ func! RunScript()
     elseif &filetype == 'c'
 		if LINUX()
 			exec "w"
-      exec "!gcc -g % -o  %<"
-			exec "! ./%<"
+			exec "!gcc -g % -o  %< && ./%<"
 		elseif WINDOWS() "添加dgb
 			exec "w"
       exec "!gcc %<"
@@ -661,25 +659,20 @@ func! RunScript()
     elseif &filetype == 'cpp'
 		if LINUX()
 			exec "w"
-			exec "!gcc -g % -o %<"
-			exec "! ./%<"
+			exec "!gcc -g % -o %< && ./%<"
 		elseif WINDOWS()
-			exec "!g++ -g % -o %<"
-			exec "! %<"
+			exec "!gcc -g % -o %< && %<"
 		endif
 		"golang
 	elseif &filetype == 'go'
 		if LINUX()
 			exec "w"
-			exec "!go build %"
-			exec "! ./%<"
+			exec "!go build % && ./%<"
 		elseif WINDOWS()
-			exec "!go build %"
-			exec "!%<"
+			exec "!go build % && !%<"
 		endif
 	elseif &filetype == 'java'
-		exec "!javac %"
-		exec "!java %<"
+		exec "!javac % && java %<"
 
     endif
 endfunc
