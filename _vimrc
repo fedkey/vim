@@ -188,7 +188,7 @@ set expandtab                      "将Tab自动转化成空格 [需要输入真
 set smarttab
 
 set foldmethod=indent              "折叠方式是使用语法折叠
-"set foldlevel=100                   "折叠的层次是100,也就是打开所有的折叠
+set foldlevel=100                   "折叠的层次是100,也就是打开所有的折叠
 
 "=================《外观设置》===============================
 if WINDOWS()
@@ -374,7 +374,7 @@ let g:winManagerWindowLayout = "TagList|FileExplorer,BufExplorer"
 
 "========================================<IDE>========================
 "colorscheme
-colorscheme murphy
+"colorscheme murphy
 Plugin 'mhinz/vim-startify'				"显示最近使用的文件列表
 Plugin 'vim-scripts/sessionman.vim'		"session管理
 let g:session_menu = 1
@@ -435,8 +435,6 @@ Plugin 'bling/vim-airline'               "状态栏美化
 "Plugin  'Lokaltog/vim-powerline'         "状态栏增强
 Plugin 'itchyny/lightline.vim'           "状态栏横条美化
 set laststatus=2                      	 "总是显示状态栏
-" 状态栏样式
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
 set ruler                                   " 显示光标当前位置
 
 Plugin 'pbrisbin/vim-mkdir'				 "新建文件时,自动创建不存在的目录
@@ -562,10 +560,12 @@ let g:user_emmet_next_key='<c-n>'
 let g:user_emmet_prev_key='<c-p>'
 Plugin 'docunext/closetag.vim'                    	"关闭标签
 "-----------------------java ide -------------------------------------
+Plugin 'fedkey/vjde' "vjde
+Plugin 'fedkey/maven-ide' "vim maven 插件
 Plugin 'wsdjeg/java_getset.vim'
 Plugin 'vim-scripts/JavaBrowser'
 Plugin 'vim-jp/vim-java'
-"Plugin 'vim-scripts/Vim-JDE'
+Plugin 'vim-scripts/Vim-JDE'
 Plugin 'jostillmanns/javacomplete'
 Plugin 'artur-shaik/vim-javacomplete2'
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
