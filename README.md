@@ -6,6 +6,7 @@
 ## 支持的语言类型
 * c
 * c++
+* java
 * javascript
 * html
 * css 
