@@ -1,7 +1,7 @@
 scriptencoding utf-8
 "-----------------      作者: fedkey
 "-----------------      邮箱: fedkey@sina.com
-" -----------------     博客: http://huimingcc.com
+" -----------------     博客: http://yangshengliang.com
 "系统依赖
 "linux-debian fedora ubuntu
 "sudo yum install ctags
@@ -562,10 +562,7 @@ Plugin 'docunext/closetag.vim'                    	"关闭标签
 "-----------------------java ide -------------------------------------
 Plugin 'fedkey/vjde' "vjde
 Plugin 'fedkey/maven-ide' "vim maven 插件
-Plugin 'wsdjeg/java_getset.vim'
 Plugin 'vim-scripts/JavaBrowser'
-Plugin 'vim-jp/vim-java'
-Plugin 'vim-scripts/Vim-JDE'
 Plugin 'jostillmanns/javacomplete'
 Plugin 'artur-shaik/vim-javacomplete2'
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
@@ -584,7 +581,7 @@ func SetTitle()
     call setline(1,"\#!/bin/bash")
         call append(1,"# 作者:" .    "  fedkey")
         call append(2,"# 邮箱:" .    "  fedkey@sina.com")
-        call append(3,"# 博客:" .    "  huimingcc.com")
+        call append(3,"# 博客:" .    "  yangshengliang.com")
         call append(4,"# 创建日期:" .strftime("%Y-%m-%d"))
 
     elseif &filetype == 'python'
@@ -595,7 +592,7 @@ func SetTitle()
         call append(4,"创建日期:    " . strftime("%Y-%m-%d"))
       call append(5,"作者:        fedkey")
       call append(6,"邮箱:        fedkey@sina.com")
-        call append(7,"博客：       huimingcc.com")
+        call append(7,"博客：       yangshengliang.com")
         call append(8, "\"\"\"")
 
     elseif &filetype == 'ruby'
@@ -608,7 +605,7 @@ func SetTitle()
     call append(line(".")+1,"文件名:  ".expand("%"))
     call append(line(".")+2,"作者:    fedkey")
     call append(line(".")+3,"邮箱:    fedkey@sina.com ")
-    call append(line(".")+4,"博客:    huimingcc.com ")
+    call append(line(".")+4,"博客:    yangshengliang.com ")
     call append(line(".")+5,"创建日期:" . strftime("%Y-%m-%d"))
     call append(line(".")+6, "*/")
   endif
@@ -625,7 +622,7 @@ func SetTitle()
     call append(3,"创建日期:    " . strftime("%Y-%m-%d"))
     call append(4,"作者:        fedkey")
     call append(5,"邮箱:        fedkey@sina.com")
-    call append(6,"博客：       huimingcc.com")
+    call append(6,"博客：       yangshengliang.com")
     call append(7,"*/")
     call append(8,"public class ".expand("%<"))
     call append(9,"{")
