@@ -342,10 +342,10 @@ au FileType gitcommit call setpos('.', [0, 1, 1, 0])
 
 " extended start----------------------------------------------------------
 "安装neobundle.vim管理插件，先安装git再安装neobundle.vim
-if WINDOWS()             			"安装:git clone git clone https://github.com/Shougo/neobundle.vim
+if WINDOWS()             			"安装:git clone  https://github.com/Shougo/neobundle.vim
   set runtimepath+=$VIM/vimfiles/bundle/neobundle.vim/    		" 此处规定neobundle.vim的路径
     call neobundle#begin(expand('$VIM/vimfiles/bundle/')) 	"插件安装位置
-elseif LINUX()             "安装:git clone git clone https://github.com/Shougo/neobundle.vim
+elseif LINUX()             "安装:git clone  https://github.com/Shougo/neobundle.vim
   set rtp+=~/.vim/bundle/neobundle.vim         			" 此处规定neobundle.vim的路径
     call neobundle#begin(expand('~/.vim/bundle/'))   	"插件安装位置
 endif
@@ -584,9 +584,8 @@ let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 "==================python IDE============
 NeoBundle 'vim-scripts/indentpython.vim'
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 NeoBundle 'davidhalter/jedi-vim'		"python jedi补全
-NeoBundle 'vim-scripts/VimPdb'
+"NeoBundle 'vim-scripts/VimPdb'
 NeoBundle 'nvie/vim-flake8'
 NeoBundle 'jistr/vim-nerdtree-tabs'
 "快速跳转
