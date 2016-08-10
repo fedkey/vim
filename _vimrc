@@ -583,13 +583,12 @@ let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 
 "==================python IDE============
-NeoBundle 'klen/python-mode'									"需要很多库的支持，请点击以下的链接获取说明
-"install 
-"add-apt-repository https://klen.github.io/python-mode/deb main
-"apt-get update
-"apt-get install vim-python-mode
+NeoBundle 'vim-scripts/indentpython.vim'
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 NeoBundle 'davidhalter/jedi-vim'		"python jedi补全
-
+NeoBundle 'vim-scripts/VimPdb'
+NeoBundle 'nvie/vim-flake8'
+NeoBundle 'jistr/vim-nerdtree-tabs'
 "快速跳转
 NeoBundle 'easymotion/vim-easymotion'
 " Gif config
