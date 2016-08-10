@@ -233,13 +233,8 @@ set hlsearch                                "高亮被搜索的关键字
 set ignorecase								"搜索模式里忽略大小写
 set smartcase        						" 如果搜索模式包含大写字符，不使用 'ignorecase' 选项。只有在输入搜索模式并且打开 'ignorecase' 选项时才会使用。
 "=================《字体》================================
-if WINDOWS()
-    set guifont=courier_new:h11
-elseif LINUX()
-    " set guifont=DejaVu\Sans\Mono\ 11
-    " Droid sans mono需要下载
-    set guifont=DroidSansMono\ 11
-endif
+
+set guifont=Consolas:h11
 
 " ==============《根据后缀名指定文件类型》================
 au BufRead,BufNewFile *.h             setlocal ft=c
@@ -436,7 +431,7 @@ let g:session_menu = 1
 NeoBundle 'altercation/vim-colors-solarized'
 
 try
-    colorscheme murphy
+    colorscheme solarized
 catch
 endtry
 
