@@ -1,7 +1,7 @@
 ##注意：此为Gvim配置,可以在windows和linux下运行。
 
 * 该项目是我自己的vim配置,可以在linux和windows上通用。<br><br>
-* 使用vundle来管理所有的插件包,利于后期更改，使用方法见：https://github.com/gmarik/vundle.git<br>
+* 使用neobundle.vim来管理所有的插件包,利于后期更改，使用方法见：https://github.com/Shougo/neobundle.vim<br>
 
 ## 支持的语言类型
 * c
