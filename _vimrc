@@ -75,6 +75,12 @@ imap <C-x><C-f> <ESC>:browse confirm e<CR>
 nmap <C-x><C-n>  :!ctags -R .<CR>
 imap <C-x><C-n> <ESC>:!ctags -R .<CR>
 
+" 插入模式下的快捷按键
+map!	<M-j>	<Down>
+map!	<M-k>	<Up>
+map!	<M-h>	<left>
+map!	<M-l>	<Right>
+
 " 修改 _vimrc 后自动生效 
 autocmd! bufwritepost _vimrc source %
 
