@@ -149,8 +149,8 @@ nmap <leader>w :w!<cr>
 
 "=========================语言与编码===========================
 set helplang=cn                 	"中文帮助
+set fileencoding=utf-8 
 set fileencodings=utf-8,ucs-bom,gbk,gb2312,cp936
-set termencoding=utf-8  
 set ffs=unix,dos,mac				"使用UNIX的标准文件类型
 set imcmdline 
 
