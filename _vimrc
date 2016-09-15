@@ -208,15 +208,15 @@ endif
 
 " Set extra options when running in GUI mode
 if has("gui_running")
-    set guioptions-=T
-    set guioptions-=e
+    "set guioptions-=T
+    "set guioptions-=e
     set t_Co=256
     set guitablabel=%M\ %t
 endif
 
 set cursorline                              "高亮所在行
 "set cursorcolumn                           "高亮当前列
-set guioptions-=T                           "隐藏工具栏
+"set guioptions-=T                           "隐藏工具栏
 "set guioptions-=m                          "隐藏菜单
 "打开原生菜单
 set wildmenu
@@ -609,12 +609,12 @@ let g:user_emmet_next_key='<c-n>'
 let g:user_emmet_prev_key='<c-p>'
 NeoBundle 'docunext/closetag.vim'                    	"关闭标签
 "-----------------------java ide -------------------------------------
-NeoBundle 'fedkey/vjde' "vjde
-NeoBundle 'fedkey/maven-ide' "vim maven 插件
-NeoBundle 'vim-scripts/JavaBrowser'
-NeoBundle 'jostillmanns/javacomplete'
-NeoBundle 'artur-shaik/vim-javacomplete2'
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
+"NeoBundle 'fedkey/vjde' "vjde
+"NeoBundle 'fedkey/maven-ide' "vim maven 插件
+"NeoBundle 'vim-scripts/JavaBrowser'
+"NeoBundle 'jostillmanns/javacomplete'
+"NeoBundle 'artur-shaik/vim-javacomplete2'
+"autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
 "other
 NeoBundle 'evanmiller/nginx-vim-syntax'                "nginx
