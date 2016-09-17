@@ -352,8 +352,13 @@ endif
 NeoBundleFetch 'Shougo/neobundle.vim'       			"必须启用
 NeoBundle 'taglist.vim'                     			"Tlist 函数列表
 let g:Tlist_Use_Right_Window = 1						"位置右栏
-let Tlist_Auto_Open=1									"打开vim时启动
+let Tlist_Show_One_File=1  
+"如果taglist窗口是最后一个窗口，则退出vim"
+let Tlist_Exit_OnlyWindow = 1 
 
+"显示taglist菜单
+let Tlist_Show_Menu=1
+let Tlist_Auto_Open=1									"打开vim时启动
 NeoBundle 'wesleyche/SrcExpl'								"窗口文件着色
 nmap <F8> :SrcExplToggle<CR> 
 let g:SrcExpl_winHeight = 8 
@@ -386,7 +391,6 @@ NeoBundle 'ctrlpvim/ctrlp.vim'						"ctrl p查找
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     		" MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  		" Windows
 
-
 "界面
 NeoBundle 'junegunn/vim-github-dashboard.git'
 " ----- man pages, tmux -----------------------------------------------
@@ -399,22 +403,53 @@ NeoBundle 'corntrace/bufexplorer'
 nmap <F6> :cn<cr>							"// 切换到下一个结果
 nmap <F7> :cp<cr>							"// 切换到上一个结果
 NeoBundle 'scrooloose/nerdtree'             	"树形目录
+let NERDTreeShowHidden=0					"不显示隐藏文件
+"排序"
+let NERDTreeSortOrder=['//$','/.cpp$','/.c$', '/.h$', '/.py$', '/.lua$', '*'] 
+"高亮NERDTrre窗口的当前行"
+let NERDTreeHighlightCursorline=1
+
 nmap <F3> :NERDTreeToggle<CR>               "F9调出
-let NERDTreeWinSize=25  
-let g:NERDTreeHight= 30
-let g:NERDTreeMouseMode = 1
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 set autochdir
 NeoBundle 'fholgado/minibufexpl.vim'
-    " MiniBufExpl Colors
-    hi MBENormal               guifg=#808080 guibg=fg
-    hi MBEChanged              guifg=#CD5907 guibg=fg
-    hi MBEVisibleNormal        guifg=#5DC2D6 guibg=fg
-    hi MBEVisibleChanged       guifg=#F1266F guibg=fg
-    hi MBEVisibleActiveNormal  guifg=#A6DB29 guibg=fg
-    hi MBEVisibleActiveChanged guifg=#F1266F guibg=fg
-let g:winManagerWindowLayout = "TagList|FileExplorer,BufExplorer"
+    let g:miniBufExplMapWindowNavVim = 1   
+    let g:miniBufExplMapWindowNavArrows = 1   
+    let g:miniBufExplMapCTabSwitchBufs = 1   
+    let g:miniBufExplModSelTarget = 1  
+    let g:miniBufExplMoreThanOne=0  
+
+NeoBundle 'vim-scripts/winmanager'
+"在进入vim时自动打开winmanager
+let g:AutoOpenWinManager = 1
+let g:NERDTree_title="[NERDTree]"  
+"设置winmanager的宽度，默认为25
+let g:winManagerWidth = 30
+let g:NERDTree_title="[NERDTree]"  
+let g:winManagerWindowLayout="NERDTree|TagList"  
+function! NERDTree_Start()  
+        exec 'NERDTree'  
+endfunction  
+      
+function! NERDTree_IsValid()  
+        return 1  
+endfunction 
+
+nmap wm :WMToggle<CR> 
+"这个版本的Winmanager好像有个小bug，你在打开Winmanager界面时，
+"会同时打开一个空的文件。这会影响后续使用。
+"在~/.vim/plugin目录下的winmanager.vim文件中找到以下函数定义并在第5行下添加第6行的内容：
+"
+"[plain] view plain copy
+"
+"    function! <SID>ToggleWindowsManager()  
+"       if IsWinManagerVisible()  
+"          call s:CloseWindowsManager()  
+"      else  
+"          call s:StartWindowsManager()  
+"          exe 'q'  
+"       end  
+"    endfunction  
 
 "========================================<IDE>========================
 NeoBundle 'mhinz/vim-startify'				"显示最近使用的文件列表
@@ -454,9 +489,9 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_style_error_symbol = '✠'
-let g:syntastic_warning_symbol = '∆'
+let g:syntastic_error_symbol = '?'
+let g:syntastic_style_error_symbol = '?'
+let g:syntastic_warning_symbol = '?'
 let g:syntastic_style_warning_symbol = '≈'
 NeoBundle 'syngan/vim-vimlint', {
             \ 'depends' : 'ynkdir/vim-vimlparser'}
