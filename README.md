@@ -6,7 +6,7 @@
 ## 支持的语言类型
 * c
 * c++
-* java
+* java(不建议用vim写java,应该选择eclipse 或 netbeans)
 * javascript
 * html
 * css 
