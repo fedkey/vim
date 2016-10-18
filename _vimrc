@@ -411,7 +411,7 @@ let g:NERDTreeWinSize=23
 let NERDTreeSortOrder=['//$','/.cpp$','/.c$', '/.h$', '/.py$', '/.lua$', '*'] 
 "高亮NERDTrre窗口的当前行"
 let NERDTreeHighlightCursorline=1
-autocmd vimenter * NERDTree					"自动打开
+"autocmd vimenter * NERDTree					"自动打开
 nmap <F3> :NERDTreeToggle<CR>               "F3调出
 
 set autochdir
@@ -525,6 +525,7 @@ Plugin 'Shougo/neocomplete.vim'			"补全
 		elseif WINDOWS()
 			let g:neosnippet#snippets_directory='$VIM/$VIMFILES/bundle/vim-snippets/snippets'
 		endif
+Plugin 'Shougo/neosnippet.vim'
 
 Plugin 'xolox/vim-session'                "session
 	let g:loaded_session = 1
