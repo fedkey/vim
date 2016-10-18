@@ -343,17 +343,17 @@ au FileType gitcommit call setpos('.', [0, 1, 1, 0])
 " filetype end --------------------------------------
 
 " extended start----------------------------------------------------------
-"安装neobundle.vim管理插件，先安装git再安装neobundle.vim
-if WINDOWS()             			"安装:git clone  https://github.com/Shougo/neobundle.vim
-  set runtimepath+=$VIM/vimfiles/bundle/neobundle.vim/    		" 此处规定neobundle.vim的路径
-    call neobundle#begin(expand('$VIM/vimfiles/bundle/')) 	"插件安装位置
-elseif LINUX()             "安装:git clone  https://github.com/Shougo/neobundle.vim
-  set rtp+=~/.vim/bundle/neobundle.vim         			" 此处规定neobundle.vim的路径
-    call neobundle#begin(expand('~/.vim/bundle/'))   	"插件安装位置
+"安装Vundle.vim管理插件，先安装git再安装Vundle.vim
+if WINDOWS()             			"安装:git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+  set runtimepath+=$VIM/vimfiles/bundle/Vundle.vim/    		" 此处规定Vundle.vim的路径
+    call vundle#begin(expand('$VIM/vimfiles/bundle/')) 	"插件安装位置
+elseif LINUX()             "安装:git clone  https://github.com/VundleVim/Vundle.vim.git
+  set rtp+=~/.vim/bundle/Vundle.vim         			" 此处规定Vundle.vim的路径
+    call vundle#begin(expand('~/.vim/bundle/'))   	"插件安装位置
 endif
-NeoBundleFetch 'Shougo/neobundle.vim'       			"必须启用
-NeoBundle 'taglist.vim'                     			"Tlist 函数列表
-let g:Tlist_Use_Right_Window = 1						"位置右栏
+Plugin 'VundleVim/Vundle.vim'       				"必须启用
+Plugin 'taglist.vim'                     			"Tlist 函数列表
+let g:Tlist_Use_Right_Window = 1					"位置右栏
 let Tlist_Show_One_File=1  
 "如果taglist窗口是最后一个窗口，则退出vim"
 let Tlist_Exit_OnlyWindow = 1 
@@ -361,7 +361,7 @@ let Tlist_Exit_OnlyWindow = 1
 "显示taglist菜单
 let Tlist_Show_Menu=1
 let Tlist_Auto_Open=1									"打开vim时启动
-NeoBundle 'wesleyche/SrcExpl'								"窗口文件着色
+Plugin 'wesleyche/SrcExpl'								"窗口文件着色
 nmap <F8> :SrcExplToggle<CR> 
 let g:SrcExpl_winHeight = 8 
 let g:SrcExpl_refreshTime = 100 
@@ -376,52 +376,53 @@ let g:SrcExpl_updateTagsCmd = "ctags --sort=foldcase -R ."
 let g:SrcExpl_updateTagsKey = "<F12>" 
 let g:SrcExpl_prevDefKey = "<F6>" 
 let g:SrcExpl_nextDefKey = "<F4>" 
-set tags=tags;                          " ';' 不能没有
+set tags=tags;                          			" ';' 不能没有
 
 "文件,项目查找,搜索
-NeoBundle 'Shougo/unite.vim'					"浏览、查找文件
+Plugin 'Shougo/unite.vim'							"浏览、查找文件
 
-NeoBundle 'wincent/command-t'
+Plugin 'wincent/command-t'
 if LINUX()	
-	NeoBundle 'rking/ag.vim'							"代码搜索,提供上下文搜索
+	Plugin 'rking/ag.vim'							"代码搜索,提供上下文搜索
 	let g:ag_prg="<custom-ag-path-goes-here> --vimgrep"
 	let g:ag_working_path_mode="r"
 endif
 
-NeoBundle 'ctrlpvim/ctrlp.vim'						"ctrl p查找
+Plugin 'ctrlpvim/ctrlp.vim'							"ctrl p查找
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     		" MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  		" Windows
 
 "界面
-NeoBundle 'junegunn/vim-github-dashboard.git'
+Plugin 'junegunn/vim-github-dashboard.git'
 " ----- man pages, tmux -----------------------------------------------
-NeoBundle 'jez/vim-superman'
-NeoBundle 'christoomey/vim-tmux-navigator'
-NeoBundle 'donnemartin/dev-setup'
+Plugin 'jez/vim-superman'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'donnemartin/dev-setup'
 
-NeoBundle 'corntrace/bufexplorer'
+Plugin 'corntrace/bufexplorer'
 "QuickFix窗口
 nmap <F6> :cn<cr>							"// 切换到下一个结果
 nmap <F7> :cp<cr>							"// 切换到上一个结果
 
-NeoBundle 'scrooloose/nerdtree'             "树形目录
+Plugin 'scrooloose/nerdtree'             	"树形目录
 let NERDTreeShowHidden=0					"不显示隐藏文件
 let g:NERDTreeWinSize=23
 "排序"
 let NERDTreeSortOrder=['//$','/.cpp$','/.c$', '/.h$', '/.py$', '/.lua$', '*'] 
 "高亮NERDTrre窗口的当前行"
 let NERDTreeHighlightCursorline=1
+autocmd vimenter * NERDTree					"自动打开
 nmap <F3> :NERDTreeToggle<CR>               "F3调出
 
 set autochdir
-NeoBundle 'fholgado/minibufexpl.vim'
+Plugin 'fholgado/minibufexpl.vim'
     let g:miniBufExplMapWindowNavVim = 1   
     let g:miniBufExplMapWindowNavArrows = 1   
     let g:miniBufExplMapCTabSwitchBufs = 1   
     let g:miniBufExplModSelTarget = 1  
     let g:miniBufExplMoreThanOne=0  
 
-NeoBundle 'vim-scripts/winmanager'
+Plugin 'vim-scripts/winmanager'
 "在进入vim时自动打开winmanager
 let g:AutoOpenWinManager = 1
 let g:NERDTree_title="[NERDTree]"  
@@ -454,12 +455,13 @@ nmap wm :WMToggle<CR>
 "    endfunction  
 
 "========================================<IDE>========================
-NeoBundle 'mhinz/vim-startify'				"显示最近使用的文件列表
-NeoBundle 'vim-scripts/YankRing.vim'
+Plugin 'mhinz/vim-startify'				"显示最近使用的文件列表
+
+Plugin 'vim-scripts/YankRing.vim'
 set cul 									"高亮光标所在位置
 set ruler           						" 显示标尺  
 "主题
-NeoBundle 'tomasr/molokai'
+Plugin 'tomasr/molokai'
 
 try
     colorscheme molokai
@@ -467,9 +469,7 @@ try
 catch
 endtry
 
-NeoBundle 'jceb/vim-orgmode'  
-
-NeoBundle 'scrooloose/syntastic'            	"语法检查
+Plugin 'scrooloose/syntastic'            	"语法检查
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1 			"自动开启检查
@@ -484,7 +484,7 @@ let g:syntastic_error_symbol = '?'
 let g:syntastic_style_error_symbol = '?'
 let g:syntastic_warning_symbol = '?'
 let g:syntastic_style_warning_symbol = '≈'
-NeoBundle 'syngan/vim-vimlint', {
+Plugin 'syngan/vim-vimlint', {
             \ 'depends' : 'ynkdir/vim-vimlparser'}
 let g:syntastic_vimlint_options = { 
             \'EVL102': 1 ,
@@ -493,15 +493,15 @@ let g:syntastic_vimlint_options = {
             \'EVL105': 1 ,
             \}
 
-NeoBundle 'Raimondi/delimitMate'             "补全括号和引号
-NeoBundle 'majutsushi/tagbar'                   "tagbar
+Plugin 'Raimondi/delimitMate'             "补全括号和引号
+Plugin 'majutsushi/tagbar'                   "tagbar
 let g:tagbar_sort = 0                        "关闭排序[也就是按标签本身在文件中的位置排序]
 "let g:tagbar_show_linenumbers = -1          "显示行号
 let g:tagbar_width=30
 let g:tagbar_left = 1
-NeoBundle 'honza/vim-snippets'				"snippets代码
+Plugin 'honza/vim-snippets'				"snippets代码
 
-NeoBundle 'Shougo/neocomplete.vim'			"补全
+Plugin 'Shougo/neocomplete.vim'			"补全
 	" Plugin key-mappings.
 	imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 	smap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -526,30 +526,28 @@ NeoBundle 'Shougo/neocomplete.vim'			"补全
 			let g:neosnippet#snippets_directory='$VIM/$VIMFILES/bundle/vim-snippets/snippets'
 		endif
 
-NeoBundle 'Shougo/neosnippet'
-
-NeoBundle 'xolox/vim-session'                "session
+Plugin 'xolox/vim-session'                "session
 	let g:loaded_session = 1
 	
 "快速文件切换插件a.vim 
-NeoBundle 'vim-scripts/a.vim'		
+Plugin 'vim-scripts/a.vim'		
 " 撤销
-NeoBundle 'mbbill/undotree'                 "撤销树
-NeoBundle 'sjl/gundo.vim'                   "查看撤销树,类似版本控制系统,可恢复到某一阶段
+Plugin 'mbbill/undotree'                 "撤销树
+Plugin 'sjl/gundo.vim'                   "查看撤销树,类似版本控制系统,可恢复到某一阶段
 	nnoremap <F7> :GundoToggle<CR>
 	" 开启自动预览 [随着光标在标签上的移动，顶部会出现一个实时的预览窗口]
 	let g:tagbar_autopreview = 1
 
 "状态栏
-NeoBundle 'itchyny/lightline.vim'           "状态栏横条美化
+Plugin 'itchyny/lightline.vim'           "状态栏横条美化
 	  
 	set laststatus=2                      	"总是显示状态栏
 
-NeoBundle 'pbrisbin/vim-mkdir'				 "新建文件时,自动创建不存在的目录
+Plugin 'pbrisbin/vim-mkdir'				 "新建文件时,自动创建不存在的目录
 "编辑
-NeoBundle 'xolox/vim-misc'
+Plugin 'xolox/vim-misc'
 
-NeoBundle 'terryma/vim-multiple-cursors'    "多光标编辑
+Plugin 'terryma/vim-multiple-cursors'    "多光标编辑
     " 默认设置
     let g:multi_cursor_next_key='<C-n>'
     let g:multi_cursor_prev_key='<C-p>'
@@ -557,38 +555,38 @@ NeoBundle 'terryma/vim-multiple-cursors'    "多光标编辑
     let g:multi_cursor_quit_key='<Esc>'
 
 "终端
-NeoBundle 'Shougo/vimshell.vim'
+Plugin 'Shougo/vimshell.vim'
 
 "---------------------------------
-NeoBundle 'Yggdroot/indentLine'
+Plugin 'Yggdroot/indentLine'
 let g:indentLine_color_term = 239
 let g:indentLine_color_gui = '#3366ff'
 let g:indentLine_char = '|'
-NeoBundle 'danro/rename.vim'                "重命名插件
-NeoBundle 'jiangmiao/auto-pairs'            "自动插入和格式化方括号和圆括号
-NeoBundle 'vim-scripts/matchit.zip'         "\ %匹配成对的标签，跳转
+Plugin 'danro/rename.vim'                "重命名插件
+Plugin 'jiangmiao/auto-pairs'            "自动插入和格式化方括号和圆括号
+Plugin 'vim-scripts/matchit.zip'         "\ %匹配成对的标签，跳转
 
 "代码块
-NeoBundle 'msanders/snipmate.vim'           	"spipmate代码片段
+Plugin 'msanders/snipmate.vim'           	"spipmate代码片段
 
-NeoBundle 'nathanaelkane/vim-indent-guides'
+Plugin 'nathanaelkane/vim-indent-guides'
 
 "添加环绕
-NeoBundle 'tpope/vim-surround'                  "快速给词加环绕符号,例如引号
+Plugin 'tpope/vim-surround'                  "快速给词加环绕符号,例如引号
 
-NeoBundle 'godlygeek/tabular'                   " Tabular: 自动对齐。
+Plugin 'godlygeek/tabular'                   " Tabular: 自动对齐。
 
-NeoBundle 'shemerey/vim-project'                "项目管理
+Plugin 'shemerey/vim-project'                "项目管理
 
-NeoBundle 'ervandew/supertab'                   "按<tab>可实现代码提示
+Plugin 'ervandew/supertab'                   "按<tab>可实现代码提示
 "使用tab可补全,使用supertab不占用<tab>键
 let g:SuperTabRetainCompletionType = 2 
 let g:SuperTabDefaultCompletionType = "<C-X><C-O>" 
 "快速注释
-NeoBundle 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdcommenter'
 
 "go语言
-NeoBundle 'fatih/vim-go'
+Plugin 'fatih/vim-go'
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>t <Plug>(go-test)
@@ -608,11 +606,11 @@ let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 
 "==================python IDE============
-NeoBundle 'vim-scripts/indentpython.vim'
-"NeoBundle 'vim-scripts/VimPdb'
-NeoBundle 'nvie/vim-flake8'
+Plugin 'vim-scripts/indentpython.vim'
+"Plugin 'vim-scripts/VimPdb'
+Plugin 'nvie/vim-flake8'
 "快速跳转
-NeoBundle 'easymotion/vim-easymotion'
+Plugin 'easymotion/vim-easymotion'
 " Gif config
     map <Leader>l <Plug>(easymotion-lineforward)
     map <Leader>j <Plug>(easymotion-j)
@@ -621,32 +619,32 @@ NeoBundle 'easymotion/vim-easymotion'
     let g:EasyMotion_use_smartsign_us = 1 " US layout
     let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
 "--------------------《web 插件》--------------------------------------
-NeoBundle 'mattn/webapi-vim'
-NeoBundle 'gregsexton/MatchTag', {'autoload':{'filetypes':['html','xml']}}
-NeoBundle 'mattn/emmet-vim'                         "emmet 速写
+Plugin 'mattn/webapi-vim'
+Plugin 'gregsexton/MatchTag', {'autoload':{'filetypes':['html','xml']}}
+Plugin 'mattn/emmet-vim'                         "emmet 速写
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall				"只在html和css中启用                          
 let g:user_zen_mode='a'
 let g:user_emmet_expandabbr_key='<C-E>'             "更改默认按键
-let g:user_emmet_complete_tag=1
+let g:user_emmet_complete_tag=0
 let g:user_emmet_next_key='<c-n>'
 let g:user_emmet_prev_key='<c-p>'
 
-NeoBundle 'docunext/closetag.vim'                   "关闭标签
-NeoBundle 'gruntjs/grunt-contrib-watch'				"快速预览,无需要刷新页面
+Plugin 'docunext/closetag.vim'                   "关闭标签
+Plugin 'gruntjs/grunt-contrib-watch'				"快速预览,无需要刷新页面
 
 
 "编辑写作===============================
-NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'jceb/vim-orgmode'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'jceb/vim-orgmode'
 
 "other
-NeoBundle 'evanmiller/nginx-vim-syntax'             "nginx
+Plugin 'evanmiller/nginx-vim-syntax'             "nginx
 
 "drupal 7
 " drupal 开发 https://www.drupal.org/project/vimrc
 
-NeoBundle 'tanarurkerem/drupal-snippets'
+Plugin 'tanarurkerem/drupal-snippets'
 if has("autocmd")
   " Drupal *.module and *.install files.
   augroup module
@@ -659,11 +657,8 @@ if has("autocmd")
   augroup END
 endif
 syntax on
-
-
-call neobundle#end()
+call vundle#end()
 filetype plugin indent on
- NeoBundleCheck
 "=============<自定义命令>================
 filetype plugin indent on                           " 开启自动检测文件类型
 autocmd BufNewFile * normal G
