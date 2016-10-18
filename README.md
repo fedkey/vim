@@ -1,12 +1,12 @@
 ##注意：此为Gvim配置,可以在windows和linux下运行。
 
 * 该项目是我自己的vim配置,可以在linux和windows上通用。<br><br>
-* 使用neobundle.vim来管理所有的插件包,利于后期更改，使用方法见：https://github.com/Shougo/neobundle.vim<br>
+* 使用Vundle.vim来管理所有的插件包,利于后期更改，使用方法见：https://github.com/VundleVim/Vundle.vim.git<br>
 
 ## 支持的语言类型
 * c
 * c++
-* java(不建议用vim写java,应该选择eclipse 或 netbeans)
+* java(不建议用vim写java,应该选择eclipse 或 netbeans，已去掉)
 * javascript
 * html
 * css 
@@ -22,7 +22,7 @@
 ## 安装说明
 
 * windows用户
-* git clone https://github.com/Shougo/neobundle.vim
+* git clone https://github.com/VundleVim/Vundle.vim.git
 * 找到下载的文件夹,复制_vimrc到  $VIM 下。替换之前最好备份一下<br>
 * 创建bundle目录，位置为： $VIM/vimfiles/bundle    （$VIM代表你的vim安装目录）<br>
 * 创建colors目录，位置为：$VIM/vimfiles/colors     如果有就不需创建,到https://github.com/altercation/solarized/tree/master/vim-colors-solarized/colors,将
@@ -33,7 +33,7 @@
 
 
 * linux用户 
-*  git clone https://github.com/Shougo/neobundle.vim 
+*  git clone https://github.com/VundleVim/Vundle.vim.git
 *  复制_vimrc文件到~/，使用：mv _vimrc .vimrc 来修改_vimrc 。如果原来有.vimrc文件，替换掉原来的 .vimrc文件，操作之前先备份一下原来的.vimrc文件，当前想恢复的时候，可以换回来。<br>
  * 创建bundle目录，位置为： ~/.vim/bundle<br>
  * 创建colors目录，位置为： ~/.vim/colors，到https://github.com/altercation/solarized/tree/master/vim-colors-solarized/colors,将
