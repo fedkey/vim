@@ -83,7 +83,7 @@ map!	<M-l>	<Right>
 
 " 修改 _vimrc 后自动生效 
 autocmd! bufwritepost _vimrc source %
-
+filetype plugin indent on
 "===========《判断是什么样的系统》============================
 "选择操作系统(os){{{
 function! OSX()
@@ -184,11 +184,13 @@ set wildmenu
 set wildignore=*.o,*~,*.pyc
 
 " 打开文件时，按照 viminfo 保存的上次关闭时的光标位置重新设置光标
-au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+"au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 "================《缩进设置》===================================
 set ts=2                           	"tab 用空格表示,对python编程尤其重要,因为python是以缩进来局限代码块的
 set shiftwidth=4		       		"缩进为4个空格
 set autoindent						"每行的缩进值与上一行相等
+set smartindent
+
 set expandtab                      	"将Tab自动转化成空格 [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
 %retab!
 set smarttab
@@ -216,7 +218,7 @@ endif
 
 set cursorline                              "高亮所在行
 "set cursorcolumn                           "高亮当前列
-"set guioptions-=T                           "隐藏工具栏
+set guioptions-=T                          "隐藏工具栏
 "set guioptions-=m                          "隐藏菜单
 "打开原生菜单
 set wildmenu
@@ -386,7 +388,6 @@ if LINUX()
 	let g:ag_working_path_mode="r"
 endif
 
-
 NeoBundle 'ctrlpvim/ctrlp.vim'						"ctrl p查找
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     		" MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  		" Windows
@@ -402,14 +403,15 @@ NeoBundle 'corntrace/bufexplorer'
 "QuickFix窗口
 nmap <F6> :cn<cr>							"// 切换到下一个结果
 nmap <F7> :cp<cr>							"// 切换到上一个结果
-NeoBundle 'scrooloose/nerdtree'             	"树形目录
+
+NeoBundle 'scrooloose/nerdtree'             "树形目录
 let NERDTreeShowHidden=0					"不显示隐藏文件
+let g:NERDTreeWinSize=23
 "排序"
 let NERDTreeSortOrder=['//$','/.cpp$','/.c$', '/.h$', '/.py$', '/.lua$', '*'] 
 "高亮NERDTrre窗口的当前行"
 let NERDTreeHighlightCursorline=1
-
-nmap <F3> :NERDTreeToggle<CR>               "F9调出
+nmap <F3> :NERDTreeToggle<CR>               "F3调出
 
 set autochdir
 NeoBundle 'fholgado/minibufexpl.vim'
@@ -453,28 +455,17 @@ nmap wm :WMToggle<CR>
 
 "========================================<IDE>========================
 NeoBundle 'mhinz/vim-startify'				"显示最近使用的文件列表
-NeoBundle 'vim-scripts/sessionman.vim'		"session管理
-let g:session_menu = 1
-"q                        - close session list
-"o, <CR>, <2-LeftMouse>   - open session
-"d                        - delete session
-"e                        - edit session
-"x                        - edit extra session script
-"{
-
+NeoBundle 'vim-scripts/YankRing.vim'
+set cul 									"高亮光标所在位置
+set ruler           						" 显示标尺  
 "主题
-NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'tomasr/molokai'
 
 try
-    colorscheme solarized
+    colorscheme molokai
+	let g:molokai_original = 1
 catch
 endtry
-
-set background=dark
-
-
-"AWK,Bash,C/C++,LaTeX,Perl ,Vim-Script  IDE并集成git插件
-NeoBundle 'WolfgangMehner/vim-plugins'        
 
 NeoBundle 'jceb/vim-orgmode'  
 
@@ -502,28 +493,57 @@ let g:syntastic_vimlint_options = {
             \'EVL105': 1 ,
             \}
 
-NeoBundle 'Raimondi/delimitMate'                "补全括号和引号
+NeoBundle 'Raimondi/delimitMate'             "补全括号和引号
 NeoBundle 'majutsushi/tagbar'                   "tagbar
 let g:tagbar_sort = 0                        "关闭排序[也就是按标签本身在文件中的位置排序]
 "let g:tagbar_show_linenumbers = -1          "显示行号
 let g:tagbar_width=30
 let g:tagbar_left = 1
+NeoBundle 'honza/vim-snippets'				"snippets代码
 
+NeoBundle 'Shougo/neocomplete.vim'			"补全
+	" Plugin key-mappings.
+	imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+	smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+	xmap <C-k>     <Plug>(neosnippet_expand_target)
 
+	" SuperTab like snippets behavior.
+	"imap <expr><TAB>
+	" \ pumvisible() ? "\<C-n>" :
+	" \ neosnippet#expandable_or_jumpable() ?
+	" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+	smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+	\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+	" For conceal markers.
+	if has('conceal')
+		set conceallevel=2 concealcursor=niv
+	endif
+	let g:neosnippet#enable_snipmate_compatibility = 1
+		if LINUX()
+			let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+		elseif WINDOWS()
+			let g:neosnippet#snippets_directory='$VIM/$VIMFILES/bundle/vim-snippets/snippets'
+		endif
+
+NeoBundle 'Shougo/neosnippet'
+
+NeoBundle 'xolox/vim-session'                "session
+	let g:loaded_session = 1
+	
 "快速文件切换插件a.vim 
 NeoBundle 'vim-scripts/a.vim'		
 " 撤销
 NeoBundle 'mbbill/undotree'                 "撤销树
 NeoBundle 'sjl/gundo.vim'                   "查看撤销树,类似版本控制系统,可恢复到某一阶段
-nnoremap <F7> :GundoToggle<CR>
-" 开启自动预览 [随着光标在标签上的移动，顶部会出现一个实时的预览窗口]
-let g:tagbar_autopreview = 1
+	nnoremap <F7> :GundoToggle<CR>
+	" 开启自动预览 [随着光标在标签上的移动，顶部会出现一个实时的预览窗口]
+	let g:tagbar_autopreview = 1
 
 "状态栏
 NeoBundle 'itchyny/lightline.vim'           "状态栏横条美化
 	  
-set laststatus=2                      	 	"总是显示状态栏
-set ruler                                   " 显示光标当前位置
+	set laststatus=2                      	"总是显示状态栏
 
 NeoBundle 'pbrisbin/vim-mkdir'				 "新建文件时,自动创建不存在的目录
 "编辑
@@ -535,36 +555,6 @@ NeoBundle 'terryma/vim-multiple-cursors'    "多光标编辑
     let g:multi_cursor_prev_key='<C-p>'
     let g:multi_cursor_skip_key='<C-x>'
     let g:multi_cursor_quit_key='<Esc>'
-    
-" neocomplete补全
-if has('lua')
-	NeoBundle 'Shougo/neocomplete.vim'
-	" Disable AutoComplPop.
-	let g:acp_enableAtStartup = 0
-	" Use neocomplete.
-	let g:neocomplete#enable_at_startup = 1
-	" Use smartcase.
-	let g:neocomplete#enable_smart_case = 1
-	" Set minimum syntax keyword length.
-	let g:neocomplete#sources#syntax#min_keyword_length = 3
-	let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-	" Define keyword.
-	if !exists('g:neocomplete#keyword_patterns')
-		let g:neocomplete#keyword_patterns = {}
-	endif
-		let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-		" NeoBundle key-mappings.
-		inoremap <expr><C-g>     neocomplete#undo_completion()
-		inoremap <expr><C-l>     neocomplete#complete_common_string()
-	" <TAB>: completion.
-	inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-	" <C-h>, <BS>: close popup and delete backword char.
-	inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-	inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-	" Close popup by <Space>.
-	"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-	"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-endif
 
 "终端
 NeoBundle 'Shougo/vimshell.vim'
@@ -579,7 +569,7 @@ NeoBundle 'jiangmiao/auto-pairs'            "自动插入和格式化方括号�
 NeoBundle 'vim-scripts/matchit.zip'         "\ %匹配成对的标签，跳转
 
 "代码块
-NeoBundle 'msanders/snipmate.vim'           "spipmate代码片段
+NeoBundle 'msanders/snipmate.vim'           	"spipmate代码片段
 
 NeoBundle 'nathanaelkane/vim-indent-guides'
 
@@ -619,10 +609,8 @@ let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 "==================python IDE============
 NeoBundle 'vim-scripts/indentpython.vim'
-NeoBundle 'davidhalter/jedi-vim'		"python jedi补全
 "NeoBundle 'vim-scripts/VimPdb'
 NeoBundle 'nvie/vim-flake8'
-NeoBundle 'jistr/vim-nerdtree-tabs'
 "快速跳转
 NeoBundle 'easymotion/vim-easymotion'
 " Gif config
@@ -633,36 +621,45 @@ NeoBundle 'easymotion/vim-easymotion'
     let g:EasyMotion_use_smartsign_us = 1 " US layout
     let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
 "--------------------《web 插件》--------------------------------------
+NeoBundle 'mattn/webapi-vim'
 NeoBundle 'gregsexton/MatchTag', {'autoload':{'filetypes':['html','xml']}}
 NeoBundle 'mattn/emmet-vim'                         "emmet 速写
-let g:user_emmet_install_global = 0                                
-autocmd FileType html,css EmmetInstall              "只在html和css中启用
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall				"只在html和css中启用                          
 let g:user_zen_mode='a'
-let g:user_emmet_expandabbr_key='<c-e>'             "更改默认按键
+let g:user_emmet_expandabbr_key='<C-E>'             "更改默认按键
 let g:user_emmet_complete_tag=1
 let g:user_emmet_next_key='<c-n>'
 let g:user_emmet_prev_key='<c-p>'
-NeoBundle 'docunext/closetag.vim'                    	"关闭标签
-"-----------------------java ide -------------------------------------
-"NeoBundle 'fedkey/vjde' "vjde
-"NeoBundle 'fedkey/maven-ide' "vim maven 插件
-"NeoBundle 'vim-scripts/JavaBrowser'
-"NeoBundle 'jostillmanns/javacomplete'
-"NeoBundle 'artur-shaik/vim-javacomplete2'
-"autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
-"other
-NeoBundle 'evanmiller/nginx-vim-syntax'                "nginx
-NeoBundle 'vim-scripts/LanguageTool'
-NeoBundle 'vim-scripts/YankRing.vim'
-NeoBundle 'vim-scripts/cscope.vim'
-NeoBundle 'vim-scripts/logo'
-NeoBundle 'carlhuda/janus'
-NeoBundle 'tpope/vim-sensible'
+NeoBundle 'docunext/closetag.vim'                   "关闭标签
+NeoBundle 'gruntjs/grunt-contrib-watch'				"快速预览,无需要刷新页面
+
 
 "编辑写作===============================
 NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'jceb/vim-orgmode'
+
+"other
+NeoBundle 'evanmiller/nginx-vim-syntax'             "nginx
+
+"drupal 7
+" drupal 开发 https://www.drupal.org/project/vimrc
+
+NeoBundle 'tanarurkerem/drupal-snippets'
+if has("autocmd")
+  " Drupal *.module and *.install files.
+  augroup module
+    autocmd BufRead,BufNewFile *.module set filetype=php
+    autocmd BufRead,BufNewFile *.install set filetype=php
+    autocmd BufRead,BufNewFile *.test set filetype=php
+    autocmd BufRead,BufNewFile *.inc set filetype=php
+    autocmd BufRead,BufNewFile *.profile set filetype=php
+    autocmd BufRead,BufNewFile *.view set filetype=php
+  augroup END
+endif
+syntax on
+
 
 call neobundle#end()
 filetype plugin indent on
