@@ -470,20 +470,20 @@ catch
 endtry
 
 Plugin 'scrooloose/syntastic'            	"语法检查
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1 			"自动开启检查
-let g:syntastic_check_on_wq = 0
-let g:syntastic_java_javac_delete_output = 0
-let g:syntastic_java_javac_config_file_enabled = 0
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_error_symbol = '?'
-let g:syntastic_style_error_symbol = '?'
-let g:syntastic_warning_symbol = '?'
-let g:syntastic_style_warning_symbol = '≈'
+	set statusline+=%#warningmsg#
+	set statusline+=%{SyntasticStatuslineFlag()}
+	set statusline+=%*
+	let g:syntastic_always_populate_loc_list = 1
+	let g:syntastic_auto_loc_list = 1
+	let g:syntastic_check_on_open = 1
+	let g:syntastic_check_on_wq = 0
+	let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+	let g:syntastic_python_checkers = ['pylint']
+	let g:syntastic_tex_checkers = ['lacheck', 'text/language_check']
+	let g:syntastic_aggregate_errors = 1
+	let g:syntastic_enable_perl_checker = 1
+	
+	
 Plugin 'syngan/vim-vimlint', {
             \ 'depends' : 'ynkdir/vim-vimlparser'}
 let g:syntastic_vimlint_options = { 
@@ -604,21 +604,28 @@ let g:go_fmt_command = "goimports"
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
+"==================PHP IDE================
+Plugin 'ilei/phpcheck-vim'             "php代码检查
+	" 设置插件自动运行，即写入文件后触发 PHP 代码检查
+	let g:php_check_autorun = 1
+	" 设置 <F6> 为代码检查映射键
+	"noremap <F6> :call CallPhpCheckSyntax()<CR>
+	"inoremap <F6> <ESC>:call CallPhpCheckSyntax()<CR>
+
 
 "==================python IDE============
-Plugin 'vim-scripts/indentpython.vim'
-"Plugin 'vim-scripts/VimPdb'
-Plugin 'nvie/vim-flake8'
-"快速跳转
-Plugin 'easymotion/vim-easymotion'
-" Gif config
-    map <Leader>l <Plug>(easymotion-lineforward)
-    map <Leader>j <Plug>(easymotion-j)
-    map <Leader>k <Plug>(easymotion-k)
-    map <Leader>h <Plug>(easymotion-linebackward)
-    let g:EasyMotion_use_smartsign_us = 1 " US layout
-    let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
-"--------------------《web 插件》--------------------------------------
+Plugin 'klen/python-mode'
+	" Override go-to.definition key shortcut to Ctrl-]
+	let g:pymode_rope_goto_definition_bind = "<C-]>"
+
+	" Override run current python file key shortcut to Ctrl-Shift-e
+	let g:pymode_run_bind = "<C-S-e>"
+
+	" Override view python doc key shortcut to Ctrl-Shift-d
+	let g:pymode_doc_bind = "<C-S-d>"
+
+
+"--------------------《web ide》--------------------------------------
 Plugin 'mattn/webapi-vim'
 Plugin 'gregsexton/MatchTag', {'autoload':{'filetypes':['html','xml']}}
 Plugin 'mattn/emmet-vim'                         "emmet 速写
@@ -633,6 +640,9 @@ let g:user_emmet_prev_key='<c-p>'
 Plugin 'docunext/closetag.vim'                   "关闭标签
 Plugin 'gruntjs/grunt-contrib-watch'				"快速预览,无需要刷新页面
 
+Plugin 'hail2u/vim-css3-syntax'
+Plugin 'pangloss/vim-javascript'
+Plugin 'ap/vim-css-color'
 
 "编辑写作===============================
 Plugin 'plasticboy/vim-markdown'
