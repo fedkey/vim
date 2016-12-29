@@ -344,6 +344,12 @@ au FileType gitcommit call setpos('.', [0, 1, 1, 0])
 
 " extended start----------------------------------------------------------
 "安装neobundle.vim管理插件，先安装git再安装neobundle.vim
+if 0 | endif
+
+ if &compatible
+   set nocompatible               " Be iMproved
+ endif
+
 if WINDOWS()             			"安装:https://github.com/Shougo/neobundle.vim $VIM/vimfiles/bundle/neobundle.vim
   set runtimepath+=$VIM/vimfiles/bundle/neobundle.vim/   		" 此处规定neobundle.vim的路径
     call neobundle#begin(expand('$VIM/vimfiles/bundle/')) 	"插件安装位置
@@ -669,9 +675,10 @@ if has("autocmd")
 endif
 syntax on
 call neobundle#end()
-filetype plugin indent on
+filetype plugin indent on                           
+NeoBundleCheck
 "=============<自定义命令>================
-filetype plugin indent on                           " 开启自动检测文件类型
+
 autocmd BufNewFile * normal G
 
 "====F5 一键运行=====
