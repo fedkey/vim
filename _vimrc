@@ -369,6 +369,7 @@ set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  		" Windows
 "界面
 Plugin 'junegunn/vim-github-dashboard.git'
 " ----- man pages, tmux -----------------------------------------------
+Plugin 'jez/vim-superman'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'donnemartin/dev-setup'
 
