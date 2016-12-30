@@ -234,7 +234,7 @@ set hlsearch                                "高亮被搜索的关键字
 set ignorecase								"搜索模式里忽略大小写
 set smartcase        						" 如果搜索模式包含大写字符，不使用 'ignorecase' 选项。只有在输入搜索模式并且打开 'ignorecase' 选项时才会使用。
 "=================《字体》================================
-set guifont=Consolas:h11
+set guifont=Courier\ 11
 " ==============《根据后缀名指定文件类型》================
 au BufRead,BufNewFile *.h             setlocal ft=c
 au BufRead,BufNewFile *.i             setlocal ft=c
@@ -429,21 +429,47 @@ nmap wm :WMToggle<CR>
 "    endfunction  
 
 "========================================<IDE>========================
+Plugin 'neomake/neomake'
+autocmd! BufWritePost * Neomake
+Plugin 'kshenoy/vim-signature'
+Plugin 'airblade/vim-gitgutter'
 Plugin 'mhinz/vim-startify'				"显示最近使用的文件列表
 
 Plugin 'vim-scripts/YankRing.vim'
+Plugin 'iCyMind/NeoSolarized'
+
 "主题
 Plugin 'tomasr/molokai'
 Plugin 'altercation/vim-colors-solarized'
-	if WINDOWS()        
-	  set runtimepath+=$VIM/vimfiles/bundle/vim-colors-solarized/
-	elseif LINUX()
-	  set runtimepath+=~/.vim/bundle/vim-colors-solarized/
-	endif
-set background=dark
-colorscheme solarized
-let g:solarized_termcolors=256
+	if WINDOWS() 
+            if has('gui_running')       
+	        set runtimepath+=$VIM/vimfiles/bundle/vim-colors-solarized/
+                set background=dark
+                colorscheme solarized
+            else
+                set runtimepath+=$VIM/vimfiles/bundle/NeoSolarized/
+                set termguicolors
+                colorscheme NeoSolarized
+                set background=dark
 
+            endif
+	elseif LINUX()
+            if has('gui_running')
+	          set runtimepath+=~/.vim/bundle/vim-colors-solarized/
+                  set background=dark
+                  colorscheme solarized
+            else
+                set runtimepath+=~/.vim/bundle/NeoSolarized/ "终端配色
+                set termguicolors
+                colorscheme NeoSolarized
+                let g:neosolarized_contrast = "normal"
+                let g:neosolarized_visibility = "normal"
+                let g:neosolarized_vertSplitBgTrans = 1 
+                let g:neosolarized_bold = 1
+                let g:neosolarized_underline = 1
+                let g:neosolarized_italic = 1
+            endif
+	endif
 Plugin 'scrooloose/syntastic'            	"语法检查
 	set statusline+=%#warningmsg#
 	set statusline+=%{SyntasticStatuslineFlag()}
