@@ -142,8 +142,8 @@ set previewwindow    				" 标识预览窗口,开启后 python会报错
 filetype plugin indent on
 syntax on
 "map
-let mapleader = "\,"
-let g:mapleader = "\,"
+let mapleader = "-"
+let g:mapleader = "-"
 " 快速保存
 nmap <leader>w :w!<cr>
 
@@ -361,6 +361,8 @@ set tags=tags;                          			" ';' 不能没有
 
 "文件,项目查找,搜索
 Plugin 'Shougo/unite.vim'							"浏览、查找文件
+Plugin 'mileszs/ack.vim'
+nnoremap <Leader>a :Ack!<Space>
 
 Plugin 'wincent/command-t'
 if LINUX()	
@@ -514,6 +516,15 @@ Plugin 'sjl/gundo.vim'                   "查看撤销树,类似版本控制系�
 
 "状态栏
 Plugin 'vim-airline/vim-airline'		"状态栏横条美化
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'powerline/fonts'
+Plugin 'bling/vim-bufferline'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'nathanaelkane/vim-indent-guides'
+
+
+Plugin 'powerline/powerline'
 set laststatus=2                      	"总是显示状态栏
 
 Plugin 'pbrisbin/vim-mkdir'				 "新建文件时,自动创建不存在的目录
@@ -541,8 +552,6 @@ Plugin 'vim-scripts/matchit.zip'         "\ %匹配成对的标签，跳转
 
 "代码块
 Plugin 'msanders/snipmate.vim'           	"spipmate代码片段
-
-Plugin 'nathanaelkane/vim-indent-guides'
 
 "添加环绕
 Plugin 'tpope/vim-surround'                  "快速给词加环绕符号,例如引号
@@ -591,9 +600,6 @@ Plugin 'klen/python-mode'
 Plugin 'yssource/python.vim'
 Plugin 'python_match.vim'
 Plugin 'pythoncomplete'
-let g:pymode_rope_goto_definition_bind = "<C-]>"
-let g:pymode_run_bind = "<C-S-e>"
-let g:pymode_doc_bind = "<C-S-d>"
 
 "Haskell
 Plugin 'travitch/hasksyn'
