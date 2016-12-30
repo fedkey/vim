@@ -466,6 +466,11 @@ Plugin 'scrooloose/syntastic'            	"语法检查
 	let g:syntastic_tex_checkers = ['lacheck', 'text/language_check']
 	let g:syntastic_aggregate_errors = 1
 	let g:syntastic_enable_perl_checker = 1
+	
+Plugin 'tpope/vim-repeat'
+Plugin 'rhysd/conflict-marker.vim'
+Plugin 'tacahiroy/ctrlp-funky'
+Plugin 'vim-scripts/sessionman.vim'
 
 Plugin 'Raimondi/delimitMate'             "补全括号和引号
 Plugin 'majutsushi/tagbar'                   "tagbar
