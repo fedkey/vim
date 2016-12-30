@@ -438,7 +438,7 @@ Plugin 'altercation/vim-colors-solarized'
 	if WINDOWS()        
 	  set runtimepath+=$VIM/vimfiles/bundle/vim-colors-solarized/
 	elseif LINUX()
-	  set runtimepath+=~/.vim/bundlevim-colors-solarized/
+	  set runtimepath+=~/.vim/bundle/vim-colors-solarized/
 	endif
 set background=dark
 colorscheme solarized
