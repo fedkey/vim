@@ -218,15 +218,14 @@ endif
 
 set cursorline                              "高亮所在行
 "set cursorcolumn                           "高亮当前列
-"set guioptions-=T                          "隐藏工具栏
+set guioptions-=T                          	"隐藏工具栏
 "set guioptions-=m                          "隐藏菜单
 "打开原生菜单
 set wildmenu
-set cmdheight=1                             " 命令行（在状态行下）的高度，默认为1
+set cmdheight=1                             "命令行（在状态行下）的高度，默认为1
 set showmatch                               "高亮显示[] {} ()配对
 
 "--------------------高级技巧---------------------------------
-"autocmd BufWritePre * :%s/\s\+$//e "保存文件时自动去除行末空格
 "指定文件类型去除行末空格
 "autocmd FileType c,cpp,java,php autocmd BufWritePre <buffer> :%s/\s\+$//e
 "================《搜索设置》========================================
@@ -235,9 +234,7 @@ set hlsearch                                "高亮被搜索的关键字
 set ignorecase								"搜索模式里忽略大小写
 set smartcase        						" 如果搜索模式包含大写字符，不使用 'ignorecase' 选项。只有在输入搜索模式并且打开 'ignorecase' 选项时才会使用。
 "=================《字体》================================
-
 set guifont=Consolas:h11
-
 " ==============《根据后缀名指定文件类型》================
 au BufRead,BufNewFile *.h             setlocal ft=c
 au BufRead,BufNewFile *.i             setlocal ft=c
@@ -258,7 +255,6 @@ au BufRead,BufNewFile php-fpm*.conf   setlocal ft=dosini
 au BufRead,BufNewFile *.ini           setlocal ft=dosini
 "鼠标样式
 set so=7
-
 "------------声音---------------
 set vb t_vb=                            "去除报警音
 set noerrorbells
@@ -273,7 +269,7 @@ autocmd BufNewFile * normal G           "新建文件后 自动定位到文件�
 set nobackup                            "禁止生成临时文件
 set nowb
 setlocal noswapfile                     "不要生成swap文件
-set wrap                               "自动折行
+set wrap                               	"自动折行
 set textwidth=79
 set cul 								"高亮光标所在位置
 set ruler           					" 显示标尺  
@@ -284,17 +280,13 @@ set whichwrap+=<,>,h,l
 
 " 基本设置结束---------------------------------------------------------------
 
-
-""""""""""""""""""""""""""""""
 " => "文件类型设置开始
 """""""""""""""""""""""""""""""
 au FileType javascript call JavaScriptFold()
 au FileType javascript setl fen
 au FileType javascript setl nocindent
-
 au FileType javascript imap <c-t> $log();<esc>hi
 au FileType javascript imap <c-a> alert();<esc>hi
-
 au FileType javascript inoremap <buffer> $r return 
 au FileType javascript inoremap <buffer> $f //--- PH<esc>FP2xi
 
@@ -319,7 +311,6 @@ au FileType coffee call CoffeeScriptFold()
 
 au FileType gitcommit call setpos('.', [0, 1, 1, 0])
 "文件类型设置结束--------------------------------------
-
 " 插件开始----------------------------------------------------------
 "安装Vundle.vim管理插件，必须先安装git
 filetype off   
@@ -330,11 +321,11 @@ elseif LINUX()             "安装:git clone  https://github.com/VundleVim/Vundl
   set runtimepath+=~/.vim/bundle/Vundle.vim/ 			" 此处规定Vundle.vim的路径
     call vundle#begin(expand('~/.vim/bundle/'))   	"插件安装位置
 endif
-"Plugin start
 
-Plugin 'VundleVim/Vundle.vim' 					"必须启用
-Plugin 'taglist.vim'                     		"Tlist 函数列表
-let g:Tlist_Use_Right_Window = 1				"位置右栏
+"Plugin start
+Plugin 'VundleVim/Vundle.vim' 								"必须启用
+Plugin 'taglist.vim'                     					"Tlist 函数列表
+let g:Tlist_Use_Right_Window = 1							"位置右栏
 let Tlist_Show_One_File=1  
 "如果taglist窗口是最后一个窗口，则退出vim"
 let Tlist_Exit_OnlyWindow = 1 
@@ -378,7 +369,6 @@ set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  		" Windows
 "界面
 Plugin 'junegunn/vim-github-dashboard.git'
 " ----- man pages, tmux -----------------------------------------------
-Plugin 'jez/vim-superman'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'donnemartin/dev-setup'
 
@@ -395,7 +385,7 @@ let NERDTreeSortOrder=['//$','/.cpp$','/.c$', '/.h$', '/.py$', '/.lua$', '*']
 "高亮NERDTrre窗口的当前行"
 let NERDTreeHighlightCursorline=1
 "autocmd vimenter * NERDTree					"自动打开
-nmap <F3> :NERDTreeToggle<CR>               "F3调出
+nmap <F3> :NERDTreeToggle<CR>               	"F3调出
 
 set autochdir
 Plugin 'fholgado/minibufexpl.vim'
@@ -403,23 +393,23 @@ Plugin 'fholgado/minibufexpl.vim'
     let g:miniBufExplMapWindowNavArrows = 1   
     let g:miniBufExplMapCTabSwitchBufs = 1   
     let g:miniBufExplModSelTarget = 1  
-    let g:miniBufExplMoreThanOne=0  
+    let g:miniBufExplMoreThanOne=0
 
 Plugin 'vim-scripts/winmanager'
 "在进入vim时自动打开winmanager
 let g:AutoOpenWinManager = 1
-let g:NERDTree_title="[NERDTree]"  
+let g:NERDTree_title="[NERDTree]"
 "设置winmanager的宽度，默认为25
-let g:winManagerWidth = 30
-let g:NERDTree_title="[NERDTree]"  
-let g:winManagerWindowLayout="NERDTree|TagList"  
-function! NERDTree_Start()  
-        exec 'NERDTree'  
-endfunction  
+let g:winManagerWidth = 25
+let g:NERDTree_title="[NERDTree]"
+let g:winManagerWindowLayout="NERDTree|TagList"
+function! NERDTree_Start()
+        exec 'NERDTree'
+endfunction
       
-function! NERDTree_IsValid()  
-        return 1  
-endfunction 
+function! NERDTree_IsValid()
+        return 1
+endfunction
 
 nmap wm :WMToggle<CR> 
 "这个版本的Winmanager好像有个小bug，你在打开Winmanager界面时，
@@ -472,10 +462,10 @@ Plugin 'rhysd/conflict-marker.vim'
 Plugin 'tacahiroy/ctrlp-funky'
 Plugin 'vim-scripts/sessionman.vim'
 
-Plugin 'Raimondi/delimitMate'             "补全括号和引号
-Plugin 'majutsushi/tagbar'                   "tagbar
-let g:tagbar_sort = 0                        "关闭排序[也就是按标签本身在文件中的位置排序]
-"let g:tagbar_show_linenumbers = -1          "显示行号
+Plugin 'Raimondi/delimitMate'             		"补全括号和引号
+Plugin 'majutsushi/tagbar'                   	"tagbar
+let g:tagbar_sort = 0                        	"关闭排序[也就是按标签本身在文件中的位置排序]
+let g:tagbar_show_linenumbers = -1          	"显示行号
 let g:tagbar_width=30
 let g:tagbar_left = 1
 
@@ -525,7 +515,6 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'powerline/fonts'
 Plugin 'bling/vim-bufferline'
 Plugin 'easymotion/vim-easymotion'
-Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'nathanaelkane/vim-indent-guides'
 
 set laststatus=2                      	"总是显示状态栏
