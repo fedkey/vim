@@ -142,8 +142,8 @@ set previewwindow    				" 标识预览窗口,开启后 python会报错
 filetype plugin indent on
 syntax on
 "map
-let mapleader = ","
-let g:mapleader = ","
+let mapleader = "\,"
+let g:mapleader = "\,"
 " 快速保存
 nmap <leader>w :w!<cr>
 
@@ -325,11 +325,9 @@ au FileType gitcommit call setpos('.', [0, 1, 1, 0])
 filetype off   
 if WINDOWS()             			"安装:git clone https://github.com/VundleVim/Vundle.vim.git $VIM/vimfiles/bundle/Vundle.vim
   set runtimepath+=$VIM/vimfiles/bundle/Vundle.vim/   		" 此处规定Vundle.vim的路径
-  set rtp+=$VIM/vimfiles/bundle/molokai/colors/
     call vundle#begin(expand('$VIM/vimfiles/bundle/')) 	"插件安装位置
 elseif LINUX()             "安装:git clone  https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   set runtimepath+=~/.vim/bundle/Vundle.vim/ 			" 此处规定Vundle.vim的路径
-  set rtp+=~/.vim/bundle/molokai/colors/
     call vundle#begin(expand('~/.vim/bundle/'))   	"插件安装位置
 endif
 "Plugin start
@@ -343,7 +341,7 @@ let Tlist_Exit_OnlyWindow = 1
 
 "显示taglist菜单
 let Tlist_Show_Menu=1
-let Tlist_Auto_Open=1										"打开vim时启动
+"let Tlist_Auto_Open=1										"打开vim时启动
 Plugin 'wesleyche/SrcExpl'									"窗口文件着色
 nmap <F8> :SrcExplToggle<CR> 
 let g:SrcExpl_winHeight = 8 
@@ -443,13 +441,15 @@ Plugin 'mhinz/vim-startify'				"显示最近使用的文件列表
 Plugin 'vim-scripts/YankRing.vim'
 "主题
 Plugin 'tomasr/molokai'
+Plugin 'altercation/vim-colors-solarized'
 	if WINDOWS()        
-	  set runtimepath+=$VIM/vimfiles/bundle/molokai/
+	  set runtimepath+=$VIM/vimfiles/bundle/vim-colors-solarized/
 	elseif LINUX()
-	  set runtimepath+=~/.vim/bundle/molokai/
+	  set runtimepath+=~/.vim/bundlevim-colors-solarized/
 	endif
-	colorscheme molokai
-	let g:molokai_original = 1
+set background=dark
+colorscheme solarized
+let g:solarized_termcolors=256
 
 Plugin 'scrooloose/syntastic'            	"语法检查
 	set statusline+=%#warningmsg#
@@ -473,13 +473,7 @@ let g:tagbar_width=30
 let g:tagbar_left = 1
 
 "代码块
-Plugin 'honza/vim-snippets'				"snippets代码
-Plugin 'garbas/vim-snipmate'
-Plugin 'Shougo/neocomplcache'
-Plugin 'Shougo/neosnippet'
 Plugin 'Shougo/neosnippet-snippets'
-
-
 Plugin 'Shougo/neocomplete.vim'			"补全
 	" Plugin key-mappings.
 	imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -500,9 +494,9 @@ Plugin 'Shougo/neocomplete.vim'			"补全
 	endif
 	let g:neosnippet#enable_snipmate_compatibility = 1
 		if LINUX()
-			let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+			let g:neosnippet#snippets_directory='~/.vim/bundle/neosnippet-snippets/neosnippets'
 		elseif WINDOWS()
-			let g:neosnippet#snippets_directory='$VIM/$VIMFILES/bundle/vim-snippets/snippets'
+			let g:neosnippet#snippets_directory='$VIM/$VIMFILES/bundle/neosnippet-snippets/neosnippets'
 		endif
 Plugin 'Shougo/neosnippet.vim'
 
@@ -519,7 +513,7 @@ Plugin 'sjl/gundo.vim'                   "查看撤销树,类似版本控制系�
 	let g:tagbar_autopreview = 1
 
 "状态栏
-Plugin 'itchyny/lightline.vim'           "状态栏横条美化
+Plugin 'vim-airline/vim-airline'		"状态栏横条美化
 set laststatus=2                      	"总是显示状态栏
 
 Plugin 'pbrisbin/vim-mkdir'				 "新建文件时,自动创建不存在的目录
@@ -593,11 +587,13 @@ Plugin 'ilei/phpcheck-vim'             "php代码检查
 
 "==================python IDE============
 Plugin 'klen/python-mode'
-Plugin 'nvie/vim-flake8'
-Plugin 'ivanov/vim-ipython'
+"--语法检查
 Plugin 'yssource/python.vim'
 Plugin 'python_match.vim'
 Plugin 'pythoncomplete'
+let g:pymode_rope_goto_definition_bind = "<C-]>"
+let g:pymode_run_bind = "<C-S-e>"
+let g:pymode_doc_bind = "<C-S-d>"
 
 "Haskell
 Plugin 'travitch/hasksyn'
@@ -636,7 +632,7 @@ Plugin 'briancollins/vim-jst'
 Plugin 'kchmck/vim-coffee-script'
 
 "html
-Plugin 'amirh/HTML-AutoCloseTag'
+Plugin 'alvan/vim-closetag'
 Plugin 'hail2u/vim-css3-syntax'
 Plugin 'gorodinskiy/vim-coloresque'
 Plugin 'tpope/vim-haml'
