@@ -471,7 +471,14 @@ let g:tagbar_sort = 0                        "关闭排序[也就是按标签本
 "let g:tagbar_show_linenumbers = -1          "显示行号
 let g:tagbar_width=30
 let g:tagbar_left = 1
+
+"代码块
 Plugin 'honza/vim-snippets'				"snippets代码
+Plugin 'garbas/vim-snipmate'
+Plugin 'Shougo/neocomplcache'
+Plugin 'Shougo/neosnippet'
+Plugin 'Shougo/neosnippet-snippets'
+
 
 Plugin 'Shougo/neocomplete.vim'			"补全
 	" Plugin key-mappings.
