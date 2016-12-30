@@ -528,8 +528,6 @@ Plugin 'easymotion/vim-easymotion'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'nathanaelkane/vim-indent-guides'
 
-
-Plugin 'powerline/powerline'
 set laststatus=2                      	"总是显示状态栏
 
 Plugin 'pbrisbin/vim-mkdir'				 "新建文件时,自动创建不存在的目录
