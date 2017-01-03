@@ -462,6 +462,7 @@ Plugin 'altercation/vim-colors-solarized'
                 set runtimepath+=~/.vim/bundle/NeoSolarized/ "终端配色
                 set termguicolors
                 colorscheme NeoSolarized
+		set background=dark
                 let g:neosolarized_contrast = "normal"
                 let g:neosolarized_visibility = "normal"
                 let g:neosolarized_vertSplitBgTrans = 1 
