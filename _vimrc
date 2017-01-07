@@ -334,20 +334,6 @@ let Tlist_Exit_OnlyWindow = 1
 let Tlist_Show_Menu=1
 "let Tlist_Auto_Open=1										"打开vim时启动
 Plugin 'wesleyche/SrcExpl'									"窗口文件着色
-nmap <F8> :SrcExplToggle<CR> 
-let g:SrcExpl_winHeight = 8 
-let g:SrcExpl_refreshTime = 100 
-let g:SrcExpl_jumpKey = "<ENTER>" 
-let g:SrcExpl_gobackKey = "<SPACE>" 
-let g:SrcExpl_pluginList = [ 
-        \ "__Tag_List__", 
-    \ ] 
-let g:SrcExpl_searchLocalDef = 1 
-let g:SrcExpl_isUpdateTags = 0 
-let g:SrcExpl_updateTagsCmd = "ctags --sort=foldcase -R ." 
-let g:SrcExpl_updateTagsKey = "<F12>" 
-let g:SrcExpl_prevDefKey = "<F6>" 
-let g:SrcExpl_nextDefKey = "<F4>" 
 set tags=tags;                          			" ';' 不能没有
 
 "文件,项目查找,搜索
@@ -368,11 +354,16 @@ set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  		" Windows
 
 "界面
 Plugin 'junegunn/vim-github-dashboard.git'
+Plugin 'myusuf3/numbers.vim'
+	let g:numbers_exclude = ['tagbar', 'gundo', 'minibufexpl', 'nerdtree']
+	nnoremap <F8> :NumbersToggle<CR>
+	nnoremap <F4> :NumbersOnOff<CR>
+
 " ----- man pages, tmux -----------------------------------------------
 Plugin 'jez/vim-superman'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'donnemartin/dev-setup'
-
+Plugin 'bling/vim-bufferline'
 Plugin 'corntrace/bufexplorer'
 "QuickFix窗口
 nmap <F6> :cn<cr>							"// 切换到下一个结果
@@ -539,9 +530,11 @@ Plugin 'sjl/gundo.vim'                   "查看撤销树,类似版本控制系�
 
 "状态栏
 Plugin 'vim-airline/vim-airline'		"状态栏横条美化
+Plugin 'Lokaltog/vim-powerline'
+Plugin 'itchyny/lightline.vim'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'edkolev/tmuxline.vim'
 Plugin 'powerline/fonts'
-Plugin 'bling/vim-bufferline'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'nathanaelkane/vim-indent-guides'
 
@@ -558,7 +551,7 @@ Plugin 'terryma/vim-multiple-cursors'    "多光标编辑
     let g:multi_cursor_skip_key='<C-x>'
     let g:multi_cursor_quit_key='<Esc>'
 
-"终端
+"终端 shell
 Plugin 'Shougo/vimshell.vim'
 
 "---------------------------------
@@ -620,6 +613,7 @@ Plugin 'klen/python-mode'
 Plugin 'yssource/python.vim'
 Plugin 'python_match.vim'
 Plugin 'pythoncomplete'
+Plugin 'davidhalter/jedi-vim'
 
 "Haskell
 Plugin 'travitch/hasksyn'
@@ -649,11 +643,35 @@ Plugin 'docunext/closetag.vim'                   "关闭标签
 Plugin 'gruntjs/grunt-contrib-watch'				"快速预览,无需要刷新页面
 Plugin 'ap/vim-css-color'
 Plugin 'evanmiller/nginx-vim-syntax'             "nginx
+Plugin 'othree/html5.vim'
+	let g:html5_rdfa_attributes_complete = 1
+	let g:html5_microdata_attributes_complete = 1
+	let g:html5_aria_attributes_complete = 1
 
 "javascript
 Plugin 'elzr/vim-json'
 Plugin 'groenewege/vim-less'
 Plugin 'pangloss/vim-javascript'
+	let g:javascript_plugin_jsdoc = 1
+	let g:javascript_plugin_ngdoc = 1
+	let g:javascript_plugin_flow = 1
+	set foldmethod=syntax
+
+	let g:javascript_conceal_function             = "ƒ"
+	let g:javascript_conceal_null                 = "ø"
+	let g:javascript_conceal_this                 = "@"
+	let g:javascript_conceal_return               = "⇚"
+	let g:javascript_conceal_undefined            = "¿"
+	let g:javascript_conceal_NaN                  = "ℕ"
+	let g:javascript_conceal_prototype            = "¶"
+	let g:javascript_conceal_static               = "•"
+	let g:javascript_conceal_super                = "Ω"
+	let g:javascript_conceal_arrow_function       = "⇒"
+	let g:javascript_conceal_noarg_arrow_function = "🞅"
+	let g:javascript_conceal_underscore_arrow_function = "🞅"
+	set conceallevel=1
+
+
 Plugin 'briancollins/vim-jst'
 Plugin 'kchmck/vim-coffee-script'
 
@@ -666,7 +684,11 @@ Plugin 'tpope/vim-haml'
 "编辑写作===============================
 Plugin 'plasticboy/vim-markdown'
 Plugin 'jceb/vim-orgmode'
+Plugin 'vimwiki/vimwiki'
+Plugin 'xolox/vim-notes'
 
+"gist
+Plugin 'mattn/gist-vim'
 
 call vundle#end() 
 filetype plugin indent on
