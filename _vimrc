@@ -686,6 +686,12 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'jceb/vim-orgmode'
 Plugin 'vimwiki/vimwiki'
 Plugin 'xolox/vim-notes'
+Plugin 'iamcco/mathjax-support-for-mkdp'
+Plugin 'iamcco/markdown-preview.vim'
+	nmap <silent> <F8> <Plug>MarkdownPreview        " 普通模式
+	imap <silent> <F8> <Plug>MarkdownPreview        " 插入模式
+	nmap <silent> <F9> <Plug>StopMarkdownPreview    " 普通模式
+	imap <silent> <F9> <Plug>StopMarkdownPreview    " 插入模式
 
 "gist
 Plugin 'mattn/gist-vim'
