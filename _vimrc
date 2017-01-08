@@ -325,6 +325,7 @@ endif
 "Plugin start
 Plugin 'VundleVim/Vundle.vim' 								"必须启用
 Plugin 'taglist.vim'                     					"Tlist 函数列表
+Plugin 'vim-scripts/cscope.vim'
 let g:Tlist_Use_Right_Window = 1							"位置右栏
 let Tlist_Show_One_File=1  
 "如果taglist窗口是最后一个窗口，则退出vim"
@@ -358,6 +359,7 @@ Plugin 'myusuf3/numbers.vim'
 	let g:numbers_exclude = ['tagbar', 'gundo', 'minibufexpl', 'nerdtree']
 	nnoremap <F8> :NumbersToggle<CR>
 	nnoremap <F4> :NumbersOnOff<CR>
+Plugin 'vim-scripts/bufexplorer.zip'
 
 " ----- man pages, tmux -----------------------------------------------
 Plugin 'jez/vim-superman'
@@ -432,9 +434,8 @@ Plugin 'tomasr/molokai'
 Plugin 'altercation/vim-colors-solarized'
 	if WINDOWS() 
             if has('gui_running')       
-	        set runtimepath+=$VIM/vimfiles/bundle/vim-colors-solarized/
-                set background=dark
-                colorscheme solarized
+	        set runtimepath+=$VIM/vimfiles/bundle/molokai/
+                colorscheme molokai
             else
                 set runtimepath+=$VIM/vimfiles/bundle/NeoSolarized/
                 set termguicolors
@@ -444,9 +445,8 @@ Plugin 'altercation/vim-colors-solarized'
             endif
 	elseif LINUX()
             if has('gui_running')
-	          set runtimepath+=~/.vim/bundle/vim-colors-solarized/
-                  set background=dark
-                  colorscheme solarized
+	          set runtimepath+=~/.vim/bundle/molokai/
+                  colorscheme molokai
             else
                 set runtimepath+=~/.vim/bundle/NeoSolarized/ "终端配色
                 set termguicolors
@@ -604,6 +604,7 @@ Plugin 'ilei/phpcheck-vim'             "php代码检查
 	" 设置 <F6> 为代码检查映射键
 	"noremap <F6> :call CallPhpCheckSyntax()<CR>
 	"inoremap <F6> <ESC>:call CallPhpCheckSyntax()<CR>
+Plugin 'shawncplus/phpcomplete.vim'
 
 "==================python IDE============
 Plugin 'klen/python-mode'
@@ -630,7 +631,7 @@ Plugin 'mattn/webapi-vim'
 Plugin 'gregsexton/MatchTag', {'autoload':{'filetypes':['html','xml']}}
 Plugin 'mattn/emmet-vim'                         "emmet 速写
 let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall				"只在html和css中启用                          
+autocmd FileType html,css,php EmmetInstall				"只在html和css,php中启用                          
 let g:user_zen_mode='a'
 let g:user_emmet_expandabbr_key='<C-E>'             "更改默认按键
 let g:user_emmet_complete_tag=0
@@ -682,7 +683,6 @@ Plugin 'tpope/vim-haml'
 "编辑写作===============================
 Plugin 'plasticboy/vim-markdown'
 Plugin 'jceb/vim-orgmode'
-Plugin 'vimwiki/vimwiki'
 Plugin 'xolox/vim-notes'
 Plugin 'iamcco/mathjax-support-for-mkdp'
 Plugin 'iamcco/markdown-preview.vim'
