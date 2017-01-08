@@ -420,8 +420,6 @@ nmap wm :WMToggle<CR>
 "    endfunction  
 
 "========================================<IDE>========================
-Plugin 'neomake/neomake'
-autocmd! BufWritePost * Neomake
 Plugin 'kshenoy/vim-signature'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'mhinz/vim-startify'				"显示最近使用的文件列表
