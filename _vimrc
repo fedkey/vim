@@ -14,7 +14,7 @@ scriptencoding utf-8
 "npm        sudo yum install npm
 "clang      sudo yum install clang
 "cmake      sudo yum install cmake
-"python-dev sudo yum install pythoon-dev
+"python-dev sudo yum install python-dev
 "gvim       sudo yum install vim-gtk
 " Ctrl + ]                   --转到函数定义
 " Ctrl + T                   --返回调用函数
