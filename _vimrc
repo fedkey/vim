@@ -605,6 +605,10 @@ Plugin 'ilei/phpcheck-vim'             "php代码检查
 	"noremap <F6> :call CallPhpCheckSyntax()<CR>
 	"inoremap <F6> <ESC>:call CallPhpCheckSyntax()<CR>
 Plugin 'shawncplus/phpcomplete.vim'
+Plugin 'm2mdas/phpcomplete-extended'
+	autocmd  FileType  php setlocal omnifunc=phpcomplete_extended#CompletePHP
+	let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+Plugin 'Shougo/vimproc.vim'
 
 "==================python IDE============
 Plugin 'klen/python-mode'
@@ -622,7 +626,6 @@ Plugin 'Twinside/vim-haskellFold'
 Plugin 'lukerandall/haskellmode-vim'
 Plugin 'eagletmt/neco-ghc'
 Plugin 'eagletmt/ghcmod-vim'
-Plugin 'Shougo/vimproc.vim'
 Plugin 'adinapoli/cumino'
 Bundle 'bitc/vim-hdevtools'
 
