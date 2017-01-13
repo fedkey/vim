@@ -135,7 +135,7 @@ if WINDOWS()
 endif
 
 "视图
-set completeopt=menuone            "关闭函数preview预览窗口
+set completeopt=menuone            	"关闭函数preview预览窗口
 set completeopt=longest,menu 		"打开函数preview预览窗口
 set previewwindow    				" 标识预览窗口,开启后 python会报错
 
@@ -378,8 +378,6 @@ let g:NERDTreeWinSize=23
 let NERDTreeSortOrder=['//$','/.cpp$','/.c$', '/.h$', '/.py$', '/.lua$', '*'] 
 "高亮NERDTrre窗口的当前行"
 let NERDTreeHighlightCursorline=1
-"autocmd vimenter * NERDTree					"自动打开
-nmap <F3> :NERDTreeToggle<CR>               	"F3调出
 
 set autochdir
 Plugin 'fholgado/minibufexpl.vim'
@@ -390,21 +388,10 @@ Plugin 'fholgado/minibufexpl.vim'
     let g:miniBufExplMoreThanOne=0
 
 Plugin 'vim-scripts/winmanager'
-"在进入vim时自动打开winmanager
-let g:AutoOpenWinManager = 1
-let g:NERDTree_title="[NERDTree]"
 "设置winmanager的宽度，默认为25
 let g:winManagerWidth = 25
 let g:NERDTree_title="[NERDTree]"
 let g:winManagerWindowLayout="NERDTree|TagList"
-function! NERDTree_Start()
-        exec 'NERDTree'
-endfunction
-      
-function! NERDTree_IsValid()
-        return 1
-endfunction
-
 nmap wm :WMToggle<CR> 
 "这个版本的Winmanager好像有个小bug，你在打开Winmanager界面时，
 "会同时打开一个空的文件。这会影响后续使用。
@@ -424,42 +411,12 @@ nmap wm :WMToggle<CR>
 "========================================<IDE>========================
 Plugin 'kshenoy/vim-signature'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'mhinz/vim-startify'				"显示最近使用的文件列表
 
 Plugin 'vim-scripts/YankRing.vim'
-Plugin 'iCyMind/NeoSolarized'
 
 "主题
-Plugin 'tomasr/molokai'
-Plugin 'altercation/vim-colors-solarized'
-	if WINDOWS() 
-            if has('gui_running')       
-	        set runtimepath+=$VIM/vimfiles/bundle/molokai/
-                colorscheme molokai
-            else
-                set runtimepath+=$VIM/vimfiles/bundle/NeoSolarized/
-                set termguicolors
-                colorscheme NeoSolarized
-                set background=dark
-
-            endif
-	elseif LINUX()
-            if has('gui_running')
-	          set runtimepath+=~/.vim/bundle/molokai/
-                  colorscheme molokai
-            else
-                set runtimepath+=~/.vim/bundle/NeoSolarized/ "终端配色
-                set termguicolors
-                colorscheme NeoSolarized
-		set background=dark
-                let g:neosolarized_contrast = "normal"
-                let g:neosolarized_visibility = "normal"
-                let g:neosolarized_vertSplitBgTrans = 1 
-                let g:neosolarized_bold = 1
-                let g:neosolarized_underline = 1
-                let g:neosolarized_italic = 1
-            endif
-	endif
+colorscheme default
+set background=light
 Plugin 'scrooloose/syntastic'            	"语法检查
 	set statusline+=%#warningmsg#
 	set statusline+=%{SyntasticStatuslineFlag()}
@@ -611,7 +568,6 @@ Plugin 'm2mdas/phpcomplete-extended'
 Plugin 'Shougo/vimproc.vim'
 
 "==================python IDE============
-Plugin 'klen/python-mode'
 "--语法检查
 Plugin 'yssource/python.vim'
 Plugin 'python_match.vim'
@@ -643,7 +599,7 @@ let g:user_emmet_prev_key='<c-p>'
 
 Plugin 'docunext/closetag.vim'                   "关闭标签
 Plugin 'gruntjs/grunt-contrib-watch'				"快速预览,无需要刷新页面
-Plugin 'ap/vim-css-color'
+"Plugin 'ap/vim-css-color'
 Plugin 'evanmiller/nginx-vim-syntax'             "nginx
 Plugin 'othree/html5.vim'
 	let g:html5_rdfa_attributes_complete = 1
@@ -680,7 +636,7 @@ Plugin 'kchmck/vim-coffee-script'
 "html
 Plugin 'alvan/vim-closetag'
 Plugin 'hail2u/vim-css3-syntax'
-Plugin 'gorodinskiy/vim-coloresque'
+"Plugin 'gorodinskiy/vim-coloresque'
 Plugin 'tpope/vim-haml'
 
 "编辑写作===============================
